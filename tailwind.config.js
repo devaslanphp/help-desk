@@ -8,6 +8,7 @@ module.exports = {
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
         "./vendor/filament/**/*.blade.php",
+        "./config/system.php",
     ],
     theme: {
         extend: {
