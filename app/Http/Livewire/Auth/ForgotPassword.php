@@ -28,6 +28,7 @@ class ForgotPassword extends Component implements HasForms
         return [
             TextInput::make('email')
                 ->label('Email address')
+                ->prefixIcon('heroicon-o-at-symbol')
                 ->email()
                 ->required(),
         ];

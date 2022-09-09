@@ -29,10 +29,12 @@ class RecoverPassword extends Component implements HasForms
             Password::make('password')
                 ->label('New password')
                 ->rule('confirmed')
+                ->prefixIcon('heroicon-o-lock-closed')
                 ->required(),
 
             Password::make('password_confirmation')
                 ->label('Password confirmation')
+                ->prefixIcon('heroicon-o-lock-closed')
                 ->required()
                 ->dehydrated(false),
         ];
