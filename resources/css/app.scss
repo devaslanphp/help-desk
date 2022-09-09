@@ -1,3 +1,5 @@
+@use 'media-queries' as *;
+
 @import '../../vendor/filament/forms/dist/module.esm.css';
 
 @tailwind base;
@@ -5,11 +7,15 @@
 @tailwind utilities;
 
 .main-menu {
-    @apply transition-all;
+    @apply transition-all relative;
     min-width: 250px;
     width: 250px;
     margin-left: 0;
     transition-duration: 500ms;
+
+    @include lt-sm {
+        @apply fixed;
+    }
 
     &.closed {
         margin-left: -250px;
