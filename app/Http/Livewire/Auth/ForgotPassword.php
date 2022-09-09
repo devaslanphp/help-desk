@@ -33,7 +33,7 @@ class ForgotPassword extends Component implements HasForms
         ];
     }
 
-    public function login(): void
+    public function forgotPassword(): void
     {
         $data = $this->form->getState();
         dd($data);

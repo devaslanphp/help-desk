@@ -38,7 +38,7 @@ class RecoverPassword extends Component implements HasForms
         ];
     }
 
-    public function login(): void
+    public function recoverPassword(): void
     {
         $data = $this->form->getState();
         dd($data);
