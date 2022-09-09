@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
+        "mohamedsabil83/filament-forms-tinyeditor": "^1.6",
         "phpsa/filament-password-reveal": "^1.1"
     },
     "require-dev": {
