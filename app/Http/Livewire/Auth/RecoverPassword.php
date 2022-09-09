@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Livewire\Auth;
+
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Livewire\Component;
+use Phpsa\FilamentPasswordReveal\Password;
+
+class RecoverPassword extends Component implements HasForms
+{
+    use InteractsWithForms;
+
+    public function mount(string $token)
+    {
+        $this->form->fill([]);
+    }
+
+    public function render()
+    {
+        return view('livewire.auth.recover-password');
+    }
+
+    protected function getFormSchema(): array
+    {
+        return [
+            Password::make('password')
+                ->label('New password')
+                ->rule('confirmed')
+                ->required(),
+
+            Password::make('password_confirmation')
+                ->label('Password confirmation')
+                ->required()
+                ->dehydrated(false),
+        ];
+    }
+
+    public function login(): void
+    {
+        $data = $this->form->getState();
+        dd($data);
+    }
+}
