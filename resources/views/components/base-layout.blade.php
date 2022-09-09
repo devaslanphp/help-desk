@@ -12,12 +12,13 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
     @livewireStyles
+    @livewireScripts
+    @stack('scripts')
 </head>
 <body>
 
 {{$slot}}
 
-@livewireScripts
-@stack('scripts')
+@livewire('notifications')
 </body>
 </html>

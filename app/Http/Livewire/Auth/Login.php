@@ -9,6 +9,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
@@ -30,6 +31,13 @@ class Login extends Component implements HasForms
 
     public function render()
     {
+        if (session()->get('password_reset')) {
+            Notification::make()
+                ->success()
+                ->title('Success')
+                ->body(__('Your password is now updated'))
+                ->send();
+        }
         return view('livewire.auth.login');
     }
 
@@ -37,20 +45,20 @@ class Login extends Component implements HasForms
     {
         return [
             TextInput::make('email')
-                ->label('Email address')
+                ->label(__('Email address'))
                 ->email()
                 ->disableLabel()
-                ->placeholder('Email address')
+                ->placeholder(__('Email address'))
                 ->required(),
 
             Password::make('password')
-                ->label('Password')
+                ->label(__('Password'))
                 ->disableLabel()
-                ->placeholder('Password')
+                ->placeholder(__('Password'))
                 ->required(),
 
             Checkbox::make('remember')
-                ->label('Remember me'),
+                ->label(__('Remember me')),
         ];
     }
 
@@ -60,7 +68,9 @@ class Login extends Component implements HasForms
             $this->rateLimit(5);
         } catch (TooManyRequestsException $exception) {
             throw ValidationException::withMessages([
-                'email' => 'Too many login attempts. Please try again in ' . $exception->secondsUntilAvailable . ' seconds.'
+                'email' => __('Too many login attempts. Please try again in :seconds seconds.', [
+                    'seconds' => $exception->secondsUntilAvailable
+                ])
             ]);
         }
 
@@ -70,7 +80,7 @@ class Login extends Component implements HasForms
             'password' => $data['password'],
         ], $data['remember'])) {
             throw ValidationException::withMessages([
-                'email' => 'These credentials do not match our records.',
+                'email' => __('These credentials do not match our records.'),
             ]);
         }
 

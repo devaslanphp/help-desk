@@ -14,12 +14,20 @@ use App\Http\Controllers\Auth\LogoutController;
 |
 */
 
-Route::group(['as' => 'auth.', 'prefix' => 'auth'], function () {
-    Route::view('/login', 'auth.login')->name('login');
-    Route::view('/forgot-password', 'auth.forgot-password')->name('forgot-password');
-    Route::get('/recover-password/{token}', fn(string $token) => view('auth.recover-password', compact('token')))->name('recover-password');
-    Route::get('/logout', LogoutController::class)->name('logout')->middleware('auth');
-});
+Route::middleware('guest')
+    ->group(function () {
+        // Login
+        Route::view('/auth/login', 'auth.login')->name('auth.login');
+        // Forgot password
+        Route::view('/auth/forgot-password', 'auth.forgot-password')->name('password.request');
+        // Recover password
+        Route::get('/auth/recover-password/{token}', fn(string $token) => view('auth.recover-password', compact('token')))->name('password.reset');
+    });
+Route::middleware('auth')
+    ->group(function () {
+        // Logout
+        Route::get('/auth/logout', LogoutController::class)->name('auth.logout');
+    });
 
 Route::middleware('auth')
     ->group(function () {

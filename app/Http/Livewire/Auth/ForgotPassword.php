@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Auth;
 
-use Filament\Forms\Components\Checkbox;
+use App\Models\User;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
-use Phpsa\FilamentPasswordReveal\Password;
+use Illuminate\Support\Facades\Password as PasswordFacade;
 
 class ForgotPassword extends Component implements HasForms
 {
@@ -27,10 +29,11 @@ class ForgotPassword extends Component implements HasForms
     {
         return [
             TextInput::make('email')
-                ->label('Email address')
+                ->label(__('Email address'))
                 ->disableLabel()
-                ->placeholder('Email address')
+                ->placeholder(__('Email address'))
                 ->email()
+                ->exists(table: User::class, column: 'email')
                 ->required(),
         ];
     }
@@ -38,6 +41,20 @@ class ForgotPassword extends Component implements HasForms
     public function forgotPassword(): void
     {
         $data = $this->form->getState();
-        dd($data);
+        $status = PasswordFacade::sendResetLink([
+            'email' => $data['email']
+        ]);
+        if ($status === PasswordFacade::RESET_LINK_SENT) {
+            Notification::make()
+                ->success()
+                ->title('Success')
+                ->body(__('A password recovery email has been sent'))
+                ->send();
+            $this->form->fill();
+        } else {
+            throw ValidationException::withMessages([
+                'email' => __('These credentials do not match our records.'),
+            ]);
+        }
     }
 }
