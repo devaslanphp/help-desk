@@ -8,9 +8,9 @@
                 <li>
                     <a
                         href="{{ route($key) }}"
-                        class="flex items-center gap-2 p-2 text-base rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ Route::is($key) ? 'text-primary-500 bg-gray-100 font-medium' : 'text-gray-500 font-normal' }}">
-                        <i class="fa {{ $value['icon'] }}"></i>
+                        class="flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ Route::is($key) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                         <span>@lang($value['title'])</span>
+                        <i class="fa {{ $value['icon'] }}"></i>
                     </a>
                 </li>
             @endforeach
