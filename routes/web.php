@@ -33,4 +33,12 @@ Route::middleware('auth')
     ->group(function () {
         // Home
         Route::view('/', 'welcome')->name('home');
+        // My profile
+        Route::view('/my-profile', 'my-profile')->name('my-profile');
+        // Analytics
+        Route::view('/analytics', 'analytics')->name('analytics');
+        // Chat
+        Route::view('/chat', 'chat')->name('chat');
+        // Tickets
+        Route::view('/tickets', 'tickets')->name('tickets');
     });
