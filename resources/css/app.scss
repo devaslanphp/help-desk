@@ -5,6 +5,13 @@
 @tailwind utilities;
 
 .main-menu {
+    @apply transition-all;
     min-width: 250px;
     width: 250px;
+    margin-left: 0;
+    transition-duration: 500ms;
+
+    &.closed {
+        margin-left: -250px;
+    }
 }
