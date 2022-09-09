@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
 Route::group(['as' => 'auth.', 'prefix' => 'auth'], function () {
     Route::view('/login', 'auth.login')->name('login');
     Route::view('/forgot-password', 'auth.forgot-password')->name('forgot-password');
-    Route::get('/recover-password/{token}', fn (string $token) => view('auth.recover-password', compact('token')))->name('recover-password');
+    Route::get('/recover-password/{token}', fn(string $token) => view('auth.recover-password', compact('token')))->name('recover-password');
+    Route::get('/logout', LogoutController::class)->name('logout')->middleware('auth');
 });
+
+Route::middleware('auth')
+    ->group(function () {
+        // Home
+        Route::view('/', 'welcome')->name('home');
+    });
