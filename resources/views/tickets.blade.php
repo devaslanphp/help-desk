@@ -11,6 +11,9 @@
                 @lang('New ticket')
             </a>
         </div>
+        <div class="w-full mt-5">
+            @livewire('tickets')
+        </div>
     </div>
 
 </x-layout>

@@ -21,3 +21,20 @@
         margin-left: -250px;
     }
 }
+
+#tickets {
+    .menu {
+        .item {
+            @apply font-normal text-gray-500 pb-2 px-2 border-primary-700;
+            min-width: 150px;
+
+            &:hover {
+                @apply border-b;
+            }
+
+            &.active {
+                @apply border-b-2 font-bold;
+            }
+        }
+    }
+}
