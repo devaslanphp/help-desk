@@ -30,12 +30,14 @@ class Login extends Component implements HasForms
             TextInput::make('email')
                 ->label('Email address')
                 ->email()
-                ->prefixIcon('heroicon-o-at-symbol')
+                ->disableLabel()
+                ->placeholder('Email address')
                 ->required(),
 
             Password::make('password')
                 ->label('Password')
-                ->prefixIcon('heroicon-o-lock-closed')
+                ->disableLabel()
+                ->placeholder('Password')
                 ->required(),
 
             Checkbox::make('remember_me')
