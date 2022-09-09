@@ -1,4 +1,4 @@
-<aside class="main-menu h-full relative" aria-label="Sidebar" :class="{ 'closed': !sidebar_opened }" x-data="{ sidebar_opened: (window.innerWidth < 640 ? false : true) }">
+<aside class="main-menu h-full relative" aria-label="Sidebar" :class="{ 'closed': !sidebar_opened }" x-data="{ sidebar_opened: (window && window.innerWidth && window.innerWidth < 640 ? false : true) }">
     <button x-on:click="sidebar_opened = !sidebar_opened" type="button" class="absolute top-7 -right-11 w-12 h-12 rounded-tr-full rounded-br-full shadow hover:shadow-lg bg-gray-50 text-gray-500 hover:bg-primary-500 hover:text-white text-xl">
         <i class="fa" :class="{
             'fa-angle-left': sidebar_opened,
