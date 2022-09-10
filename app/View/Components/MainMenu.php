@@ -24,6 +24,7 @@ class MainMenu extends Component
             'analytics' => ['title' => 'Analytics', 'icon' => 'fa-chart-bar'],
             'chat' => ['title' => 'Chat', 'icon' => 'fa-comments'],
             'tickets' => ['title' => 'Tickets', 'icon' => 'fa-ticket'],
+            'administration' => ['title' => 'Administration', 'icon' => 'fa-cogs'],
         ];
     }
 

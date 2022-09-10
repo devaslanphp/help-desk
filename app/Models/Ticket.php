@@ -19,6 +19,7 @@ class Ticket extends Model
         'priority',
         'owner_id',
         'responsible_id',
+        'project_id',
     ];
 
     protected $appends = [
@@ -34,6 +35,11 @@ class Ticket extends Model
     public function responsible(): BelongsTo
     {
         return $this->belongsTo(User::class, 'responsible_id');
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 
     public function statusObject(): Attribute

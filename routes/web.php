@@ -41,4 +41,6 @@ Route::middleware('auth')
         Route::view('/chat', 'chat')->name('chat');
         // Tickets
         Route::view('/tickets', 'tickets')->name('tickets');
+        // Administration
+        Route::view('/administration', 'administration')->name('administration');
     });

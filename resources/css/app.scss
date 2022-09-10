@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 .main-menu {
-    @apply transition-all relative;
+    @apply transition-all relative z-50;
     min-width: 250px;
     width: 250px;
     margin-left: 0;
@@ -36,5 +36,11 @@
                 @apply border-b-2 font-bold;
             }
         }
+    }
+}
+
+table {
+    .min-w-table {
+        min-width: 200px;
     }
 }
