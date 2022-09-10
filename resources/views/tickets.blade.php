@@ -14,7 +14,7 @@
                     ])
                 </span>
             </div>
-            <a href="#" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-xs">
+            <a href="#" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-base">
                 @lang('Create a new ticket')
             </a>
         </div>
