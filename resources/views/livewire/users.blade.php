@@ -41,7 +41,7 @@
                         </div>
                     </th>
                     <td class="py-4 px-6">
-
+                        <x-role-span :role="$user->role" />
                     </td>
                     <td class="py-4 px-6">
                         <div class="flex flex-col">

@@ -105,6 +105,7 @@ return [
     | This value is the configured roles assigned to users while creating /
     | updating them, you can change it as you like
     |
+    | 'text-color' and 'bg-color' are tailwindcss based css classes
     | 'permissions' contains the rights to access "pages" and "functions"
     | 'pages' contains the pages accessible by the role
     |   -> Same declared in App\View\Components\MainMenu component)
@@ -132,7 +133,8 @@ return [
     'roles' => [
         'administrator' => [
             'title' => 'Administrator',
-            'color' => 'text-red-500',
+            'text-color' => 'bg-red-50',
+            'bg-color' => 'text-red-500',
             'permissions' => [
                 'pages' => ['analytics', 'chat', 'tickets', 'administration'],
                 'functions' => [
@@ -144,7 +146,8 @@ return [
         ],
         'employee' => [
             'title' => 'Employee',
-            'color' => 'text-gray-500',
+            'text-color' => 'bg-gray-50',
+            'bg-color' => 'text-gray-500',
             'permissions' => [
                 'pages' => ['analytics', 'chat', 'tickets'],
                 'functions' => [
@@ -155,7 +158,8 @@ return [
         ],
         'customer' => [
             'title' => 'Customer',
-            'color' => 'text-blue-500',
+            'text-color' => 'bg-blue-50',
+            'bg-color' => 'text-blue-500',
             'permissions' => [
                 'pages' => ['analytics', 'chat', 'tickets'],
                 'functions' => [

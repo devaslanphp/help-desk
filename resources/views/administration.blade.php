@@ -15,7 +15,7 @@
                 </span>
             </div>
             <a href="#" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-xs">
-                @lang('New user')
+                @lang('Create a new user')
             </a>
         </div>
         <div class="w-full mt-5">
