@@ -14,8 +14,10 @@ class Users extends Component implements HasForms
     use InteractsWithForms;
 
     public $search;
+    public $selectedUser;
 
-    public function mount(): void {
+    public function mount(): void
+    {
         $this->form->fill();
     }
 
@@ -44,8 +46,27 @@ class Users extends Component implements HasForms
         ];
     }
 
-    public function search(): void {
+    public function search(): void
+    {
         $data = $this->form->getState();
         $this->search = $data['search'] ?? null;
+    }
+
+    public function updateUser($id)
+    {
+        $this->selectedUser = User::find($id);
+        $this->dispatchBrowserEvent('toggleUserModal');
+    }
+
+    public function createUser()
+    {
+        $this->selectedUser = new User();
+        $this->dispatchBrowserEvent('toggleUserModal');
+    }
+
+    public function cancelUser()
+    {
+        $this->selectedUser = null;
+        $this->dispatchBrowserEvent('toggleUserModal');
     }
 }
