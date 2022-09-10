@@ -20,6 +20,10 @@
     &.closed {
         margin-left: -250px;
     }
+
+    ul {
+        min-height: 350px;
+    }
 }
 
 #tickets {
