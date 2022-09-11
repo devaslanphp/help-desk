@@ -167,6 +167,7 @@ return [
     |       - update-own-tickets: Update assigned tickets
     |       - delete-own-tickets: Delete assigned tickets
     |       - assign-tickets: Assign tickets to responsibles
+    |       - change-status-tickets: Change tickets status
     |
     */
     'roles' => [
@@ -178,7 +179,7 @@ return [
                 'pages' => ['analytics', 'tickets', 'administration'],
                 'functions' => [
                     'view-all-projects', 'update-all-projects', 'delete-all-projects', 'create-projects',
-                    'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets', 'assign-tickets'
+                    'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets', 'assign-tickets', 'change-status-tickets'
                 ]
             ]
         ],
@@ -190,7 +191,7 @@ return [
                 'pages' => ['analytics', 'tickets'],
                 'functions' => [
                     'view-own-projects',
-                    'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets', 'assign-tickets'
+                    'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets', 'assign-tickets', 'change-status-tickets'
                 ]
             ]
         ],
