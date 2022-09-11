@@ -49,7 +49,6 @@ class TicketsDialog extends Component implements HasForms
                 ->label(__('Project'))
                 ->required()
                 ->searchable()
-                ->columnSpan(3)
                 ->options(function () {
                     $query = Project::query();
                     if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {

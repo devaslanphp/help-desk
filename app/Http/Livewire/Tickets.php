@@ -25,7 +25,7 @@ class Tickets extends Component implements HasForms
     public $projects;
     public $priorities;
     public $statuses;
-    public $owner;
+    public $types;
     public $responsible;
     public $selectedTicket;
 
@@ -73,6 +73,12 @@ class Tickets extends Component implements HasForms
         if ($this->statuses && sizeof($this->statuses)) {
             $query->whereIn('status', $this->statuses);
         }
+        if ($this->types && sizeof($this->types)) {
+            $query->whereIn('type', $this->types);
+        }
+        if ($this->statuses && sizeof($this->responsible)) {
+            $query->whereIn('responsible_id', $this->responsible);
+        }
         $tickets = $query->paginate();
         return view('livewire.tickets', compact('tickets'));
     }
@@ -98,9 +104,6 @@ class Tickets extends Component implements HasForms
     {
         return [
             Grid::make(6)
-                ->extraAttributes([
-                    'class' => 'w-full'
-                ])
                 ->schema([
                     MultiSelect::make('projects')
                         ->label(__('Project'))
@@ -129,12 +132,12 @@ class Tickets extends Component implements HasForms
                         ->placeholder(__('Statuses'))
                         ->options(statuses_list()),
 
-                    MultiSelect::make('owner')
-                        ->label(__('Owner'))
+                    MultiSelect::make('types')
+                        ->label(__('Types'))
                         ->disableLabel()
                         ->searchable()
-                        ->placeholder(__('Owner'))
-                        ->options(User::all()->pluck('name', 'id')),
+                        ->placeholder(__('Types'))
+                        ->options(types_list()),
 
                     MultiSelect::make('responsible')
                         ->label(__('Responsible'))
@@ -164,7 +167,7 @@ class Tickets extends Component implements HasForms
         $this->projects = $data['projects'] ?? null;
         $this->priorities = $data['priorities'] ?? null;
         $this->statuses = $data['statuses'] ?? null;
-        $this->owner = $data['owner'] ?? null;
+        $this->types = $data['types'] ?? null;
         $this->responsible = $data['responsible'] ?? null;
     }
 
@@ -173,7 +176,7 @@ class Tickets extends Component implements HasForms
         $this->projects = null;
         $this->priorities = null;
         $this->statuses = null;
-        $this->owner = null;
+        $this->types = null;
         $this->responsible = null;
     }
 
