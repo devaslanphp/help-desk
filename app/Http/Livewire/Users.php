@@ -18,7 +18,7 @@ class Users extends Component implements HasForms
     public $search;
     public $selectedUser;
 
-    protected $listeners = ['userSaved'];
+    protected $listeners = ['userSaved', 'userDeleted'];
 
     public function mount(): void
     {
@@ -75,8 +75,12 @@ class Users extends Component implements HasForms
     }
 
     public function userSaved() {
-        $this->render();
+        $this->search();
         $this->cancelUser();
+    }
+
+    public function userDeleted() {
+        $this->userSaved();
     }
 
     public function resendActivationEmail(User $user) {

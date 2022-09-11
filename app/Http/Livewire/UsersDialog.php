@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Livewire\Component;
 use Ramsey\Uuid\Uuid;
@@ -17,6 +18,9 @@ class UsersDialog extends Component implements HasForms
     use InteractsWithForms;
 
     public User $user;
+    public bool $deleteConfirmationOpened = false;
+
+    protected $listeners = ['doDeleteUser', 'cancelDeleteUser'];
 
     public function mount(): void {
         $this->form->fill([
@@ -83,8 +87,40 @@ class UsersDialog extends Component implements HasForms
         $this->emit('userSaved');
     }
 
-    public function deleteUser(): void {
+    public function doDeleteUser(): void {
         $this->user->delete();
-        $this->dispatchBrowserEvent('toggleUserModal');
+        $this->deleteConfirmationOpened = false;
+        $this->emit('userDeleted');
+        Notification::make()
+            ->success()
+            ->title('User deleted')
+            ->body(__('The user has been deleted'))
+            ->send();
+    }
+
+    public function cancelDeleteUser(): void {
+        $this->deleteConfirmationOpened = false;
+    }
+
+    public function deleteUser(): void {
+        $this->deleteConfirmationOpened = true;
+        Notification::make()
+            ->warning()
+            ->title('User deletion')
+            ->body(__('Are you sure you want to delete this user?'))
+            ->actions([
+                Action::make('confirm')
+                    ->label(__('Confirm'))
+                    ->color('danger')
+                    ->button()
+                    ->close()
+                    ->emit('doDeleteUser'),
+                Action::make('cancel')
+                    ->label(__('Cancel'))
+                    ->close()
+                    ->emit('cancelDeleteUser')
+            ])
+            ->persistent()
+            ->send();
     }
 }
