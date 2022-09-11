@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 if (!function_exists('roles_list')) {
     /**
@@ -22,11 +23,11 @@ if (!function_exists('has_all_permissions')) {
     /**
      * Check if the user has all the permissions passed as parameters
      *
-     * @param User $user
+     * @param User|Authenticatable $user
      * @param ...$permissions
      * @return bool
      */
-    function has_all_permissions(User $user, ...$permissions): bool
+    function has_all_permissions(User|Authenticatable $user, ...$permissions): bool
     {
         if ($user->role) {
             $role = config('system.roles.' . $user->role);
@@ -43,11 +44,11 @@ if (!function_exists('has_any_permissions')) {
     /**
      * Check if the user has any of the permissions passed as parameters
      *
-     * @param User $user
+     * @param User|Authenticatable $user
      * @param ...$permissions
      * @return bool
      */
-    function has_any_permissions(User $user, ...$permissions): bool
+    function has_any_permissions(User|Authenticatable $user, ...$permissions): bool
     {
         if ($user->role) {
             $role = config('system.roles.' . $user->role);
@@ -64,11 +65,11 @@ if (!function_exists('can_access_page')) {
     /**
      * Check if the user can access the pages passed as parameters
      *
-     * @param User $user
+     * @param User|Authenticatable $user
      * @param ...$pages
      * @return bool
      */
-    function can_access_page(User $user, ...$pages): bool
+    function can_access_page(User|Authenticatable $user, ...$pages): bool
     {
         if ($user->role) {
             $role = config('system.roles.' . $user->role);

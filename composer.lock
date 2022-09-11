@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf7f565d5eac9e42dbcb751b70d72f81",
+    "content-hash": "6d1270718309a2b22370dd744228a882",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -629,16 +629,16 @@
         },
         {
             "name": "dragonmantank/cron-expression",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/cron-expression.git",
-                "reference": "be85b3f05b46c39bbc0d95f6c071ddff669510fa"
+                "reference": "782ca5968ab8b954773518e9e49a6f892a34b2a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/be85b3f05b46c39bbc0d95f6c071ddff669510fa",
-                "reference": "be85b3f05b46c39bbc0d95f6c071ddff669510fa",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/782ca5968ab8b954773518e9e49a6f892a34b2a8",
+                "reference": "782ca5968ab8b954773518e9e49a6f892a34b2a8",
                 "shasum": ""
             },
             "require": {
@@ -678,7 +678,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dragonmantank/cron-expression/issues",
-                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.3.1"
+                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.3.2"
             },
             "funding": [
                 {
@@ -686,7 +686,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-18T15:43:28+00:00"
+            "time": "2022-09-10T18:51:20+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -758,16 +758,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.15.48",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/admin.git",
-                "reference": "4f67e5482ccf485c87a53d18146eb2197ff264e8"
+                "reference": "4bfea272b3a4210fff0f3440a03072f7daa3568f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/admin/zipball/4f67e5482ccf485c87a53d18146eb2197ff264e8",
-                "reference": "4f67e5482ccf485c87a53d18146eb2197ff264e8",
+                "url": "https://api.github.com/repos/filamentphp/admin/zipball/4bfea272b3a4210fff0f3440a03072f7daa3568f",
+                "reference": "4bfea272b3a4210fff0f3440a03072f7daa3568f",
                 "shasum": ""
             },
             "require": {
@@ -817,20 +817,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-09-08T12:26:19+00:00"
+            "time": "2022-09-10T14:22:14+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.15.48",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "61d2c501f7d8493a66fc6a4417c9fb08ea62176a"
+                "reference": "24412c86e593871aab5442caed63f2b72b1494a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/61d2c501f7d8493a66fc6a4417c9fb08ea62176a",
-                "reference": "61d2c501f7d8493a66fc6a4417c9fb08ea62176a",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/24412c86e593871aab5442caed63f2b72b1494a7",
+                "reference": "24412c86e593871aab5442caed63f2b72b1494a7",
                 "shasum": ""
             },
             "require": {
@@ -875,20 +875,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-09-08T12:26:10+00:00"
+            "time": "2022-09-10T12:35:15+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v2.15.48",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "5f148469ec5466688b5fc01a23d48e64a6b88b1e"
+                "reference": "7c82359cc3521892aa5ab47e50ef9670a1a2f240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/5f148469ec5466688b5fc01a23d48e64a6b88b1e",
-                "reference": "5f148469ec5466688b5fc01a23d48e64a6b88b1e",
+                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/7c82359cc3521892aa5ab47e50ef9670a1a2f240",
+                "reference": "7c82359cc3521892aa5ab47e50ef9670a1a2f240",
                 "shasum": ""
             },
             "require": {
@@ -896,6 +896,7 @@
                 "filament/support": "self.version",
                 "illuminate/contracts": "^8.6|^9.0",
                 "illuminate/filesystem": "^8.6|^9.0",
+                "illuminate/notifications": "^8.6|^9.0",
                 "illuminate/support": "^8.6|^9.0",
                 "livewire/livewire": "^2.10.7",
                 "php": "^8.0",
@@ -924,20 +925,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-09-01T22:09:39+00:00"
+            "time": "2022-09-10T14:22:10+00:00"
         },
         {
             "name": "filament/support",
-            "version": "v2.15.48",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "5cda848cd7bfbad8b45128f5d1725e46be0fc09c"
+                "reference": "274f6d3873bf57d20d6183e72cbab35e0d24cab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/5cda848cd7bfbad8b45128f5d1725e46be0fc09c",
-                "reference": "5cda848cd7bfbad8b45128f5d1725e46be0fc09c",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/274f6d3873bf57d20d6183e72cbab35e0d24cab6",
+                "reference": "274f6d3873bf57d20d6183e72cbab35e0d24cab6",
                 "shasum": ""
             },
             "require": {
@@ -974,20 +975,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-09-09T04:40:40+00:00"
+            "time": "2022-09-10T12:35:22+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v2.15.48",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "158b1c661af25aef21a492c50a938caca3caa52a"
+                "reference": "fba9cefe2a63dbf53879d708c7c974b141c203b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/158b1c661af25aef21a492c50a938caca3caa52a",
-                "reference": "158b1c661af25aef21a492c50a938caca3caa52a",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/fba9cefe2a63dbf53879d708c7c974b141c203b1",
+                "reference": "fba9cefe2a63dbf53879d708c7c974b141c203b1",
                 "shasum": ""
             },
             "require": {
@@ -1030,7 +1031,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-09-08T12:26:01+00:00"
+            "time": "2022-09-10T12:35:17+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1498,16 +1499,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.28.0",
+            "version": "v9.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "396a89e1f3654123d1c7f56306051212e5c75bc0"
+                "reference": "585da0913e907fd54941260860ae3d7d4be8e8cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/396a89e1f3654123d1c7f56306051212e5c75bc0",
-                "reference": "396a89e1f3654123d1c7f56306051212e5c75bc0",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/585da0913e907fd54941260860ae3d7d4be8e8cb",
+                "reference": "585da0913e907fd54941260860ae3d7d4be8e8cb",
                 "shasum": ""
             },
             "require": {
@@ -1674,7 +1675,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-09-06T14:57:01+00:00"
+            "time": "2022-09-09T18:21:21+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2414,87 +2415,6 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.7.6"
             },
             "time": "2022-08-18T16:18:26+00:00"
-        },
-        {
-            "name": "mohamedsabil83/filament-forms-tinyeditor",
-            "version": "v1.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mohamedsabil83/filament-forms-tinyeditor.git",
-                "reference": "8e2017b6a68ca95601cdc020846c912adc1eb4aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mohamedsabil83/filament-forms-tinyeditor/zipball/8e2017b6a68ca95601cdc020846c912adc1eb4aa",
-                "reference": "8e2017b6a68ca95601cdc020846c912adc1eb4aa",
-                "shasum": ""
-            },
-            "require": {
-                "filament/forms": "^2.0",
-                "illuminate/contracts": "^8.73|^9.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9.2"
-            },
-            "require-dev": {
-                "nunomaduro/collision": "^5.10|^6.1",
-                "nunomaduro/larastan": "^1.0|^2.0",
-                "orchestra/testbench": "^6.23|^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mohamedsabil83\\FilamentFormsTinyeditor\\FilamentFormsTinyeditorServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mohamedsabil83\\FilamentFormsTinyeditor\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "MohamedSabil83",
-                    "email": "me@mohamedsabil83.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A tinymce editor field for Filament forms",
-            "homepage": "https://github.com/mohamedsabil83/filament-forms-tinyeditor",
-            "keywords": [
-                "Forms",
-                "filament",
-                "laravel",
-                "tinyeditor",
-                "tinymce"
-            ],
-            "support": {
-                "issues": "https://github.com/mohamedsabil83/filament-forms-tinyeditor/issues",
-                "source": "https://github.com/mohamedsabil83/filament-forms-tinyeditor/tree/v1.6.2"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/technolizer",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/mohamedsabil83",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-08-27T19:01:45+00:00"
         },
         {
             "name": "monolog/monolog",
