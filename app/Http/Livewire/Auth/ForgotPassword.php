@@ -25,6 +25,11 @@ class ForgotPassword extends Component implements HasForms
         return view('livewire.auth.forgot-password');
     }
 
+    /**
+     * Form schema definition
+     *
+     * @return array
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -38,6 +43,12 @@ class ForgotPassword extends Component implements HasForms
         ];
     }
 
+    /**
+     * Forgot password main function
+     *
+     * @return void
+     * @throws ValidationException
+     */
     public function forgotPassword(): void
     {
         $data = $this->form->getState();

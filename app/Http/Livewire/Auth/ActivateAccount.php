@@ -26,6 +26,11 @@ class ActivateAccount extends Component implements HasForms
         return view('livewire.auth.activate-account');
     }
 
+    /**
+     * Form schema definition
+     *
+     * @return array
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -45,6 +50,11 @@ class ActivateAccount extends Component implements HasForms
         ];
     }
 
+    /**
+     * Activate the user's account
+     *
+     * @return void
+     */
     public function activate(): void
     {
         $data = $this->form->getState();

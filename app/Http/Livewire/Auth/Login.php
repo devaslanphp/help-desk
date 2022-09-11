@@ -41,6 +41,11 @@ class Login extends Component implements HasForms
         return view('livewire.auth.login');
     }
 
+    /**
+     * Form schema definition
+     *
+     * @return array
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -62,6 +67,12 @@ class Login extends Component implements HasForms
         ];
     }
 
+    /**
+     * Login the user main function
+     *
+     * @return void
+     * @throws ValidationException
+     */
     public function login(): void
     {
         try {

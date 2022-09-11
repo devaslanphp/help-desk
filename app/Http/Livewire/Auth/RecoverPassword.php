@@ -38,6 +38,11 @@ class RecoverPassword extends Component implements HasForms
         return view('livewire.auth.recover-password');
     }
 
+    /**
+     * Form schema definition
+     *
+     * @return array
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -64,6 +69,12 @@ class RecoverPassword extends Component implements HasForms
         ];
     }
 
+    /**
+     * Recover a password main function
+     *
+     * @return void
+     * @throws ValidationException
+     */
     public function recoverPassword(): void
     {
         $data = $this->form->getState();

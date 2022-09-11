@@ -30,11 +30,17 @@ class UsersDialog extends Component implements HasForms
         ]);
     }
 
+
     public function render()
     {
         return view('livewire.users-dialog');
     }
 
+    /**
+     * Form schema definition
+     *
+     * @return array
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -57,6 +63,11 @@ class UsersDialog extends Component implements HasForms
         ];
     }
 
+    /**
+     * Create / Update the user
+     *
+     * @return void
+     */
     public function save(): void {
         $data = $this->form->getState();
         if (!$this->user?->id) {
@@ -87,6 +98,11 @@ class UsersDialog extends Component implements HasForms
         $this->emit('userSaved');
     }
 
+    /**
+     * Delete an existing user
+     *
+     * @return void
+     */
     public function doDeleteUser(): void {
         $this->user->delete();
         $this->deleteConfirmationOpened = false;
@@ -98,10 +114,21 @@ class UsersDialog extends Component implements HasForms
             ->send();
     }
 
+    /**
+     * Cancel the deletion of a user
+     *
+     * @return void
+     */
     public function cancelDeleteUser(): void {
         $this->deleteConfirmationOpened = false;
     }
 
+    /**
+     * Show the delete user confirmation dialog
+     *
+     * @return void
+     * @throws \Exception
+     */
     public function deleteUser(): void {
         $this->deleteConfirmationOpened = true;
         Notification::make()

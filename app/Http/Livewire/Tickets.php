@@ -24,6 +24,12 @@ class Tickets extends Component
         return view('livewire.tickets');
     }
 
+    /**
+     * Change a menu (tab)
+     *
+     * @param $item
+     * @return void
+     */
     public function selectMenu($item)
     {
         $this->activeMenu = $item;

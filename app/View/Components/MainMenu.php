@@ -17,6 +17,8 @@ class MainMenu extends Component
     public function __construct()
     {
         /**
+         * Menu array definition
+         *
          *  'route name' => 'menu item label'
          */
         $this->menu = [
