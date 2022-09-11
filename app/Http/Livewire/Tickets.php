@@ -12,9 +12,9 @@ class Tickets extends Component
     public function mount()
     {
         $this->menu = [
+            'All tickets',
             'Unassigned',
             'Assigned to me',
-            'All tickets',
         ];
         $this->activeMenu = $this->menu[0];
     }
