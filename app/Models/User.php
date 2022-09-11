@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -52,6 +53,14 @@ class User extends Authenticatable
     protected $appends = [
         'avatar_url'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
 
     public function avatarUrl(): Attribute
     {

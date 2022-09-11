@@ -22,18 +22,20 @@
                 <i class="fa fa-star"></i>
                 @lang('Favorite projects')
             </span>
-            <div class="w-full flex flex-row justify-start items-center gap-5 flex-wrap">
+            <div class="w-full flex flex-row justify-start items-start flex-wrap -ml-2">
                 @foreach(auth()->user()->favoriteProjects as $project)
-                    <div class="lg:w-1/6 md:w-1/4 w-1/2 h-full flex flex-col justify-start items-start gap-1 p-5 border border-gray-100 rounded-lg shadow bg-white hover:shadow-lg">
-                        <span class="text-gray-700 font-medium text-base">
-                            {{ $project->name }}
-                        </span>
-                        <span class="text-gray-500 font-light text-sm">
-                            {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
-                        </span>
-                        <a href="#" class="mt-2 text-primary-500 hover:text-primary-600 font-normal text-sm hover:underline">
-                            @lang('View tickets')
-                        </a>
+                    <div class="xl:w-1/6 lg:w-1/4 md:w-1/3 w-1/2 p-2">
+                        <div class="w-full flex flex-col gap-1 p-5 border border-gray-100 rounded-lg shadow bg-white hover:shadow-lg">
+                            <span class="text-gray-700 font-medium text-base">
+                                {{ $project->name }}
+                            </span>
+                            <span class="text-gray-500 font-light text-sm" style="min-height: 120px;">
+                                {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
+                            </span>
+                            <a href="#" class="mt-2 text-primary-500 hover:text-primary-600 font-normal text-sm hover:underline">
+                                @lang('View tickets')
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -65,6 +67,9 @@
                             @lang('Description')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
+                            @lang('Owner')
+                        </th>
+                        <th scope="col" class="py-3 px-6 min-w-table">
                             @lang('Tickets')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
@@ -90,6 +95,13 @@
                                 <td class="py-4 px-6">
                                     {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 50) }}
                                 </td>
+                                <td class="flex items-center py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <x-user-avatar :user="$project->owner" />
+                                    <div class="pl-3">
+                                        <div class="text-base font-semibold">{{ $project->owner->name }}</div>
+                                        <div class="font-normal text-gray-500">{{ $project->owner->email }}</div>
+                                    </div>
+                                </td>
                                 <td class="py-4 px-6">
                                     {{ $project->tickets()->count() }} @lang($project->tickets()->count() > 1 ? 'Tickets' : 'Ticket')
                                 </td>
@@ -108,7 +120,7 @@
                         @endforeach
                     @else
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td colspan="4" class="py-4 px-6 text-center dark:text-white">
+                            <td colspan="6" class="py-4 px-6 text-center dark:text-white">
                                 @lang('No projects to show!')
                             </td>
                         </tr>
