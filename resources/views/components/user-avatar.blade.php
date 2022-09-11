@@ -1,1 +1,1 @@
-<img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full shadow" />
+<img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-full shadow" style="width: {{ $size }}px; height:{{ $size }}px;" />

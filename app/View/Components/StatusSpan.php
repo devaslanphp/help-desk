@@ -4,21 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class UserAvatar extends Component
+class StatusSpan extends Component
 {
-
-    public $user;
-    public $size;
+    public $status;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($user, $size = 40)
+    public function __construct($status)
     {
-        $this->user = $user;
-        $this->size = $size;
+        $this->status = $status;
     }
 
     /**
@@ -28,6 +25,6 @@ class UserAvatar extends Component
      */
     public function render()
     {
-        return view('components.user-avatar');
+        return view('components.status-span');
     }
 }

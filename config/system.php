@@ -20,7 +20,7 @@ return [
         'created' => [
             'title' => 'Created',
             'text-color' => 'text-gray-500',
-            'bg-color' => 'bg-color-100',
+            'bg-color' => 'bg-gray-100',
             'default' => true
         ],
         'in_progress' => [
@@ -65,13 +65,13 @@ return [
     */
     'priorities' => [
         'lowest' => [
-            'title' => 'Created',
+            'title' => 'Lowest',
             'text-color' => 'text-green-500',
             'bg-color' => 'bg-green-100',
             'icon' => 'fa-arrow-down'
         ],
         'low' => [
-            'title' => 'In progress',
+            'title' => 'Low',
             'text-color' => 'text-emerald-500',
             'bg-color' => 'bg-emerald-100',
             'icon' => 'fa-angle-down'

@@ -81,3 +81,53 @@ if (!function_exists('can_access_page')) {
         return false;
     }
 }
+
+if (!function_exists('statuses_list')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * @return array
+     */
+    function statuses_list(): array
+    {
+        $statuses = [];
+        foreach (config('system.statuses') as $key => $value) {
+            $statuses[$key] = __($value['title']);
+        }
+        return $statuses;
+    }
+}
+
+if (!function_exists('priorities_list')) {
+    /**
+     * Return priorities list as an array of KEY (priority id) => VALUE (priority title)
+     *
+     * @return array
+     */
+    function priorities_list(): array
+    {
+        $priorities = [];
+        foreach (config('system.priorities') as $key => $value) {
+            $priorities[$key] = __($value['title']);
+        }
+        return $priorities;
+    }
+}
+
+if (!function_exists('default_ticket_status')) {
+    /**
+     * Return the default status configured on system configurations
+     *
+     * @return string|null
+     */
+    function default_ticket_status(): string|null
+    {
+        $default = null;
+        foreach (config('system.statuses') as $key => $status) {
+            if ($status['default']) {
+                $default = $key;
+            }
+        }
+        return $default;
+    }
+}

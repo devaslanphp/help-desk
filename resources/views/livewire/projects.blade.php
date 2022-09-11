@@ -44,7 +44,7 @@
     <div class="w-full mt-5">
         <div class="w-full flex flex-col justify-start items-start gap-5">
             <div class="w-full flex flex-row justify-end items-center pb-4 bg-white dark:bg-gray-900">
-                <form wire:submit.prevent="search" class="relative flex flex-row justify-end items-center gap-1 md:w-1/3 w-2/3">
+                <form wire:submit.prevent="search" class="relative flex flex-row justify-end items-center gap-5 md:w-1/3 w-2/3">
                     {{ $this->form }}
                     <button type="submit" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-primary-700 hover:bg-primary-800 text-white text-base">
                         <div wire:loading.remove>
@@ -159,7 +159,6 @@
     @push('scripts')
         <script>
             window.addEventListener('toggleProjectModal', () => {
-                console.log('here');
                 const toggleProjectModalBtn = document.querySelector('#toggleProjectModal');
                 toggleProjectModalBtn.click();
             });
