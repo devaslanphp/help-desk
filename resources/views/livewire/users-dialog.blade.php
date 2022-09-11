@@ -1,4 +1,4 @@
-<form wire:submit.prevent="login" class="w-full">
+<form wire:submit.prevent="save" class="w-full">
     <div class="w-full p-5">
         {{ $this->form }}
     </div>

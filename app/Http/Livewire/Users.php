@@ -16,6 +16,8 @@ class Users extends Component implements HasForms
     public $search;
     public $selectedUser;
 
+    protected $listeners = ['userSaved'];
+
     public function mount(): void
     {
         $this->form->fill();
@@ -68,5 +70,10 @@ class Users extends Component implements HasForms
     {
         $this->selectedUser = null;
         $this->dispatchBrowserEvent('toggleUserModal');
+    }
+
+    public function userSaved() {
+        $this->render();
+        $this->cancelUser();
     }
 }

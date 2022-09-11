@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::middleware('guest')
         Route::view('/auth/forgot-password', 'auth.forgot-password')->name('password.request');
         // Recover password
         Route::get('/auth/recover-password/{token}', fn(string $token) => view('auth.recover-password', compact('token')))->name('password.reset');
+        // Account activation
+        Route::get('/auth/activate-account/{user:register_token}', fn (User $user) => view('auth.activate-account', compact('user')))->name('auth.activate-account');
     });
 Route::middleware('auth')
     ->group(function () {

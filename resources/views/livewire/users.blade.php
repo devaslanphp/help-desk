@@ -40,6 +40,9 @@
                             @lang('Role')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
+                            @lang('Account activated')
+                        </th>
+                        <th scope="col" class="py-3 px-6 min-w-table">
                             @lang('Created at')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
@@ -61,6 +64,13 @@
                                 <x-role-span :role="$user->role" />
                             </td>
                             <td class="py-4 px-6">
+                                @if($user->register_token)
+                                    <i class="fa fa-times-circle-o text-red-500 text-lg"></i>
+                                @else
+                                    <i class="fa fa-check-circle-o text-green-500 text-lg"></i>
+                                @endif
+                            </td>
+                            <td class="py-4 px-6">
                                 <div class="flex flex-col">
                                     <span class="text-base font-semibold">{{ $user->created_at->diffForHumans() }}</span>
                                     <span class="font-normal text-gray-500">{{ $user->created_at->format(__('Y-m-d g:i A')) }}</span>
@@ -75,6 +85,9 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="w-full flex flex-row justify-start items-center">
+                {{ $users->links('pagination::tailwind') }}
             </div>
 
             <div id="userModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex items-center justify-center w-full md:inset-0 h-modal md:h-full">
