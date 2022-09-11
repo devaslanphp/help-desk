@@ -70,7 +70,7 @@
                             {{ $ticket->project->name }}
                         </span>
                         <div class="w-full flex flex-row justify-between items-start gap-5">
-                            <a href="#" class="text-lg font-medium text-gray-700 hover:underline">{{ $ticket->title }}</a>
+                            <a href="{{ route('ticket-details', ['ticket' => $ticket, 'slug' => Str::slug($ticket->title)]) }}" class="text-lg font-medium text-gray-700 hover:underline">{{ $ticket->title }}</a>
                             <span class="text-sm font-medium text-gray-700">{{ $ticket->created_at->diffForHumans() }}</span>
                         </div>
                         <span class="text-sm font-light text-gray-500">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Models\User;
+use App\Models\Ticket;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::middleware('auth')
         Route::view('/analytics', 'analytics')->name('analytics');
         // Tickets
         Route::view('/tickets', 'tickets')->name('tickets');
+        Route::get('/tickets/{ticket:id}/{slug}', fn (Ticket $ticket) => view('ticket-details', compact('ticket')))->name('ticket-details');
         // Administration
         Route::view('/administration', 'administration')->name('administration');
     });

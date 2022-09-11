@@ -2,23 +2,30 @@
 
 namespace App\Notifications;
 
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 
-class UserActivatedNotification extends Notification implements ShouldQueue
+class TicketCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
+
+    private Ticket $ticket;
+    private User $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Ticket $ticket, User $user)
     {
-        //
+        $this->ticket = $ticket;
+        $this->user = $user;
     }
 
     /**
@@ -41,9 +48,14 @@ class UserActivatedNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line(__('We inform you that your user account for the :platform platform is now activated.', ['platform' => config('app.name')]))
-                    ->line(__('You can use the following button to access the platform.'))
-                    ->action('Access my account', route('home'))
+                    ->line(__('We inform you that a new ticket has been created in the platform :platform.', [
+                        'platform' => config('app.name')
+                    ]))
+                    ->line(__('Below are the details of this ticket:'))
+                    ->line(__('- Title: :title', ['title' => $this->ticket->title]))
+                    ->line(__('- Type: :type', ['type' => config('system.types.' . $this->ticket->type . '.title')]))
+                    ->line(__('- Priority: :priority', ['priority' => config('system.priorities.' . $this->ticket->priority . '.title')]))
+                    ->action(__('Ticket details'), route('ticket-details', ['ticket' => $this->ticket, 'slug' => Str::slug($this->ticket->title)]))
                     ->line(__('Thank you for using our application!'));
     }
 

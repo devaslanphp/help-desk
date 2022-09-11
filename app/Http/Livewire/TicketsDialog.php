@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\TicketCreatedJob;
 use App\Models\Project;
 use App\Models\Ticket;
 use App\Models\User;
@@ -95,7 +96,7 @@ class TicketsDialog extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        Ticket::create([
+        $ticket = Ticket::create([
             'project_id' => $data['project_id'],
             'title' => $data['title'],
             'content' => $data['content'],
@@ -110,6 +111,6 @@ class TicketsDialog extends Component implements HasForms
             ->body(__('The ticket has been successfully created'))
             ->send();
         $this->emit('ticketSaved');
-        // TODO send a notification to users containing the created ticket
+        TicketCreatedJob::dispatch($ticket);
     }
 }
