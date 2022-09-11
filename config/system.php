@@ -139,8 +139,7 @@ return [
                 'pages' => ['analytics', 'chat', 'tickets', 'administration'],
                 'functions' => [
                     'view-all-projects', 'update-all-projects', 'delete-all-projects', 'create-projects',
-                    'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets',
-                    'view-all-users', 'manage-all-users', 'create-user'
+                    'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets'
                 ]
             ]
         ],
