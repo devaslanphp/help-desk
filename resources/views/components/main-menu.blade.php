@@ -11,14 +11,16 @@
         </a>
         <ul class="space-y-8 mt-20 h-full w-full">
             @foreach($menu as $key => $value)
-                <li>
-                    <a
-                        href="{{ route($key) }}"
-                        class="flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ Route::is($key) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                        <span>@lang($value['title'])</span>
-                        <i class="fa {{ $value['icon'] }}"></i>
-                    </a>
-                </li>
+                @if($value['always_shown'] || can_access_page(auth()->user(), $key))
+                    <li>
+                        <a
+                            href="{{ route($key) }}"
+                            class="flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ Route::is($key) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                            <span>@lang($value['title'])</span>
+                            <i class="fa {{ $value['icon'] }}"></i>
+                        </a>
+                    </li>
+                @endif
             @endforeach
         </ul>
         <div
