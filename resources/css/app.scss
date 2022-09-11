@@ -26,7 +26,8 @@
     }
 }
 
-#tickets {
+#tickets,
+#ticket-details-tabs {
     .menu {
         .item {
             @apply font-normal text-gray-500 pb-2 px-2 border-primary-700;
