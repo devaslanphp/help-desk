@@ -74,7 +74,7 @@
                     <span class="text-gray-400 font-medium text-sm">@lang('Not assigned yet!')</span>
                 </div>
             @endif
-            <div class="w-full flex flex-col justify-start items-start gap-1 mt-5">
+            <div class="w-full flex flex-col justify-start items-start gap-1 mt-5 pt-5 border-t border-gray-200">
                 <div class="w-full flex flex-row justify-start items-center gap-1">
                     <span class="text-gray-500 font-normal text-xs">@lang('Created:')</span>
                     <span class="text-gray-500 font-medium text-xs">{{ $ticket->created_at->diffForHumans() }}</span>
