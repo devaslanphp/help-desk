@@ -40,20 +40,19 @@
                         <div class="w-full flex flex-row justify-start items-center p-5 border border-gray-200">
                             <form wire:submit.prevent="search" class="relative flex lg:flex-row flex-col justify-start items-center gap-5 w-full">
                                 {{ $this->form }}
-                                <button type="submit" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-primary-700 hover:bg-primary-800 text-white text-base">
-                                    <div wire:loading.remove>
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <div wire:loading>
-                                        <i class="fa fa-spin fa-spinner"></i>
-                                    </div>
-                                </button>
-                                <button type="button" wire:click="resetFilters" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-gray-700 hover:bg-gray-800 text-white text-base">
-                                    <div class="flex flex-row justify-center items-center gap-2">
-                                        <i class="fa fa-times"></i>
-                                        @lang('Reset filters')
-                                    </div>
-                                </button>
+                                <div class="flex flex-row items-center gap-1">
+                                    <button type="submit" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-primary-700 hover:bg-primary-800 text-white text-base">
+                                        <div wire:loading.remove>
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                        <div wire:loading>
+                                            <i class="fa fa-spin fa-spinner"></i>
+                                        </div>
+                                    </button>
+                                    <button type="button" wire:click="resetFilters" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-gray-700 hover:bg-gray-800 text-white text-base">
+                                        <i class="fa fa-filter-circle-xmark"></i>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\FavoriteProject;
 use App\Models\Project;
 use App\Models\Ticket;
+use App\Models\User;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Select;
@@ -24,6 +25,8 @@ class Tickets extends Component implements HasForms
     public $projects;
     public $priorities;
     public $statuses;
+    public $owner;
+    public $responsible;
     public $selectedTicket;
 
     protected $listeners = ['ticketSaved', 'ticketDeleted'];
@@ -94,7 +97,7 @@ class Tickets extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Grid::make(4)
+            Grid::make(6)
                 ->extraAttributes([
                     'class' => 'w-full'
                 ])
@@ -126,6 +129,20 @@ class Tickets extends Component implements HasForms
                         ->placeholder(__('Statuses'))
                         ->options(statuses_list()),
 
+                    MultiSelect::make('owner')
+                        ->label(__('Owner'))
+                        ->disableLabel()
+                        ->searchable()
+                        ->placeholder(__('Owner'))
+                        ->options(User::all()->pluck('name', 'id')),
+
+                    MultiSelect::make('responsible')
+                        ->label(__('Responsible'))
+                        ->disableLabel()
+                        ->searchable()
+                        ->placeholder(__('Responsible'))
+                        ->options(User::all()->pluck('name', 'id')),
+
                     TextInput::make('search')
                         ->label(__('Search for tickets'))
                         ->disableLabel()
@@ -147,6 +164,8 @@ class Tickets extends Component implements HasForms
         $this->projects = $data['projects'] ?? null;
         $this->priorities = $data['priorities'] ?? null;
         $this->statuses = $data['statuses'] ?? null;
+        $this->owner = $data['owner'] ?? null;
+        $this->responsible = $data['responsible'] ?? null;
     }
 
     public function resetFilters(): void {
@@ -154,6 +173,8 @@ class Tickets extends Component implements HasForms
         $this->projects = null;
         $this->priorities = null;
         $this->statuses = null;
+        $this->owner = null;
+        $this->responsible = null;
     }
 
     /**
