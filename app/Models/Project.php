@@ -47,7 +47,7 @@ class Project extends Model
     {
         $query = $this->belongsToMany(User::class, 'favorite_projects', 'project_id', 'user_id');
         if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
-            $query->where('owner_id', auth()->user()->id);
+            $query->where('user_id', auth()->user()->id);
         }
         return $query;
     }
