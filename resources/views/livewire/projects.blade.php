@@ -31,7 +31,7 @@
                         <span class="text-gray-500 font-light text-sm">
                             {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
                         </span>
-                        <a href="#" class="mt-2 text-gray-500 hover:text-primary-500 font-normal text-sm hover:underline">
+                        <a href="#" class="mt-2 text-gray-500 hover:text-primary-600 font-normal text-sm hover:underline">
                             @lang('View tickets')
                         </a>
                     </div>
@@ -65,6 +65,9 @@
                             @lang('Description')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
+                            @lang('Tickets')
+                        </th>
+                        <th scope="col" class="py-3 px-6 min-w-table">
                             @lang('Created at')
                         </th>
                         <th scope="col" class="py-3 px-6 min-w-table">
@@ -85,7 +88,10 @@
                                     </div>
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
+                                    {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 50) }}
+                                </td>
+                                <td class="py-4 px-6">
+                                    {{ $project->tickets()->count() }} @lang($project->tickets()->count() > 1 ? 'Tickets' : 'Ticket')
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex flex-col">
