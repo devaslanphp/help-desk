@@ -18,6 +18,7 @@ class Ticket extends Model
         'content',
         'status',
         'priority',
+        'type',
         'owner_id',
         'responsible_id',
         'project_id',

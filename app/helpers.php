@@ -131,3 +131,19 @@ if (!function_exists('default_ticket_status')) {
         return $default;
     }
 }
+
+if (!function_exists('types_list')) {
+    /**
+     * Return types list as an array of KEY (type id) => VALUE (type title)
+     *
+     * @return array
+     */
+    function types_list(): array
+    {
+        $priorities = [];
+        foreach (config('system.types') as $key => $value) {
+            $priorities[$key] = __($value['title']);
+        }
+        return $priorities;
+    }
+}

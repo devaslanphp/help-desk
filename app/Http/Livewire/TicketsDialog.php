@@ -45,28 +45,33 @@ class TicketsDialog extends Component implements HasForms
     {
         return [
 
-            Grid::make(5)
+            Select::make('project_id')
+                ->label(__('Project'))
+                ->required()
+                ->searchable()
+                ->columnSpan(3)
+                ->options(function () {
+                    $query = Project::query();
+                    if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+                        $query->where('owner_id', auth()->user()->id);
+                    }
+                    return $query->get()->pluck('name', 'id');
+                }),
+
+            Grid::make()
                 ->schema([
 
-                    Select::make('project_id')
-                        ->label(__('Project'))
+                    Select::make('type')
+                        ->label(__('Type'))
                         ->required()
                         ->searchable()
-                        ->columnSpan(3)
-                        ->options(function () {
-                            $query = Project::query();
-                            if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
-                                $query->where('owner_id', auth()->user()->id);
-                            }
-                            return $query->get()->pluck('name', 'id');
-                        }),
+                        ->options(types_list()),
 
                     Select::make('priority')
                         ->label(__('Priority'))
                         ->required()
                         ->searchable()
-                        ->options(priorities_list())
-                        ->columnSpan(2),
+                        ->options(priorities_list()),
 
                 ]),
 
@@ -97,6 +102,7 @@ class TicketsDialog extends Component implements HasForms
             'content' => $data['content'],
             'owner_id' => auth()->user()->id,
             'priority' => $data['priority'],
+            'type' => $data['type'],
             'status' => default_ticket_status()
         ]);
         Notification::make()

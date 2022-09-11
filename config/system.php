@@ -49,7 +49,6 @@ return [
         ],
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Priorities configuration
@@ -96,6 +95,45 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Types configuration
+    |--------------------------------------------------------------------------
+    |
+    | This value is the configured types used by the application, you can
+    | change it as you like, but be sure that your old data will not be
+    | corrupted
+    |
+    | 'text-color' and 'bg-color' are tailwindcss based css classes
+    | 'icon' is a fontawesome based css class
+    |
+    */
+    'types' => [
+        'improvement' => [
+            'title' => 'Improvement',
+            'text-color' => 'text-blue-500',
+            'bg-color' => 'bg-blue-100',
+            'icon' => 'fa-arrow-up'
+        ],
+        'new-feature' => [
+            'title' => 'New feature',
+            'text-color' => 'text-green-500',
+            'bg-color' => 'bg-green-100',
+            'icon' => 'fa-square-plus'
+        ],
+        'task' => [
+            'title' => 'Task',
+            'text-color' => 'text-orange-500',
+            'bg-color' => 'bg-orange-100',
+            'icon' => 'fa-square-check'
+        ],
+        'bug' => [
+            'title' => 'Bug',
+            'text-color' => 'text-red-500',
+            'bg-color' => 'bg-red-100',
+            'icon' => 'fa-bug'
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
