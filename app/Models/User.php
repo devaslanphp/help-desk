@@ -79,4 +79,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class, 'user_projects', 'user_id', 'project_id')->withPivot('role');
     }
+
+    public function favoriteProjects(): BelongsToMany
+    {
+        $query = $this->belongsToMany(Project::class, 'favorite_projects', 'user_id', 'project_id');
+        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+            $query->where('owner_id', auth()->user()->id);
+        }
+        return $query;
+    }
 }

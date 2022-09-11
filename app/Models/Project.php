@@ -27,4 +27,13 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'user_projects', 'project_id', 'user_id')->withPivot('role');
     }
+
+    public function favoriteUsers(): BelongsToMany
+    {
+        $query = $this->belongsToMany(User::class, 'favorite_projects', 'project_id', 'user_id');
+        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+            $query->where('owner_id', auth()->user()->id);
+        }
+        return $query;
+    }
 }

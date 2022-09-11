@@ -16,6 +16,29 @@
             </button>
         @endif
     </div>
+    @if(auth()->user()->favoriteProjects()->count())
+        <div class="w-full mt-5 flex flex-col justify-start items-start gap-2">
+            <span class="text-lg text-warning-500 font-medium flex flex-row justify-start items-center gap-2">
+                <i class="fa fa-star"></i>
+                @lang('Favorite projects')
+            </span>
+            <div class="w-full flex flex-row justify-start items-center gap-5 flex-wrap">
+                @foreach(auth()->user()->favoriteProjects as $project)
+                    <div class="lg:w-1/6 md:w-1/4 w-1/2 flex flex-col justify-start items-start gap-1 p-5 border border-gray-100 rounded-lg shadow bg-white hover:shadow-lg">
+                        <span class="text-gray-700 font-medium text-base">
+                            {{ $project->name }}
+                        </span>
+                        <span class="text-gray-500 font-light text-sm">
+                            {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
+                        </span>
+                        <a href="#" class="mt-2 text-gray-500 hover:text-primary-500 font-normal text-sm hover:underline">
+                            @lang('View tickets')
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
     <div class="w-full mt-5">
         <div class="w-full flex flex-col justify-start items-start gap-5">
             <div class="w-full flex flex-row justify-end items-center pb-4 bg-white dark:bg-gray-900">
@@ -54,10 +77,15 @@
                         @foreach($projects as $project)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" class="py-4 px-6">
-                                    {{ $project->name }}
+                                    <div class="flex flex-row justify-start items-center gap-2">
+                                        <button wire:click="toggleFavoriteProject({{ $project }})" type="button" class="{{ $project->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'text-warning-500' : 'text-gray-500' }}">
+                                            <i class="fa {{ $project->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'fa-star' : 'fa-star-o' }}"></i>
+                                        </button>
+                                        {{ $project->name }}
+                                    </div>
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 150) }}
+                                    {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex flex-col">

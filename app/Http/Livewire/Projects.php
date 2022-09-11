@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FavoriteProject;
 use App\Models\Project;
 use App\Notifications\ProjectCreatedNotification;
 use Filament\Forms\Components\Grid;
@@ -28,7 +29,8 @@ class Projects extends Component implements HasForms
     public function render()
     {
         $query = Project::query();
-        if (has_all_permissions(auth()->user(), 'view-own-projects')) {
+        $query->with('favoriteUsers');
+        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
             $query->where('owner_id', auth()->user()->id);
         }
         if ($this->search) {
@@ -120,5 +122,33 @@ class Projects extends Component implements HasForms
      */
     public function projectDeleted() {
         $this->projectSaved();
+    }
+
+    /**
+     * Add / Remove project from authenticated user favorite projects
+     *
+     * @param Project $project
+     * @return void
+     */
+    public function toggleFavoriteProject(Project $project) {
+        if (FavoriteProject::where('user_id', auth()->user()->id)->where('project_id', $project->id)->count()) {
+            FavoriteProject::where('user_id', auth()->user()->id)->where('project_id', $project->id)->delete();
+            Notification::make()
+                ->success()
+                ->title('Favorite removed')
+                ->body(__('The project has been successfully remove from your favorite projects'))
+                ->send();
+        } else {
+            FavoriteProject::create([
+                'user_id' => auth()->user()->id,
+                'project_id' => $project->id
+            ]);
+            Notification::make()
+                ->success()
+                ->title('Favorite added')
+                ->body(__('The project has been successfully added to your favorite projects'))
+                ->send();
+        }
+        $this->search();
     }
 }
