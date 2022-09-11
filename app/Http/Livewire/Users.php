@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Notifications\UserCreatedNotification;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class Users extends Component implements HasForms
@@ -75,5 +77,16 @@ class Users extends Component implements HasForms
     public function userSaved() {
         $this->render();
         $this->cancelUser();
+    }
+
+    public function resendActivationEmail(User $user) {
+        if ($user->register_token) {
+            $user->notify(new UserCreatedNotification($user));
+            Notification::make()
+                ->success()
+                ->title('Success')
+                ->body(__('An email has been sent to the user'))
+                ->send();
+        }
     }
 }
