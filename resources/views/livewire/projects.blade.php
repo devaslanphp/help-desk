@@ -31,7 +31,7 @@
                         <span class="text-gray-500 font-light text-sm">
                             {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
                         </span>
-                        <a href="#" class="mt-2 text-gray-500 hover:text-primary-600 font-normal text-sm hover:underline">
+                        <a href="#" class="mt-2 text-primary-500 hover:text-primary-600 font-normal text-sm hover:underline">
                             @lang('View tickets')
                         </a>
                     </div>
