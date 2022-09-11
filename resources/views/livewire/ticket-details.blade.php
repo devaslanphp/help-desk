@@ -76,7 +76,7 @@
             @endif
             <div class="w-full flex flex-col justify-start items-start gap-1 mt-5">
                 <div class="w-full flex flex-row justify-start items-center gap-1">
-                    <span class="text-gray-500 font-normal text-xs">@lang('Created at:')</span>
+                    <span class="text-gray-500 font-normal text-xs">@lang('Created:')</span>
                     <span class="text-gray-500 font-medium text-xs">{{ $ticket->created_at->diffForHumans() }}</span>
                 </div>
                 <div class="w-full flex flex-row justify-start items-center gap-1">
