@@ -24,7 +24,6 @@ class MainMenu extends Component
         $this->menu = [
             'home' => ['title' => 'Overview', 'icon' => 'fa-table-columns', 'always_shown' => true],
             'analytics' => ['title' => 'Analytics', 'icon' => 'fa-chart-bar', 'always_shown' => false],
-            'chat' => ['title' => 'Chat', 'icon' => 'fa-comments', 'always_shown' => false],
             'tickets' => ['title' => 'Tickets', 'icon' => 'fa-ticket', 'always_shown' => false],
             'administration' => ['title' => 'Administration', 'icon' => 'fa-cogs', 'always_shown' => false],
         ];

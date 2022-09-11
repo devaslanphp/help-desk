@@ -112,7 +112,7 @@ return [
     | 'functions' contains the functionnalities accessible by the role
     |
     | Available permissions:
-    |   - Pages: analytics, chat, tickets, administration
+    |   - Pages: analytics, tickets, administration
     |   - Functions:
     |       - view-all-projects: View all configured projects
     |       - update-all-projects: Update all configured projects
@@ -136,7 +136,7 @@ return [
             'text-color' => 'bg-red-50',
             'bg-color' => 'text-red-500',
             'permissions' => [
-                'pages' => ['analytics', 'chat', 'tickets', 'administration'],
+                'pages' => ['analytics', 'tickets', 'administration'],
                 'functions' => [
                     'view-all-projects', 'update-all-projects', 'delete-all-projects', 'create-projects',
                     'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets'
@@ -148,7 +148,7 @@ return [
             'text-color' => 'bg-gray-50',
             'bg-color' => 'text-gray-500',
             'permissions' => [
-                'pages' => ['analytics', 'chat', 'tickets'],
+                'pages' => ['analytics', 'tickets'],
                 'functions' => [
                     'view-own-projects',
                     'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets'
@@ -160,7 +160,7 @@ return [
             'text-color' => 'bg-blue-50',
             'bg-color' => 'text-blue-500',
             'permissions' => [
-                'pages' => ['analytics', 'chat', 'tickets'],
+                'pages' => ['analytics', 'tickets'],
                 'functions' => [
                     'view-own-projects',
                     'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets'

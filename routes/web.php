@@ -40,8 +40,6 @@ Route::middleware('auth')
         Route::view('/my-profile', 'my-profile')->name('my-profile');
         // Analytics
         Route::view('/analytics', 'analytics')->name('analytics');
-        // Chat
-        Route::view('/chat', 'chat')->name('chat');
         // Tickets
         Route::view('/tickets', 'tickets')->name('tickets');
         // Administration
