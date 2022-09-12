@@ -76,7 +76,7 @@
                         <span class="text-sm font-light text-gray-500">
                             {{ Str::limit(htmlspecialchars(strip_tags($ticket->content)), 400) }}
                         </span>
-                        <div class="w-full flex flex-row justify-start items-center gap-3 mt-2">
+                        <div class="w-full flex flex-row justify-start items-center gap-3 mt-2 overflow-x-auto">
                             <x-type-span :type="$ticket->type" />
                             <x-priority-span :priority="$ticket->priority" />
                             <x-status-span :status="$ticket->status" />
