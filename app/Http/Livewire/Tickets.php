@@ -46,6 +46,7 @@ class Tickets extends Component implements HasForms
     public function render()
     {
         $query = Ticket::query();
+        $query->withCount('comments');
         if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
             $query->where('owner_id', auth()->user()->id);
         }

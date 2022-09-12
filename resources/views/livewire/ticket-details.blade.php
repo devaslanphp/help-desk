@@ -26,7 +26,7 @@
                 <div class="w-full flex flex-row justify-start items-center gap-3 overflow-x-auto menu">
                     @foreach($menu as $item)
                         <button wire:click="selectMenu('{{ $item }}')" type="button" class="item {{ $activeMenu === $item ? 'active' : '' }}">
-                            @lang($item)
+                            @lang($item) {{ ($item === 'Comments' && $ticket->comments->count()) ? ('(' . $ticket->comments->count() . ')') : '' }}
                         </button>
                     @endforeach
                 </div>
@@ -34,7 +34,7 @@
             <div class="w-full mt-5">
                 @switch($activeMenu)
                     @case($activeMenu === 'Comments')
-
+                        @livewire('ticket-details-comments', ['ticket' => $ticket])
                         @break
                     @case($activeMenu === 'Activities')
 

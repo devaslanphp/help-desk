@@ -81,7 +81,7 @@
                             <x-priority-span :priority="$ticket->priority" />
                             <x-status-span :status="$ticket->status" />
                             <span class="flex flex-row justify-center items-center gap-2 text-sm text-gray-700 font-medium">
-                                0
+                                {{ $ticket->comments_count }}
                                 <i class="fa fa-comment-o"></i>
                             </span>
                         </div>

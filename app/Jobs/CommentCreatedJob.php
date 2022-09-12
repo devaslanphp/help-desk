@@ -2,8 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Models\Ticket;
+use App\Models\Comment;
 use App\Models\User;
+use App\Notifications\CommentCreateNotification;
 use App\Notifications\TicketCreatedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -12,20 +13,20 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class TicketCreatedJob implements ShouldQueue
+class CommentCreatedJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private Ticket $ticket;
+    private Comment $comment;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Ticket $ticket)
+    public function __construct(Comment $comment)
     {
-        $this->ticket = $ticket;
+        $this->comment = $comment;
     }
 
     /**
@@ -37,8 +38,12 @@ class TicketCreatedJob implements ShouldQueue
     {
         $users = User::whereNull('register_token')->get();
         foreach ($users as $user) {
-            if (has_all_permissions($user, 'view-all-tickets') && $this->ticket->owner_id !== $user->id) {
-                $user->notify(new TicketCreatedNotification($this->ticket, $user));
+            if (
+                (has_all_permissions($user, 'view-all-tickets') && $this->comment->owner_id !== $user->id)
+                ||
+                (has_all_permissions($user, 'view-own-tickets') && ($this->comment->ticket->owner_id === $user->id || $this->comment->ticket->responsible_id === $user->id) && $this->comment->owner_id !== $user->id)
+            ) {
+                $user->notify(new CommentCreateNotification($this->comment, $user));
             }
         }
     }

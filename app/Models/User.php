@@ -97,4 +97,9 @@ class User extends Authenticatable
         }
         return $query;
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'owner_id');
+    }
 }
