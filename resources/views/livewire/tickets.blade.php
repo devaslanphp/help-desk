@@ -85,7 +85,7 @@
                                 <i class="fa fa-comment-o"></i>
                             </span>
                         </div>
-                        <div class="w-full flex flex-row justify-start items-center gap-3 mt-5">
+                        <div class="w-full flex flex-row justify-start items-center gap-10 mt-5">
                             <div class="flex flex-row justify-start items-center gap-2 text-xs">
                                 <x-user-avatar :user="$ticket->owner" :size="30" />
                                 <div class="flex flex-col gap-0">
