@@ -31,7 +31,12 @@ class Projects extends Component implements HasForms
         $query = Project::query();
         $query->with('favoriteUsers');
         if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
-            $query->where('owner_id', auth()->user()->id);
+            $query->where(function ($query) {
+                $query->where('owner_id', auth()->user()->id)
+                    ->orWhereHas('tickets', function ($query) {
+                        $query->where('responsible_id', auth()->user()->id);
+                    });
+            });
         }
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%')

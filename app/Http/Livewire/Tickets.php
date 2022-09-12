@@ -40,7 +40,11 @@ class Tickets extends Component implements HasForms
             'Created by me',
         ];
         $this->activeMenu = $this->menu[0];
-        $this->form->fill();
+        $data = [];
+        if (request()->get('project')) {
+            $data['projects'] = [request()->get('project')];
+        }
+        $this->form->fill($data);
     }
 
     public function render()
@@ -48,7 +52,10 @@ class Tickets extends Component implements HasForms
         $query = Ticket::query();
         $query->withCount('comments');
         if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
-            $query->where('owner_id', auth()->user()->id);
+            $query->where(function ($query) {
+                $query->where('owner_id', auth()->user()->id)
+                    ->orWhere('responsible_id', auth()->user()->id);
+            });
         }
         if ($this->activeMenu === 'Unassigned') {
             $query->whereNull('responsible_id');
@@ -172,7 +179,8 @@ class Tickets extends Component implements HasForms
         $this->responsible = $data['responsible'] ?? null;
     }
 
-    public function resetFilters(): void {
+    public function resetFilters(): void
+    {
         $this->search = null;
         $this->projects = null;
         $this->priorities = null;

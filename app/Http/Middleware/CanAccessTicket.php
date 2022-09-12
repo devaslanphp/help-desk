@@ -23,7 +23,7 @@ class CanAccessTicket
             ||
             (
                 has_all_permissions(auth()->user(), 'view-own-tickets')
-                && $ticket->owner_id === auth()->user()->id
+                && in_array(auth()->user()->id, [$ticket->owner_id, $ticket->responsible_id])
             )
         )) {
             return redirect()->to(route('tickets'));

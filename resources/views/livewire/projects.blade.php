@@ -26,13 +26,16 @@
                 @foreach(auth()->user()->favoriteProjects as $project)
                     <div class="xl:w-1/5 lg:w-1/4 md:w-1/3 w-1/2 p-2">
                         <div class="w-full flex flex-col gap-1 p-5 border border-gray-100 rounded-lg shadow bg-white hover:shadow-lg">
-                            <span class="text-gray-700 font-medium text-base">
+                            <span class="text-gray-700 font-bold text-base">
                                 {{ $project->name }}
                             </span>
                             <span class="text-gray-500 font-light text-sm" style="min-height: 120px;">
                                 {{ Str::limit(htmlspecialchars(strip_tags($project->description)), 100) }}
                             </span>
-                            <a href="#" class="mt-2 text-primary-500 hover:text-primary-600 font-normal text-sm hover:underline">
+                            <span class="text-warning-500 font-medium text-xs flex flex-row items-center gap-1">
+                                <i class="fa fa-ticket"></i> {{ $project->tickets()->count() }} @lang($project->tickets()->count() > 1 ? 'Tickets' : 'Ticket')
+                            </span>
+                            <a href="{{ route('tickets', ['project' => $project->id]) }}" class="mt-2 text-primary-500 hover:text-primary-600 font-normal text-sm hover:underline">
                                 @lang('View tickets')
                             </a>
                         </div>
