@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TicketDetails;
 
+use App\Jobs\TicketUpdatedJob;
 use App\Models\Ticket;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -65,6 +66,7 @@ class Priority extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
+        $before = config('system.priorities.' . $this->ticket->priority . '.title') ?? '-';
         $this->ticket->priority = $data['priority'];
         $this->ticket->save();
         Notification::make()
@@ -77,5 +79,6 @@ class Priority extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
+        TicketUpdatedJob::dispatch($this->ticket, __('Priority'), $before, (config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'));
     }
 }

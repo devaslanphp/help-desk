@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TicketDetails;
 
+use App\Jobs\TicketUpdatedJob;
 use App\Models\Ticket;
 use App\Models\User;
 use Filament\Forms\Components\Select;
@@ -65,6 +66,7 @@ class Responsible extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
+        $before = $this->ticket->responsible?->name ?? '-';
         $this->ticket->responsible_id = $data['responsible_id'];
         $this->ticket->save();
         Notification::make()
@@ -78,6 +80,7 @@ class Responsible extends Component implements HasForms
         $this->updating = false;
         $this->ticket = $this->ticket->refresh();
         $this->emit('ticketSaved');
+        TicketUpdatedJob::dispatch($this->ticket, __('Responsible'), $before, ($this->ticket->responsible?->name ?? '-'));
     }
 
     /**

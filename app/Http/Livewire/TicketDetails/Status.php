@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\TicketDetails;
 
+use App\Jobs\TicketUpdatedJob;
 use App\Models\Ticket;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -64,6 +65,7 @@ class Status extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
+        $before = config('system.statuses.' . $this->ticket->status . '.title') ?? '-';
         $this->ticket->status = $data['status'];
         $this->ticket->save();
         Notification::make()
@@ -76,5 +78,6 @@ class Status extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
+        TicketUpdatedJob::dispatch($this->ticket, __('Status'), $before, (config('system.statuses.' . $this->ticket->status . '.title') ?? '-'));
     }
 }

@@ -30,19 +30,19 @@ return [
             'default' => false
         ],
         'done' => [
-            'title' => 'Created',
+            'title' => 'Done',
             'text-color' => 'text-orange-500',
             'bg-color' => 'bg-orange-100',
             'default' => false
         ],
         'validated' => [
-            'title' => 'Created',
+            'title' => 'Validated',
             'text-color' => 'text-green-500',
             'bg-color' => 'bg-green-100',
             'default' => false
         ],
         'rejected' => [
-            'title' => 'Created',
+            'title' => 'Rejected',
             'text-color' => 'text-red-500',
             'bg-color' => 'bg-red-100',
             'default' => false
