@@ -26,23 +26,25 @@ window.Alpine = Alpine
 Alpine.start()
 
 // Open image as magnific popup
-$('.magnificpopup-container').magnificPopup({
-    type: 'image',
-    delegate: 'img',
-    gallery: {
-        enabled: true
-    },
-    callbacks: {
-        elementParse: function(qw) {
-            qw.src = qw.el.attr('src');
+if ($('.magnificpopup-container').length) {
+    $('.magnificpopup-container').magnificPopup({
+        type: 'image',
+        delegate: 'img',
+        gallery: {
+            enabled: true
+        },
+        callbacks: {
+            elementParse: function (qw) {
+                qw.src = qw.el.attr('src');
+            }
+        },
+        image: {
+            titleSrc: function (item) {
+                let title = '';
+                if (item.el.closest('figure').children('figcaption'))
+                    title = item.el.closest('figure').children('figcaption').text();
+                return title;
+            }
         }
-    },
-    image: {
-        titleSrc: function(item) {
-            let title = '';
-            if (item.el.closest('figure').children('figcaption'))
-                title = item.el.closest('figure').children('figcaption').text();
-            return title;
-        }
-    }
-})
+    });
+}
