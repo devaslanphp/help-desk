@@ -15,31 +15,7 @@
         </form>
     </div>
     @if($ticket->comments->count())
-        @foreach($ticket->comments as $comment)
-            <div class="w-full flex flex-row gap-2 px-5 {{ $loop->index !== 0 ? 'pt-5 mt-5 border-t border-gray-200' : '' }}">
-                <x-user-avatar :user="$comment->owner" />
-                <div class="flex flex-col justify-start items-start gap-3">
-                    <div class="flex flex-col justify-center items-start gap-0">
-                        <span class="text-gray-700 text-sm font-medium">{{ $comment->owner->name }}</span>
-                        <span class="text-gray-500 text-xs font-light">@lang('Added a comment') {{ $comment->created_at->diffForHumans() }}</span>
-                    </div>
-                    <div class="w-full prose magnificpopup-container">
-                        {!! $comment->content !!}
-                    </div>
-                    @if($comment->owner_id === auth()->user()->id)
-                        <div class="w-full flex flex-row justify-start items-center gap-5">
-                            <a href="#" class="text-gray-400 text-xs hover:text-primary-500 flex flex-row justify-start items-center gap-1">
-                                <i class="fa fa-pencil"></i> @lang('Edit')
-                            </a>
-                            <span class="text-gray-300 font-light">|</span>
-                            <button {!! $deleteConfirmationOpened ? 'disabled' : '' !!} type="button" wire:click="deleteComment({{ $comment }})" class="text-gray-400 text-xs hover:text-danger-500 flex flex-row justify-start items-center gap-1">
-                                <i class="fa fa-times"></i> @lang('Delete')
-                            </button>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        @endforeach
+        @livewire('ticket-details-comments-content', ['ticket' => $ticket])
     @else
         <div class="w-full flex flex-col justify-center items-center gap-2 text-center">
             <img src="{{ asset('images/comments-empty.jpeg') }}" alt="No comments" class="w-14 opacity-50" />
