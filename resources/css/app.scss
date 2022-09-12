@@ -63,3 +63,15 @@ table {
 
     text-align: center !important;
 }
+
+.updating-section {
+    button {
+        @apply hidden;
+    }
+
+    &:hover {
+        button {
+            @apply flex;
+        }
+    }
+}

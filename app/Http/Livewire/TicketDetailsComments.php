@@ -49,11 +49,21 @@ class TicketDetailsComments extends Component implements HasForms
         ];
     }
 
+    /**
+     * Event launched after a comment is created
+     *
+     * @return void
+     */
     public function commentCreated(): void
     {
         $this->ticket = $this->ticket->refresh();
     }
 
+    /**
+     * Comment main function
+     *
+     * @return void
+     */
     public function comment(): void
     {
         $data = $this->form->getState();

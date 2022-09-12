@@ -11,7 +11,10 @@ class TicketDetails extends Component
     public $menu;
     public $activeMenu;
 
-    public function mount(): void {
+    protected $listeners = ['ticketSaved'];
+
+    public function mount(): void
+    {
         $this->menu = [
             'Comments',
             'Activities',
@@ -33,5 +36,15 @@ class TicketDetails extends Component
     public function selectMenu($item)
     {
         $this->activeMenu = $item;
+    }
+
+    /**
+     * Event launched after the ticket is updated
+     *
+     * @return void
+     */
+    public function ticketSaved(): void
+    {
+        $this->ticket = $this->ticket->refresh();
     }
 }
