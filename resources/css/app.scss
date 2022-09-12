@@ -49,3 +49,17 @@ table {
         min-width: 200px;
     }
 }
+
+.magnificpopup-container {
+    img {
+        &:hover {
+            @apply cursor-pointer;
+        }
+    }
+}
+
+.mfp-title {
+    @apply w-full;
+
+    text-align: center !important;
+}

@@ -8,9 +8,20 @@
                         <span class="text-gray-700 text-sm font-medium">{{ $comment->owner->name }}</span>
                         <span class="text-gray-500 text-xs font-light">@lang('Added a comment') {{ $comment->created_at->diffForHumans() }}</span>
                     </div>
-                    <div class="w-full prose">
+                    <div class="w-full prose magnificpopup-container">
                         {!! $comment->content !!}
                     </div>
+                    @if($comment->owner_id === auth()->user()->id)
+                        <div class="w-full flex flex-row justify-start items-center gap-5">
+                            <a href="#" class="text-gray-400 text-xs hover:text-primary-500 flex flex-row justify-start items-center gap-1">
+                                <i class="fa fa-pencil"></i> @lang('Edit')
+                            </a>
+                            <span class="text-gray-300 font-light">|</span>
+                            <a href="#" class="text-gray-400 text-xs hover:text-danger-500 flex flex-row justify-start items-center gap-1">
+                                <i class="fa fa-times"></i> @lang('Delete')
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach

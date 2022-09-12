@@ -19,7 +19,7 @@
     <div class="w-full flex lg:flex-row flex-col gap-5 mt-5">
         <div class="lg:w-3/4 w-full flex flex-col gap-2 lg:order-1 order-2">
             <span class="text-gray-500 font-normal text-xs">@lang('Content')</span>
-            <div class="w-full prose">
+            <div class="w-full prose magnificpopup-container">
                 {!! $ticket->content !!}
             </div>
             <div class="w-full flex flex-col gap-2 mt-10" id="ticket-details-tabs">

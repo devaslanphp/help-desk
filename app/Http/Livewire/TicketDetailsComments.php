@@ -52,7 +52,6 @@ class TicketDetailsComments extends Component implements HasForms
     public function commentCreated(): void
     {
         $this->ticket = $this->ticket->refresh();
-        $this->form->fill();
     }
 
     public function comment(): void
@@ -68,6 +67,7 @@ class TicketDetailsComments extends Component implements HasForms
             ->title('Comment created')
             ->body(__('Your comment has been successfully added to the ticket'))
             ->send();
+        $this->form->fill();
         $this->emit('commentCreated');
         CommentCreatedJob::dispatch($comment);
     }
