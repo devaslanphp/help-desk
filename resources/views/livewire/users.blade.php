@@ -67,7 +67,7 @@
                                 @if($user->register_token)
                                     <div class="flex flex-row justify-start items-center gap-2">
                                         <i class="fa fa-times-circle-o text-red-500 text-lg"></i>
-                                        <button wire:click="resendActivationEmail({{ $user }})" class="text-warning-500 hover:text-warning-600 text-xs">
+                                        <button wire:click="resendActivationEmail({{ $user }})" class="text-left text-warning-500 hover:text-warning-600 text-xs">
                                             @lang('Resend activation email')
                                         </button>
                                     </div>
