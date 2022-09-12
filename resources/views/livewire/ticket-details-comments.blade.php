@@ -32,9 +32,9 @@
                                 <i class="fa fa-pencil"></i> @lang('Edit')
                             </a>
                             <span class="text-gray-300 font-light">|</span>
-                            <a href="#" class="text-gray-400 text-xs hover:text-danger-500 flex flex-row justify-start items-center gap-1">
+                            <button {!! $deleteConfirmationOpened ? 'disabled' : '' !!} type="button" wire:click="deleteComment({{ $comment }})" class="text-gray-400 text-xs hover:text-danger-500 flex flex-row justify-start items-center gap-1">
                                 <i class="fa fa-times"></i> @lang('Delete')
-                            </a>
+                            </button>
                         </div>
                     @endif
                 </div>

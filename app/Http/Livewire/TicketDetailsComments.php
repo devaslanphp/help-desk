@@ -9,6 +9,7 @@ use App\Models\Ticket;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Livewire\Component;
 
@@ -17,8 +18,9 @@ class TicketDetailsComments extends Component implements HasForms
     use InteractsWithForms;
 
     public Ticket $ticket;
+    public bool $deleteConfirmationOpened = false;
 
-    protected $listeners = ['commentCreated'];
+    protected $listeners = ['commentCreated', 'doDeleteComment', 'cancelDeleteComment', 'commentDeleted'];
 
     public function mount(): void
     {
@@ -47,6 +49,16 @@ class TicketDetailsComments extends Component implements HasForms
                 ->fileAttachmentsDirectory('comments')
                 ->fileAttachmentsVisibility('private'),
         ];
+    }
+
+    /**
+     * Event launched after a comment is deleted
+     *
+     * @return void
+     */
+    public function commentDeleted(): void
+    {
+        $this->ticket = $this->ticket->refresh();
     }
 
     /**
@@ -80,5 +92,59 @@ class TicketDetailsComments extends Component implements HasForms
         $this->form->fill();
         $this->emit('commentCreated');
         CommentCreatedJob::dispatch($comment);
+    }
+
+    /**
+     * Delete an existing comment
+     *
+     * @return void
+     */
+    public function doDeleteComment(Comment $comment): void {
+        $comment->delete();
+        $this->deleteConfirmationOpened = false;
+        $this->emit('commentDeleted');
+        Notification::make()
+            ->success()
+            ->title('Comment deleted')
+            ->body(__('The comment has been deleted'))
+            ->send();
+    }
+
+    /**
+     * Cancel the deletion of a comment
+     *
+     * @return void
+     */
+    public function cancelDeleteComment(): void {
+        $this->deleteConfirmationOpened = false;
+    }
+
+    /**
+     * Show the delete comment confirmation dialog
+     *
+     * @param Comment $comment
+     * @return void
+     * @throws \Exception
+     */
+    public function deleteComment(Comment $comment): void {
+        $this->deleteConfirmationOpened = true;
+        Notification::make()
+            ->warning()
+            ->title('Comment deletion')
+            ->body(__('Are you sure you want to delete this comment?'))
+            ->actions([
+                Action::make('confirm')
+                    ->label(__('Confirm'))
+                    ->color('danger')
+                    ->button()
+                    ->close()
+                    ->emit('doDeleteComment', ['comment' => $comment]),
+                Action::make('cancel')
+                    ->label(__('Cancel'))
+                    ->close()
+                    ->emit('cancelDeleteComment')
+            ])
+            ->persistent()
+            ->send();
     }
 }
