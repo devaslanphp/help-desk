@@ -175,18 +175,8 @@
 		============================ -->
           <section id="idocs_installation">
             <h2>Installation</h2>
-            <p class="lead">Unzip the downloaded package, you will see 3 items:</p>
-            <ul>
-              <li><code>Documentation</code> - This is the documentation folder where you are reading this docs
-                right now</li>
-              <li><code>help-desk-dev.zip</code> - This is the project source code for developpers</li>
-              <li><code>help-desk-prod.zip</code> - This is the project source code for end users (ready to use in production, including all dependencies)</li>
-            </ul>
-            <p class="lead">Follow the following steps to use the <strong>help-desk-dev.zip</strong> archive</p>
+            <p class="lead">Follow the below steps to install the application:</p>
             <ol>
-              <li>Unzip the archive <code>help-desk-dev.zip</code>into a folder that you can name
-                <strong>help-desk</strong>, you will need to move this folder into your hosting web server using FTP or
-                localhost in order to test it on your local environment.</li>
               <li><strong>Database creation</strong> - Before configuring the application, you need to create a new database on your MySQL server named <code>help_desk</code></li>
               <li><strong>Database configuration</strong> - After you successfully created the database, you need to import on it the SQL script file located at <code>{ROOT_FOLDER}/database/help_desk.sql</code>
                 <ul>
@@ -208,35 +198,6 @@
                 <ul>
                   <li><code>Localhost</code> - If you have installed the application on a local environment, you can execute <code>php artisan serve</code> on the application root folder</li>
                   <li><code>Web server</code> - If you have installed the application on a web server, you can visit the domain you have configured in the virtual host</li>
-                </ul>
-              </li>
-            </ol>
-            <p class="lead">Follow the following steps to use the <strong>help-desk-prod.zip</strong> archive</p>
-            <ol>
-              <li>Unzip the archive <code>help-desk-prod.zip</code>into a folder that you can name
-                <strong>help-desk</strong>, you will need to move this folder into your hosting web server using FTP to your web server.</li>
-              <li><strong>Database creation</strong> - Before configuring the application, you need to create a new database on your MySQL server named <code>help_desk</code></li>
-              <li><strong>Database configuration</strong> - After you successfully created the database, you need to import on it the SQL script file located at <code>{ROOT_FOLDER}/database/help_desk.sql</code>
-                <ul>
-                  <li>This database contains some demo data, so you can easily test the application</li>
-                </ul>
-              </li>
-              <li><strong>Environment file</strong> - You need to configure the application environment file <code>{ROOT_FOLDER}/.env</code>
-                <ul>
-                  <li><code>APP_ENV</code> - Must have the value <strong>production</strong> when the application is used on production web server</li>
-                  <li><code>APP_DEBUG</code> - Must have the value <strong>false</strong> to disable debug mode</li>
-                  <li><code>APP_URL</code> - You need to put the domain configured to host the application</li>
-                  <li><code>DB_HOST</code> - The database host (example: <code>localhost</code>)</li>
-                  <li><code>DB_PORT</code> - The database port (by default, MySQL use the port 3306)</li>
-                  <li><code>DB_DATABASE</code> - The database name (<code>help_desk</code> is the name of the application you have created above)</li>
-                  <li><code>DB_USERNAME</code> - The database user username</li>
-                  <li><code>DB_PASSWORD</code> - The database user password</li>
-                  <li><code>MAIL_HOST</code> - The SMTP server host</li>
-                  <li><code>MAIL_PORT</code> - The SMTP server port used</li>
-                  <li><code>MAIL_USERNAME</code> - The SMTP server user username</li>
-                  <li><code>MAIL_PASSWORD</code> - The SMTP server user password</li>
-                  <li><code>MAIL_ENCRYPTION</code> - The SMTP server encryption (example: TLS, STARTLS or null if not used)</li>
-                  <li><code>MAIL_FROM_ADDRESS</code> - The email sending the email from the application</li>
                 </ul>
               </li>
             </ol>
