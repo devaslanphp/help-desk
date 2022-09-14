@@ -107,7 +107,7 @@ class TicketsDialog extends Component implements HasForms
         ]);
         Notification::make()
             ->success()
-            ->title('Ticket created')
+            ->title(__('Ticket created'))
             ->body(__('The ticket has been successfully created'))
             ->send();
         $this->emit('ticketSaved');

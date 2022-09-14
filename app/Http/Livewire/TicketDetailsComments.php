@@ -96,7 +96,7 @@ class TicketDetailsComments extends Component implements HasForms
         ]);
         Notification::make()
             ->success()
-            ->title('Comment created')
+            ->title(__('Comment created'))
             ->body(__('Your comment has been successfully added to the ticket'))
             ->send();
         $this->form->fill();

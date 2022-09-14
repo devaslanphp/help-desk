@@ -81,7 +81,7 @@ class UsersDialog extends Component implements HasForms
             $user->notify(new UserCreatedNotification($user));
             Notification::make()
                 ->success()
-                ->title('User created')
+                ->title(__('User created'))
                 ->body(__('An email has been sent to the user'))
                 ->send();
         } else {
@@ -91,7 +91,7 @@ class UsersDialog extends Component implements HasForms
             $this->user->save();
             Notification::make()
                 ->success()
-                ->title('User updated')
+                ->title(__('User updated'))
                 ->body(__('The user\'s details has been updated'))
                 ->send();
         }
@@ -109,7 +109,7 @@ class UsersDialog extends Component implements HasForms
         $this->emit('userDeleted');
         Notification::make()
             ->success()
-            ->title('User deleted')
+            ->title(__('User deleted'))
             ->body(__('The user has been deleted'))
             ->send();
     }
@@ -133,7 +133,7 @@ class UsersDialog extends Component implements HasForms
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()
-            ->title('User deletion')
+            ->title(__('User deletion'))
             ->body(__('Are you sure you want to delete this user?'))
             ->actions([
                 Action::make('confirm')

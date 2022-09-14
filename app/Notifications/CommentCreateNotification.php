@@ -37,7 +37,7 @@ class CommentCreateNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -69,7 +69,9 @@ class CommentCreateNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'ticket' => $this->comment->ticket,
+            'comment' => $this->comment,
+            'user' => $this->user,
         ];
     }
 }

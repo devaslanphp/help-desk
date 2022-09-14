@@ -140,7 +140,7 @@ class Projects extends Component implements HasForms
             FavoriteProject::where('user_id', auth()->user()->id)->where('project_id', $project->id)->delete();
             Notification::make()
                 ->success()
-                ->title('Favorite removed')
+                ->title(__('Favorite removed'))
                 ->body(__('The project has been successfully remove from your favorite projects'))
                 ->send();
         } else {
@@ -150,7 +150,7 @@ class Projects extends Component implements HasForms
             ]);
             Notification::make()
                 ->success()
-                ->title('Favorite added')
+                ->title(__('Favorite added'))
                 ->body(__('The project has been successfully added to your favorite projects'))
                 ->send();
         }

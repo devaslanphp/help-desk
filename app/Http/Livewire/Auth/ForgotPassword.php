@@ -58,7 +58,7 @@ class ForgotPassword extends Component implements HasForms
         if ($status === PasswordFacade::RESET_LINK_SENT) {
             Notification::make()
                 ->success()
-                ->title('Success')
+                ->title(__('Success'))
                 ->body(__('A password recovery email has been sent'))
                 ->send();
             $this->form->fill();

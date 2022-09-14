@@ -42,7 +42,7 @@ class TicketUpdatedNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -74,7 +74,11 @@ class TicketUpdatedNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'ticket' => $this->ticket,
+            'field' => $this->field,
+            'before' => $this->before,
+            'after' => $this->after,
+            'user' => $this->user,
         ];
     }
 }

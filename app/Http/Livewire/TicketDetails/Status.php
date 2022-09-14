@@ -70,7 +70,7 @@ class Status extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Status updated')
+            ->title(__('Status updated'))
             ->body(__('The ticket status has been successfully updated'))
             ->send();
         $this->form->fill([

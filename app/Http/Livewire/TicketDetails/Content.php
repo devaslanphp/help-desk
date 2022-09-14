@@ -71,7 +71,7 @@ class Content extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Content updated')
+            ->title(__('Content updated'))
             ->body(__('The ticket content has been successfully updated'))
             ->send();
         $this->form->fill([

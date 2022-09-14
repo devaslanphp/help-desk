@@ -70,7 +70,7 @@ class Type extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Type updated')
+            ->title(__('Type updated'))
             ->body(__('The ticket type has been successfully updated'))
             ->send();
         $this->form->fill([

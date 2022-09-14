@@ -15,9 +15,14 @@
                     <li>
                         <a
                             href="{{ route($key) }}"
-                            class="flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                            class="relative flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                             <span>@lang($value['title'])</span>
-                            <i class="fa {{ $value['icon'] }}"></i>
+                            <div class="relative">
+                                <i class="fa {{ $value['icon'] }}"></i>
+                                @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
+                                    <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                                @endif
+                            </div>
                         </a>
                     </li>
                 @endif
