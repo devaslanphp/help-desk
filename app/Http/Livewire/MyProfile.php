@@ -47,7 +47,7 @@ class MyProfile extends Component implements HasForms
         if (session()->has('profile_updated')) {
             Notification::make()
                 ->success()
-                ->title('Profile updated')
+                ->title(__('Profile updated'))
                 ->body(__('Your account details has been updated'))
                 ->send();
         }

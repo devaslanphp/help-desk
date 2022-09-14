@@ -78,7 +78,7 @@ class ProjectsDialog extends Component implements HasForms
             ]);
             Notification::make()
                 ->success()
-                ->title('Project created')
+                ->title(__('Project created'))
                 ->body(__('The project has been successfully created'))
                 ->send();
         } else {
@@ -88,7 +88,7 @@ class ProjectsDialog extends Component implements HasForms
             $this->project->save();
             Notification::make()
                 ->success()
-                ->title('Project updated')
+                ->title(__('Project updated'))
                 ->body(__('The project\'s details has been updated'))
                 ->send();
         }
@@ -106,7 +106,7 @@ class ProjectsDialog extends Component implements HasForms
         $this->emit('projectDeleted');
         Notification::make()
             ->success()
-            ->title('Project deleted')
+            ->title(__('Project deleted'))
             ->body(__('The project has been deleted'))
             ->send();
     }
@@ -130,7 +130,7 @@ class ProjectsDialog extends Component implements HasForms
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()
-            ->title('Project deletion')
+            ->title(__('Project deletion'))
             ->body(__('Are you sure you want to delete this project?'))
             ->actions([
                 Action::make('confirm')

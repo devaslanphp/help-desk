@@ -46,4 +46,6 @@ Route::middleware('auth')
         Route::get('/tickets/{ticket:id}/{slug}', fn (Ticket $ticket) => view('ticket-details', compact('ticket')))->name('tickets.details')->middleware('can_access_ticket');
         // Administration
         Route::view('/administration', 'administration')->name('administration');
+        // Notifications
+        Route::view('/notifications', 'notifications')->name('notifications');
     });

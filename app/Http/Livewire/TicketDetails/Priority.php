@@ -71,7 +71,7 @@ class Priority extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Priority updated')
+            ->title(__('Priority updated'))
             ->body(__('The ticket priority has been successfully updated'))
             ->send();
         $this->form->fill([

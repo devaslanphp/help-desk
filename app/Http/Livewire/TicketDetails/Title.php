@@ -69,7 +69,7 @@ class Title extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Title updated')
+            ->title(__('Title updated'))
             ->body(__('The ticket title has been successfully updated'))
             ->send();
         $this->form->fill([

@@ -87,7 +87,7 @@ class TicketDetailsCommentsContent extends Component implements HasForms
         $this->updating = false;
         Notification::make()
             ->success()
-            ->title('Comment updated')
+            ->title(__('Comment updated'))
             ->body(__('The comment has been updated'))
             ->send();
     }
@@ -106,7 +106,7 @@ class TicketDetailsCommentsContent extends Component implements HasForms
             $this->emit('commentDeleted');
             Notification::make()
                 ->success()
-                ->title('Comment deleted')
+                ->title(__('Comment deleted'))
                 ->body(__('The comment has been deleted'))
                 ->send();
         }
@@ -135,7 +135,7 @@ class TicketDetailsCommentsContent extends Component implements HasForms
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()
-            ->title('Comment deletion')
+            ->title(__('Comment deletion'))
             ->body(__('Are you sure you want to delete this comment?'))
             ->actions([
                 Action::make('confirm')

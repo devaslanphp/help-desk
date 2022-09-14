@@ -130,7 +130,7 @@ class Users extends Component implements HasForms
             $user->notify(new UserCreatedNotification($user));
             Notification::make()
                 ->success()
-                ->title('Success')
+                ->title(__('Success'))
                 ->body(__('An email has been sent to the user'))
                 ->send();
         }

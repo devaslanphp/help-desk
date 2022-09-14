@@ -34,7 +34,7 @@ class Login extends Component implements HasForms
         if (session()->get('password_reset')) {
             Notification::make()
                 ->success()
-                ->title('Success')
+                ->title(__('Success'))
                 ->body(__('Your password is now updated'))
                 ->send();
         }

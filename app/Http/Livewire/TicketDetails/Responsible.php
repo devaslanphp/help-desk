@@ -71,7 +71,7 @@ class Responsible extends Component implements HasForms
         $this->ticket->save();
         Notification::make()
             ->success()
-            ->title('Responsible updated')
+            ->title(__('Responsible updated'))
             ->body(__('The ticket responsible has been successfully updated'))
             ->send();
         $this->form->fill([
