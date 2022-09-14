@@ -1,10 +1,25 @@
-## Installation
+# Help Desk
 
-1. Unzip the project archive file
-2. Access to the folder root with your terminal
-3. Install Back-end dependencies `composer install`
-4. Install Front-end dependencies `npm install`
-5. Build assets `npm run build`
-6. Configure `.env` file (refer to [Laravel docs](https://laravel.com/docs) for more information about configure environment file)
-7. Import the demo database located at `{ROOT_PROJECT}/database/help_desk.sql`
-8. Or, you can run migrations by executing `php artisan migrate` and create your own `User` (it must have the `administrator` role)
+Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with a beautiful and simple to use platform.
+
+Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
+
+![Help Desk](github-contents/banner.jpg)
+
+
+## Online demo
+
+You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
+
+## Documentation
+
+You can find a full documentation here: [Documentation](http://helpdesk.devaslan.com/docs/)
+
+
+## Credits
+
+- [All Contributors](https://github.com/heloufir/filament-workflow-manager/graphs/contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
