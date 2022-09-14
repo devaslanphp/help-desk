@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+  <link href="/docs/assets/images/favicon.png" rel="icon" />
+  <title>Help Desk - Documentation</title>
+  <meta name="description" content="Help Desk - Documentation">
+  <meta name="author" content="EL OUFIR Hatim">
+
+  <!-- Stylesheet
+============================== -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="/docs/assets/vendor/bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" type="text/css" href="/docs/assets/vendor/font-awesome/css/all.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" type="text/css" href="/docs/assets/vendor/magnific-popup/magnific-popup.min.css" />
+  <!-- Highlight Syntax -->
+  <link rel="stylesheet" type="text/css" href="/docs/assets/vendor/highlight.js/styles/github.css" />
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="/docs/assets/css/stylesheet.css" />
+</head>
+
+<body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!-- Preloader End -->
+
+  <!-- Document Wrapper
+=============================== -->
+  <div id="main-wrapper">
+
+    <!-- Header
+  ============================ -->
+    <header id="header" class="sticky-top">
+      <!-- Navbar -->
+      <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+        <div class="container-fluid">
+          <!-- Sidebar Toggler -->
+          <button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span
+              class="w-75"></span><span class="w-50"></span></button>
+
+          <!-- Logo -->
+          <a class="logo ml-md-3" href="index.html" title="Help Desk">
+            <img src="/docs/assets/images/logo.png" alt="Help Desk" width="120" /> </a>
+          <span class="text-2 ml-2">v1.0</span>
+          <!-- Logo End -->
+
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+            data-target="#header-nav"><span></span><span></span><span></span></button>
+
+          <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li><a target="_blank" href="http://helpdesk.devaslan.com">Live Preview</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar End -->
+    </header>
+    <!-- Header End -->
+
+    <!-- Content
+  ============================ -->
+    <div id="content" role="main">
+
+      <!-- Sidebar Navigation
+	============================ -->
+      <div class="idocs-navigation bg-light">
+        <ul class="nav flex-column ">
+          <li class="nav-item"><a class="nav-link active" href="#idocs_start">Getting Started</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#idocs_prerequisites">Prerequisites</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_project_structure">Project Structure</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_customization">Customization</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Docs Content
+	============================ -->
+      <div class="idocs-content">
+        <div class="container">
+
+          <!-- Getting Started
+		============================ -->
+          <section id="idocs_start">
+            <h1>Documentation</h1>
+            <h2>Help Desk</h2>
+            <p class="lead">Help Desk is a Laravel based project, that let you manage your support tickets and
+              communicate with your customers, with a beautiful and simple to use platform.
+              <br>
+              Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
+            </p>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><strong>Version:</strong> 1.0</li>
+                  <li><strong>Author:</strong> <a href="mailto:eloufirhatim@gmail.com"
+                      target="_blank">heloufir</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><strong class="font-weight-700">Created:</strong> 12 September, 2022</li>
+                  <li><strong>Update:</strong> 12 September, 2022</li>
+                </ul>
+              </div>
+            </div>
+            <p class="alert alert-info">If you have any questions that are beyond the scope of this help file, Please
+              feel free to contact us via <a target="_blank" href="mailto:eloufirhatim@gmail.com">Our Fb page</a>.</p>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Prerequisites
+		============================ -->
+          <section id="idocs_prerequisites">
+            <h2>Prerequisites</h2>
+            <p class="lead">Before you can use Help Desk application, you must install and configure the following
+              prerequisites:</p>
+            <ul>
+              <li><strong>Apache / MySQL / PHP</strong>
+                <ul>
+                  <li><strong>Windows</strong> - If you are using Windows OS, you can install <code>WAMP</code> (refer
+                    to <a href="https://www.wampserver.com/" target="_blank">Official website</a>)</li>
+                  <li><strong>MacOS</strong> - If you are using Mac OS, you can install <code>MAMP</code> (refer to <a
+                      href="https://www.mamp.info/en/downloads/" target="_blank">Official website</a>)</li>
+                  <li><strong>Linux</strong> - If you are using Linux OS, you can install <code>LAMP</code> (refer to <a
+                      href="https://doc.ubuntu-fr.org/lamp" target="_blank">Official website</a>)</li>
+                </ul>
+              </li>
+              <li><strong>Dependency Manager for PHP</strong> - After you have successfully installed one of the above
+                tools, you need to install composer
+                <ul>
+                  <li><strong>Composer</strong> - Refer to <a href="https://getcomposer.org/" target="_blank">composer
+                      website</a> to install it on your specific OS</li>
+                </ul>
+              </li>
+              <li><strong>Dependency Manager for the Front</strong> - The last thing you need to install is the
+                dependency manager for the front components (NPM)
+                <ul>
+                  <li><strong>NPM</strong> - Refer to <a href="https://nodejs.org/en/" target="_blank">Nodejs
+                      website</a> to install it on your specific OS</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Installation
+		============================ -->
+          <section id="idocs_installation">
+            <h2>Installation</h2>
+            <p class="lead">Unzip the downloaded package, you will see 3 items:</p>
+            <ul>
+              <li><code>Documentation</code> - This is the documentation folder where you are reading this docs
+                right now</li>
+              <li><code>help-desk-dev.zip</code> - This is the project source code for developpers</li>
+              <li><code>help-desk-prod.zip</code> - This is the project source code for end users (ready to use in production, including all dependencies)</li>
+            </ul>
+            <p class="lead">Follow the following steps to use the <strong>help-desk-dev.zip</strong> archive</p>
+            <ol>
+              <li>Unzip the archive <code>help-desk-dev.zip</code>into a folder that you can name
+                <strong>help-desk</strong>, you will need to move this folder into your hosting web server using FTP or
+                localhost in order to test it on your local environment.</li>
+              <li><strong>Database creation</strong> - Before configuring the application, you need to create a new database on your MySQL server named <code>help_desk</code></li>
+              <li><strong>Database configuration</strong> - After you successfully created the database, you need to import on it the SQL script file located at <code>{ROOT_FOLDER}/database/help_desk.sql</code>
+                <ul>
+                  <li>This database contains some demo data, so you can easily test the application</li>
+                </ul>
+              </li>
+              <li><strong>Dependencies installation</strong> - The application contains both Back and Front dependencies that need to be installed
+                <ul>
+                  <li><code>Back dependencies</code> - On the root folder of the application you need to execute <code>composer install</code></li>
+                  <li><code>Front dependencies</code> - On the root folder of the application you need to execute <code>npm install</code></li>
+                </ul>
+              </li>
+              <li><strong>Environment file</strong> - Now you need to configure database connection information and SMTP server in the <code>{ROOT_FOLDER}/.env</code> environment file
+                <ul>
+                  <li>Refer to <a href="https://laravel.com/docs/configuration" target="_blank">Laravel documentation</a> for more information about <code>.env</code> file</li>
+                </ul>
+              </li>
+              <li><strong>Serving</strong> - You are ready to use the application in this step
+                <ul>
+                  <li><code>Localhost</code> - If you have installed the application on a local environment, you can execute <code>php artisan serve</code> on the application root folder</li>
+                  <li><code>Web server</code> - If you have installed the application on a web server, you can visit the domain you have configured in the virtual host</li>
+                </ul>
+              </li>
+            </ol>
+            <p class="lead">Follow the following steps to use the <strong>help-desk-prod.zip</strong> archive</p>
+            <ol>
+              <li>Unzip the archive <code>help-desk-prod.zip</code>into a folder that you can name
+                <strong>help-desk</strong>, you will need to move this folder into your hosting web server using FTP to your web server.</li>
+              <li><strong>Database creation</strong> - Before configuring the application, you need to create a new database on your MySQL server named <code>help_desk</code></li>
+              <li><strong>Database configuration</strong> - After you successfully created the database, you need to import on it the SQL script file located at <code>{ROOT_FOLDER}/database/help_desk.sql</code>
+                <ul>
+                  <li>This database contains some demo data, so you can easily test the application</li>
+                </ul>
+              </li>
+              <li><strong>Environment file</strong> - You need to configure the application environment file <code>{ROOT_FOLDER}/.env</code>
+                <ul>
+                  <li><code>APP_ENV</code> - Must have the value <strong>production</strong> when the application is used on production web server</li>
+                  <li><code>APP_DEBUG</code> - Must have the value <strong>false</strong> to disable debug mode</li>
+                  <li><code>APP_URL</code> - You need to put the domain configured to host the application</li>
+                  <li><code>DB_HOST</code> - The database host (example: <code>localhost</code>)</li>
+                  <li><code>DB_PORT</code> - The database port (by default, MySQL use the port 3306)</li>
+                  <li><code>DB_DATABASE</code> - The database name (<code>help_desk</code> is the name of the application you have created above)</li>
+                  <li><code>DB_USERNAME</code> - The database user username</li>
+                  <li><code>DB_PASSWORD</code> - The database user password</li>
+                  <li><code>MAIL_HOST</code> - The SMTP server host</li>
+                  <li><code>MAIL_PORT</code> - The SMTP server port used</li>
+                  <li><code>MAIL_USERNAME</code> - The SMTP server user username</li>
+                  <li><code>MAIL_PASSWORD</code> - The SMTP server user password</li>
+                  <li><code>MAIL_ENCRYPTION</code> - The SMTP server encryption (example: TLS, STARTLS or null if not used)</li>
+                  <li><code>MAIL_FROM_ADDRESS</code> - The email sending the email from the application</li>
+                </ul>
+              </li>
+            </ol>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Project Structure
+		============================ -->
+          <section id="idocs_project_structure">
+            <h2>Project Structure</h2>
+            <p class="lead">Below is the main folders that you need to know about:</p>
+            <ul>
+              <li><code>app/Http</code> - Contains all the business logic of the application
+                <ul>
+                  <li><code>app/Http/Controllers</code> - Controllers files</li>
+                  <li><code>app/Http/Livewire</code> - Livewire components (99% of business logic is here)</li>
+                  <li><code>app/Http/Middleware</code> - Middlewares used on different routes</li>
+                </ul>
+              </li>
+              <li><code>app/View</code> - Blade components (used mainly for layouts and blade structure)</li>
+              <li><code>app/Jobs</code> - Jobs used to execute some complex functions</li>
+              <li><code>app/Notifications</code> - Notifications sent by email to application users</li>
+              <li><code>config</code> - Contains all the application configuration files
+                <ul>
+                  <li><code>config/system.php</code> - Application configuration file, that you can customize as you
+                    like (please read the comments in it to know how to customize values)</li>
+                </ul>
+              </li>
+              <li><code>resources</code> - Contains all the application assets and views
+                <ul>
+                  <li><code>resources/css</code> - The stylesheet assets files</li>
+                  <li><code>resources/js</code> - The javascript assets files</li>
+                  <li><code>resources/views</code> - All the blade views for pages, blade components and livewire
+                    components</li>
+                </ul>
+              </li>
+              <li><code>routes</code> - Contains all the routes used by the application
+                <ul>
+                  <li><code>routes/web.php</code> - the web routes (the only one used by the application)</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Sass
+		============================ -->
+          <section id="idocs_customization">
+            <h2>Themes customization</h2>
+            <p>We have added SASS <code>.scss</code> files in template (see the <strong>Project Structure</strong> section).
+              If you know how to use SASS you can change sass
+              files and compile the css as well by executing the command <code>npm run build</code>.</p>
+          </section>
+
+          <hr class="divider">
+
+          <!-- FAQ
+		============================ -->
+          <section id="idocs_faq">
+            <h2>FAQ</h2>
+            <p class="text-4">A FAQ is a list of frequently asked questions (FAQs) and answers on a particular topic.
+            </p>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="accordion accordion-alterate arrow-right" id="popularTopics">
+                  <div class="card">
+                    <div class="card-header" id="heading1">
+                      <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse1"
+                          aria-expanded="false" aria-controls="collapse1">What are the languages, Frameworks, packages, ... used by Help Desk?</a> </h5>
+                    </div>
+                    <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#popularTopics">
+                      <div class="card-body">
+                        <p>Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.</p>
+                        <ul>
+                          <li>Help Desk is powered by 3 main libraries
+                            <ul>
+                              <li><code>Laravel</code> - It is the core of Help Desk</li>
+                              <li><code>Livewire</code> - It is the package used the most in this project for developping the business logic</li>
+                              <li><code>TailwindCSS</code> - It is the core of the style configuration and it provides utility classes for almost every CSS rule available</li>
+                            </ul>
+                          </li>
+                          <li>Of course, the application uses many other packages, plugins, ... we choosed to use only Open Source packages having a great community to make it easy for your developpers to maintain and improve the application if needed. Below is a list of some packages used:
+                            <ul>
+                              <li><code>Filament forms</code> - A powerfull Form Builder (refer to <a href="https://filamentphp.com/docs/forms/installation" target="_blank">Official docs</a>)</li>
+                              <li><code>Filament norifications</code> - A powerfull notification tool (refer to <a href="https://filamentphp.com/docs/notifications/installation" target="_blank">Official docs</a>)</li>
+                              <li><code>Laravel Vite</code> - The latest tool for assets building used by Laravel Framework (refer to <a href="https://laravel.com/docs/vite" target="_blank">Official docs</a>)</li>
+                              <li><code>AlpineJS</code> - A lightweight Javascript framework (refer to <a href="https://alpinejs.dev/" target="_blank">Official docs</a>)</li>
+                              <li><code>ChartJS</code> - Open source HTML5 Charts (refer to <a href="https://www.chartjs.org/" target="_blank">Official docs</a>)</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="heading2">
+                      <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse2"
+                          aria-expanded="false" aria-controls="collapse2">Do Help Desk application uses the latest versions?</a> </h5>
+                    </div>
+                    <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#popularTopics">
+                      <div class="card-body">
+                          Yes! All the Framework, packages and plugins used by Help Desk is at their latest versions when the Help Desk is released. And our developpers will maintain this versions updated.
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+          </section>
+
+          <hr class="divider">
+
+          <!-- Changelog
+		============================ -->
+
+          <section id="idocs_changelog">
+            <h2>Changelog</h2>
+            <p class="text-4">See what's new added, changed, fixed, improved or updated in the latest versions. </p>
+            <h3 id="v1-0">Version 1.0 <small class="text-muted">(12 September, 2022)</small></h3>
+            <p>Initial Release</p>
+          </section>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- Content end -->
+
+  </div>
+  <!-- Document Wrapper end -->
+
+  <!-- Back To Top -->
+  <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i
+      class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript
+============================ -->
+  <script src="/docs/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/docs/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Highlight JS -->
+  <script src="/docs/assets/vendor/highlight.js/highlight.min.js"></script>
+  <!-- Easing -->
+  <script src="/docs/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <!-- Magnific Popup -->
+  <script src="/docs/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <!-- Custom Script -->
+  <script src="/docs/assets/js/theme.js"></script>
+</body>
+
+</html>
