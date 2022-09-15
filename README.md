@@ -1,5 +1,12 @@
 # Help Desk
 
+<p>
+    <a href="https://laravel.com"><img alt="Laravel v8.x" src="https://img.shields.io/badge/Laravel-v8.x-FF2D20?style=for-the-badge&logo=laravel"></a>
+    <a href="https://laravel-livewire.com"><img alt="Livewire v2.x" src="https://img.shields.io/badge/Livewire-v2.x-FB70A9?style=for-the-badge"></a>
+    <a href="https://filamentphp.com/"><img alt="Filament v2.x" src="https://img.shields.io/badge/Filament-v2.x-e9b228?style=for-the-badge"></a>
+    <a href="https://php.net"><img alt="PHP 8.0" src="https://img.shields.io/badge/PHP-8.0-777BB4?style=for-the-badge&logo=php"></a>
+</p>
+
 Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with a beautiful and simple to use platform.
 
 Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.

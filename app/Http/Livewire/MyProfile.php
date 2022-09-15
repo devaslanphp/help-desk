@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -42,7 +43,8 @@ class MyProfile extends Component implements HasForms
         $this->user = User::where('id', auth()->user()->id)->first();
         $this->form->fill([
             'name' => $this->user->name,
-            'email' => $this->user->email
+            'email' => $this->user->email,
+            'locale' => $this->user->locale,
         ]);
         if (session()->has('profile_updated')) {
             Notification::make()
@@ -86,6 +88,14 @@ class MyProfile extends Component implements HasForms
                         ->label(__('Password confirmation'))
                         ->dehydrated(false),
                 ]),
+
+            Grid::make(1)
+                ->schema([
+                    Radio::make('locale')
+                        ->label(__('Default language'))
+                        ->options(locales())
+                        ->required()
+                ]),
         ];
     }
 
@@ -95,10 +105,12 @@ class MyProfile extends Component implements HasForms
         if (Hash::check($data['current_password'], $this->user->password)) {
             $this->user->name = $data['name'];
             $this->user->email = $data['email'];
+            $this->user->locale = $data['locale'];
             if ($data['new_password']) {
                 $this->user->password = bcrypt($data['new_password']);
             }
             $this->user->save();
+            session()->put('locale', $this->user->locale);
             session()->flash('profile_updated', true);
             redirect()->to(route('my-profile'));
         } else {

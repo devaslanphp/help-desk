@@ -43,7 +43,7 @@ class MyNotifications extends Component
         Notification::make()
             ->success()
             ->title(__('Notifications updated'))
-            ->body(__('All unread notifications is not marked as read'))
+            ->body(__('All unread notifications is marked as read'))
             ->send();
     }
 }

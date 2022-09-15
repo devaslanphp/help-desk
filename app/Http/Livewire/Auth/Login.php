@@ -95,6 +95,7 @@ class Login extends Component implements HasForms
             ]);
         }
 
+        session()->put('locale', auth()->user()->locale);
         redirect()->to(route('home'));
 
     }

@@ -147,3 +147,19 @@ if (!function_exists('types_list')) {
         return $priorities;
     }
 }
+
+if (!function_exists('locales')) {
+    /**
+     * Return application locales as an array of KEY (locale id) => VALUE (locale title)
+     *
+     * @return array
+     */
+    function locales(): array
+    {
+        $roles = [];
+        foreach (config('system.locales') as $key => $value) {
+            $roles[$key] = __($value);
+        }
+        return $roles;
+    }
+}
