@@ -40,7 +40,7 @@ You can find a full documentation here: [Documentation](http://helpdesk.devaslan
 
 ## Credits
 
-- [All Contributors](https://github.com/heloufir/filament-workflow-manager/graphs/contributors)
+- [All Contributors](https://github.com/devaslanphp/help-desk/graphs/contributors)
 
 ## License
 
