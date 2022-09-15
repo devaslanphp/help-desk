@@ -16,7 +16,7 @@ use App\Models\Ticket;
 |
 */
 
-Route::middleware('guest')
+Route::middleware(['guest', 'set_locale'])
     ->group(function () {
         // Login
         Route::view('/auth/login', 'auth.login')->name('auth.login');
@@ -27,14 +27,11 @@ Route::middleware('guest')
         // Account activation
         Route::get('/auth/activate-account/{user:register_token}', fn (User $user) => view('auth.activate-account', compact('user')))->name('auth.activate-account');
     });
-Route::middleware('auth')
+Route::middleware(['auth', 'set_locale'])
     ->group(function () {
         // Logout
         Route::get('/auth/logout', LogoutController::class)->name('auth.logout');
-    });
 
-Route::middleware('auth')
-    ->group(function () {
         // Home
         Route::view('/', 'welcome')->name('home');
         // My profile
