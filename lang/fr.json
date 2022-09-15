@@ -208,5 +208,7 @@
     "Bug": "Bug",
     "Administrator": "Administrateur",
     "Employee": "Employé",
-    "Customer": "Client"
+    "Customer": "Client",
+    "Overview": "Vue d'ensemble",
+    "Administration": "Administration"
 }
