@@ -18,6 +18,24 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 
 You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
+Use the following accounts to access demo:
+
+*Administrator*
+
+- Email: darkvador@gmail.com
+- Password: secret
+
+*Customer*
+
+- Email: janedoe@gmail.com
+- Password: secret
+
+*Employee*
+
+- Email: johndoe@gmail.com
+- Password: secret
+
+
 ## Documentation
 
 You can find a full documentation here: [Documentation](http://helpdesk.devaslan.com/docs/)
