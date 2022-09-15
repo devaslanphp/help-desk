@@ -24,7 +24,7 @@
             </span>
             <div class="w-full flex flex-row justify-start items-start flex-wrap -ml-2">
                 @foreach(auth()->user()->favoriteProjects as $project)
-                    <div class="xl:w-1/5 lg:w-1/4 md:w-1/3 w-1/2 p-2">
+                    <div class="xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2 w-full p-2">
                         <div class="w-full flex flex-col gap-1 p-5 border border-gray-100 rounded-lg shadow bg-white hover:shadow-lg">
                             <span class="text-gray-700 font-bold text-base">
                                 {{ $project->name }}
