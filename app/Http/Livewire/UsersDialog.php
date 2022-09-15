@@ -88,7 +88,7 @@ class UsersDialog extends Component implements HasForms
             $this->user->name = $data['name'];
             $this->user->email = $data['email'];
             $this->user->role = $data['role'];
-            $this->user->save();
+            // $this->user->save();
             Notification::make()
                 ->success()
                 ->title(__('User updated'))
@@ -104,7 +104,7 @@ class UsersDialog extends Component implements HasForms
      * @return void
      */
     public function doDeleteUser(): void {
-        $this->user->delete();
+        // $this->user->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('userDeleted');
         Notification::make()
