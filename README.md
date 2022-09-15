@@ -18,8 +18,9 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 
 You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
-> Use the following accounts to access demo:
-> Important: The save / delete users functions are disabled only in demo instance
+> **Use the following accounts to access demo:**
+> 
+> *Important: The save / delete users functions are disabled only in demo instance*
 >
 > **Administrator**
 > - Email: darkvador@gmail.com
