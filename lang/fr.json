@@ -191,5 +191,22 @@
     "Your account details has been updated": "Les détails de votre compte ont été mis à jour",
     "Your comment has been successfully added to the ticket": "Votre commentaire a bien été ajouté au ticket",
     "Your password is now updated": "Votre mot de passe est maintenant à jour",
-    "Default language": "Langue par défaut"
+    "Default language": "Langue par défaut",
+    "Created": "Créé",
+    "In progress": "En cours",
+    "Done": "Fait",
+    "Validated": "Validé",
+    "Rejected": "Rejeté",
+    "Lowest": "Très basse",
+    "Low": "Basse",
+    "Normal": "Normale",
+    "High": "Haute",
+    "Highest": "Très haute",
+    "Improvement": "Amélioration",
+    "New feature": "Nouvelle fonctionnalité",
+    "Task": "Tâche",
+    "Bug": "Bug",
+    "Administrator": "Administrateur",
+    "Employee": "Employé",
+    "Customer": "Client"
 }

@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form wire:submit.prevent="save" class="xl:w-2/5 lg:w-3/5 md:w-4/5 w-full">
+    <form wire:submit.prevent="save" class="lg:w-3/5 md:w-4/5 w-full">
         <div class="w-full flex flex-row justify-start items-center gap-3 p-5">
             <x-user-avatar :user="$user" :size="100" />
             <div class="flex flex-col justify-center items-start gap-0">

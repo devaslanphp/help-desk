@@ -7,43 +7,40 @@
     <a href="https://php.net"><img alt="PHP 8.0" src="https://img.shields.io/badge/PHP-8.0-777BB4?style=for-the-badge&logo=php"></a>
 </p>
 
-Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with a beautiful and simple to use platform.
+Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with
+a beautiful and simple to use platform.
 
 Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
 
 ![Help Desk](github-contents/banner.jpg)
 
-
 ## Online demo
 
 You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
-Use the following accounts to access demo:
-
-*Administrator*
-
-- Email: darkvador@gmail.com
-- Password: secret
-
-*Customer*
-
-- Email: janedoe@gmail.com
-- Password: secret
-
-*Employee*
-
-- Email: johndoe@gmail.com
-- Password: secret
-
+> **Use the following accounts to access demo:**
+> 
+> *Important: The save / delete users functions are disabled only in demo instance*
+>
+> **Administrator**
+> - Email: darkvador@gmail.com
+> - Password: secret
+>
+> **Customer**
+> - Email: janedoe@gmail.com
+> - Password: secret
+>
+> **Employee**
+> - Email: johndoe@gmail.com
+> - Password: secret
 
 ## Documentation
 
 You can find a full documentation here: [Documentation](http://helpdesk.devaslan.com/docs/)
 
-
 ## Credits
 
-- [All Contributors](https://github.com/heloufir/filament-workflow-manager/graphs/contributors)
+- [All Contributors](https://github.com/devaslanphp/help-desk/graphs/contributors)
 
 ## License
 
