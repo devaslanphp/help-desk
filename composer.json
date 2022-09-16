@@ -1,8 +1,8 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Help Desk open source project.",
+    "keywords": ["helpdesk", "laravel", "tailwindcss", "filament-forms", "filament-notifications"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
