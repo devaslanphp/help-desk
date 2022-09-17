@@ -54,7 +54,7 @@
           <!-- Logo -->
           <a class="logo ml-md-3" href="index.html" title="Help Desk">
             <img src="/docs/assets/images/logo.png" alt="Help Desk" width="120" /> </a>
-          <span class="text-2 ml-2">v1.0</span>
+          <span class="text-2 ml-2">v1.1.0</span>
           <!-- Logo End -->
 
           <!-- Navbar Toggler -->
@@ -119,7 +119,7 @@
             <div class="row">
               <div class="col-sm-6 col-lg-4">
                 <ul class="list-unstyled">
-                  <li><strong>Version:</strong> 1.0.2</li>
+                  <li><strong>Version:</strong> 1.1.0</li>
                   <li><strong>Author:</strong> <a href="mailto:eloufirhatim@gmail.com"
                       target="_blank">heloufir</a>
                   </li>
@@ -128,7 +128,7 @@
               <div class="col-sm-6 col-lg-4">
                 <ul class="list-unstyled">
                   <li><strong class="font-weight-700">Created:</strong> 12 September, 2022</li>
-                  <li><strong>Update:</strong> 14 September, 2022</li>
+                  <li><strong>Update:</strong> 17 September, 2022</li>
                 </ul>
               </div>
             </div>
@@ -142,34 +142,11 @@
 		============================ -->
           <section id="idocs_prerequisites">
             <h2>Prerequisites</h2>
-            <p class="lead">Before you can use Help Desk application, you must install and configure the following
-              prerequisites:</p>
-            <ul>
-              <li><strong>Apache / MySQL / PHP</strong>
-                <ul>
-                  <li><strong>Windows</strong> - If you are using Windows OS, you can install <code>WAMP</code> (refer
-                    to <a href="https://www.wampserver.com/" target="_blank">Official website</a>)</li>
-                  <li><strong>MacOS</strong> - If you are using Mac OS, you can install <code>MAMP</code> (refer to <a
-                      href="https://www.mamp.info/en/downloads/" target="_blank">Official website</a>)</li>
-                  <li><strong>Linux</strong> - If you are using Linux OS, you can install <code>LAMP</code> (refer to <a
-                      href="https://doc.ubuntu-fr.org/lamp" target="_blank">Official website</a>)</li>
-                </ul>
-              </li>
-              <li><strong>Dependency Manager for PHP</strong> - After you have successfully installed one of the above
-                tools, you need to install composer
-                <ul>
-                  <li><strong>Composer</strong> - Refer to <a href="https://getcomposer.org/" target="_blank">composer
-                      website</a> to install it on your specific OS</li>
-                </ul>
-              </li>
-              <li><strong>Dependency Manager for the Front</strong> - The last thing you need to install is the
-                dependency manager for the front components (NPM)
-                <ul>
-                  <li><strong>NPM</strong> - Refer to <a href="https://nodejs.org/en/" target="_blank">Nodejs
-                      website</a> to install it on your specific OS</li>
-                </ul>
-              </li>
-            </ul>
+            <p class="lead">
+                The application is developed using Docker to make it simple to you to quick start development.
+                <br>
+                So before executing the application make sure you installed docker (<a href="https://www.docker.com/" target="_blank">https://www.docker.com/</a>).
+            </p>
           </section>
 
           <hr class="divider">
@@ -178,32 +155,49 @@
 		============================ -->
           <section id="idocs_installation">
             <h2>Installation</h2>
-            <p class="lead">Follow the below steps to install the application:</p>
+            <p class="lead">Follow the below steps to install and serve the application:</p>
             <ol>
-              <li><strong>Database creation</strong> - Before configuring the application, you need to create a new database on your MySQL server named <code>help_desk</code></li>
-              <li><strong>Database configuration</strong> - After you successfully created the database, you need to import on it the SQL script file located at <code>{ROOT_FOLDER}/database/help_desk.sql</code>
-                <ul>
-                  <li>This database contains some demo data, so you can easily test the application</li>
-                </ul>
-              </li>
-              <li><strong>Dependencies installation</strong> - The application contains both Back and Front dependencies that need to be installed
-                <ul>
-                  <li><code>Back dependencies</code> - On the root folder of the application you need to execute <code>composer install</code></li>
-                  <li><code>Front dependencies</code> - On the root folder of the application you need to execute <code>npm install</code></li>
-                </ul>
-              </li>
-              <li><strong>Environment file</strong> - Now you need to configure database connection information and SMTP server in the <code>{ROOT_FOLDER}/.env</code> environment file
-                <ul>
-                  <li>Refer to <a href="https://laravel.com/docs/configuration" target="_blank">Laravel documentation</a> for more information about <code>.env</code> file</li>
-                </ul>
-              </li>
-              <li><strong>Serving</strong> - You are ready to use the application in this step
-                <ul>
-                  <li><code>Localhost</code> - If you have installed the application on a local environment, you can execute <code>php artisan serve</code> on the application root folder</li>
-                  <li><code>Web server</code> - If you have installed the application on a web server, you can visit the domain you have configured in the virtual host</li>
-                </ul>
-              </li>
+                <li>Clone the project <code>git clone https://github.com/devaslanphp/help-desk.git</code></li>
+                <li>
+                    Install dependencies:
+                    <ul>
+                        <li>Back dependencies <code>composer install</code></li>
+                        <li>Front dependencies <code>npm install</code></li>
+                    </ul>
+                </li>
+                <li>Install docker container <code>./vendor/sail/bin up -d</code></li>
+                <li>Database migration: using the docker terminal for <strong>laravel.test-1 container run this command </strong> <code>php artisan migrate</code></li>
+                <li>
+                    <strong>Optional</strong> if you wan't some demo data:
+                    <ul>
+                        <li>Visit the PhpMyAdmin configured in docker composer <code>http://127.0.0.1:8080/</code></li>
+                        <li>Use the database <code>help_desk</code></li>
+                        <li>Import the SQL script file <code>{APP_ROOT}/database/help_desk.sql</code></li>
+                    </ul>
+                </li>
+                <li>
+                    Before you can serve the project, you need to build assets:
+                    <ul>
+                        <li>For development env you can use <code>npm run dev</code></li>
+                        <li>For production env you need to build asset for prod env with <code>npm run build</code></li>
+                    </ul>
+                </li>
             </ol>
+            <div class="alert alert-info">
+                <p><strong>Important:</strong> If you used the demo data, you can use the following user accounts:</p>
+
+                <ul class="mb-0">
+                    <li>
+                        <strong>Administrator</strong> (<u>Email</u>: darkvador@gmail.com, <u>Password</u>: secret)
+                    </li>
+                    <li>
+                        <strong>Customer</strong> (<u>Email</u>: janedoe@gmail.com, <u>Password</u>: secret)
+                    </li>
+                    <li>
+                        <strong>Employee</strong> (<u>Email</u>: johndoe@gmail.com, <u>Password</u>: secret)
+                    </li>
+                </ul>
+            </div>
           </section>
 
           <hr class="divider">
