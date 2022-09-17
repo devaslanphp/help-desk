@@ -1,10 +1,24 @@
 # Help Desk
 
-<p>
+<p align="center">
     <a href="https://laravel.com"><img alt="Laravel v8.x" src="https://img.shields.io/badge/Laravel-v8.x-FF2D20?style=for-the-badge&logo=laravel"></a>
     <a href="https://laravel-livewire.com"><img alt="Livewire v2.x" src="https://img.shields.io/badge/Livewire-v2.x-FB70A9?style=for-the-badge"></a>
     <a href="https://filamentphp.com/"><img alt="Filament v2.x" src="https://img.shields.io/badge/Filament-v2.x-e9b228?style=for-the-badge"></a>
     <a href="https://php.net"><img alt="PHP 8.0" src="https://img.shields.io/badge/PHP-8.0-777BB4?style=for-the-badge&logo=php"></a>
+    <br/>
+    <a href="https://github.com/devaslanphp/help-desk/releases/">
+        <img src="https://img.shields.io/github/tag/devaslanphp/help-desk?include_prereleases=&sort=semver&color=blue&style=for-the-badge" alt="GitHub tag">
+    </a>
+    <a href="#license">
+        <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+    </a>
+    <a href="https://github.com/devaslanphp/help-desk/issues">
+        <img src="https://img.shields.io/github/issues/devaslanphp/help-desk?style=for-the-badge" alt="issues - help-desk">
+    </a>
+    <br/>
+    <a href="http://helpdesk.devaslan.com/docs" title="Go to project documentation">
+        <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
+    </a>
 </p>
 
 Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with
