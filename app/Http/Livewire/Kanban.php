@@ -34,7 +34,15 @@ class Kanban extends FilamentKanbanBoard
      */
     protected function records(): Collection
     {
-        return Ticket::all()
+        $query = Ticket::query();
+        $query->withCount('comments');
+        if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
+            $query->where(function ($query) {
+                $query->where('owner_id', auth()->user()->id)
+                    ->orWhere('responsible_id', auth()->user()->id);
+            });
+        }
+        return $query->get()
             ->map(function (Ticket $ticket) {
                 $priority = config('system.priorities.' . $ticket->priority);
                 $type = config('system.types.' . $ticket->type);
@@ -54,13 +62,19 @@ class Kanban extends FilamentKanbanBoard
                             <div class="w-full text-xs font-light">
                                 ' . Str::limit(htmlspecialchars(strip_tags($ticket->content))) . '
                             </div>
-                            <div class="w-full flex items-center gap-1">
-                                '.
-                                    ($ticket->responsible ? '
-                                        <img src="' . $ticket->responsible->avatar_url . '" alt="' . $ticket->responsible->name . '" class="rounded-full shadow" style="width: 20px; height: 20px;" />
-                                        <span class="font-light text-xs">' . $ticket->responsible->name . '</span>
-                                    ' : '<span class="text-xs font-normal text-gray-400">' . __('Not assigned yet!') . '</span>')
-                                .'
+                            <div class="w-full flex items-center space-x-4">
+                                <div class="flex items-center gap-1">
+                                    '.
+                                        ($ticket->responsible ? '
+                                            <img src="' . $ticket->responsible->avatar_url . '" alt="' . $ticket->responsible->name . '" class="rounded-full shadow" style="width: 20px; height: 20px;" />
+                                            <span class="font-light text-xs">' . $ticket->responsible->name . '</span>
+                                        ' : '<span class="text-xs font-normal text-gray-400">' . __('Not assigned yet!') . '</span>')
+                                    .'
+                                </div>
+                                <div class="flex items-center gap-1 text-xs text-gray-500">
+                                    ' . $ticket->comments_count . '
+                                    <i class="fa fa-comment-o"></i>
+                                </div>
                             </div>
                         </div>
                     '),
