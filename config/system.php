@@ -189,7 +189,7 @@ return [
             'text-color' => 'bg-red-50',
             'bg-color' => 'text-red-500',
             'permissions' => [
-                'pages' => ['analytics', 'tickets', 'administration'],
+                'pages' => ['analytics', 'tickets', 'kanban', 'administration'],
                 'functions' => [
                     'view-all-projects', 'update-all-projects', 'delete-all-projects', 'create-projects',
                     'view-all-tickets', 'update-all-tickets', 'delete-all-tickets', 'create-tickets', 'assign-tickets', 'change-status-tickets'
@@ -201,7 +201,7 @@ return [
             'text-color' => 'bg-gray-50',
             'bg-color' => 'text-gray-500',
             'permissions' => [
-                'pages' => ['analytics', 'tickets'],
+                'pages' => ['analytics', 'tickets', 'kanban'],
                 'functions' => [
                     'view-own-projects',
                     'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets', 'assign-tickets', 'change-status-tickets'
@@ -213,7 +213,7 @@ return [
             'text-color' => 'bg-blue-50',
             'bg-color' => 'text-blue-500',
             'permissions' => [
-                'pages' => ['analytics', 'tickets'],
+                'pages' => ['analytics', 'tickets', 'kanban'],
                 'functions' => [
                     'view-own-projects',
                     'view-own-tickets', 'update-own-tickets', 'delete-own-tickets', 'create-tickets'

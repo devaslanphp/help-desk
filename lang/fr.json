@@ -210,5 +210,9 @@
     "Employee": "Employé",
     "Customer": "Client",
     "Overview": "Vue d'ensemble",
-    "Administration": "Administration"
+    "Administration": "Administration",
+    "Below is the Kanban Board for tickets configured on :app": "Ci-dessous le tableau Kanban pour les tickets configurés sur :app",
+    "Kanban Board": "Tableau Kanban",
+    "Oops!": "Oups !",
+    "You don't have permissions to change this ticket status": "Vous n'êtes pas autorisé à modifier le statut de ce ticket"
 }

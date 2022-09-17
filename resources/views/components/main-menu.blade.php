@@ -9,7 +9,7 @@
         <a href="{{ route('home') }}" class="flex items-center pl-2.5 mb-5">
             <img src="{{ asset('images/logo.png') }}" class="mr-3 h-6 sm:h-7" alt="{{ config('app.name') }}" />
         </a>
-        <ul class="space-y-8 mt-20 h-full w-full">
+        <ul class="space-y-8 my-10 h-full w-full overflow-y-auto">
             @foreach($menu as $key => $value)
                 @if($value['always_shown'] || can_access_page(auth()->user(), $key))
                     <li>
