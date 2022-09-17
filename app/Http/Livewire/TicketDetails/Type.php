@@ -65,7 +65,7 @@ class Type extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        $before = config('system.types.' . $this->ticket->type . '.title') ?? '-';
+        $before = __(config('system.types.' . $this->ticket->type . '.title')) ?? '-';
         $this->ticket->type = $data['type'];
         $this->ticket->save();
         Notification::make()
@@ -78,6 +78,6 @@ class Type extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Type'), $before, (config('system.types.' . $this->ticket->type . '.title') ?? '-'));
+        TicketUpdatedJob::dispatch($this->ticket, __('Type'), $before, __(config('system.types.' . $this->ticket->type . '.title') ?? '-'));
     }
 }

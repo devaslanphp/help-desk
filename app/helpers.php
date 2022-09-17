@@ -98,6 +98,27 @@ if (!function_exists('statuses_list')) {
     }
 }
 
+if (!function_exists('statuses_list_for_kanban')) {
+    /**
+     * Return statuses list as an array for kanban board
+     *
+     * @return array
+     */
+    function statuses_list_for_kanban(): array
+    {
+        $statuses = [];
+        foreach (config('system.statuses') as $key => $value) {
+            $statuses[] = [
+                'id' => $key,
+                'title' => __($value['title']),
+                'text-color' => $value['text-color'],
+                'bg-color' => $value['bg-color'],
+            ];
+        }
+        return $statuses;
+    }
+}
+
 if (!function_exists('priorities_list')) {
     /**
      * Return priorities list as an array of KEY (priority id) => VALUE (priority title)

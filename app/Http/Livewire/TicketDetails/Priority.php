@@ -66,7 +66,7 @@ class Priority extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        $before = config('system.priorities.' . $this->ticket->priority . '.title') ?? '-';
+        $before = __(config('system.priorities.' . $this->ticket->priority . '.title')) ?? '-';
         $this->ticket->priority = $data['priority'];
         $this->ticket->save();
         Notification::make()
@@ -79,6 +79,6 @@ class Priority extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Priority'), $before, (config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'));
+        TicketUpdatedJob::dispatch($this->ticket, __('Priority'), $before, __(config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'));
     }
 }

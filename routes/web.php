@@ -45,4 +45,6 @@ Route::middleware(['auth', 'set_locale'])
         Route::view('/administration', 'administration')->name('administration');
         // Notifications
         Route::view('/notifications', 'notifications')->name('notifications');
+        // Kanban board
+        Route::view('/kanban', 'kanban')->name('kanban');
     });
