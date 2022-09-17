@@ -40,6 +40,12 @@ class MainMenu extends Component
                 'always_shown' => false,
                 'show_notification_indicator' => false
             ],
+            'kanban' => [
+                'title' => 'Kanban Board',
+                'icon' => 'fa-clipboard-check',
+                'always_shown' => false,
+                'show_notification_indicator' => false
+            ],
             'administration' => [
                 'title' => 'Administration',
                 'icon' => 'fa-cogs',

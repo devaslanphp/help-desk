@@ -9,6 +9,7 @@
         "filament/forms": "^2.15",
         "filament/notifications": "^2.15",
         "guzzlehttp/guzzle": "^7.2",
+        "invaders-xx/filament-kanban-board": "^0.2.6",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
