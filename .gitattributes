@@ -12,4 +12,4 @@ CHANGELOG.md export-ignore
 
 resources/* linguist-vendored
 public/* linguist-vendored
-project/docs/* linguist-documentation
+public/docs/* linguist-documentation
