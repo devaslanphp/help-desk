@@ -79,6 +79,6 @@ class Priority extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Priority'), $before, __(config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'));
+        TicketUpdatedJob::dispatch($this->ticket, __('Priority'), $before, __(config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'), auth()->user());
     }
 }

@@ -123,7 +123,7 @@ class Kanban extends FilamentKanbanBoard
                 ->title(__('Status updated'))
                 ->body(__('The ticket status has been successfully updated'))
                 ->send();
-            TicketUpdatedJob::dispatch($ticket, __('Status'), $before, __(config('system.statuses.' . $ticket->status . '.title') ?? '-'));
+            TicketUpdatedJob::dispatch($ticket, __('Status'), $before, __(config('system.statuses.' . $ticket->status . '.title') ?? '-'), auth()->user());
         } else {
             Notification::make()
                 ->success()
