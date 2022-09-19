@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Project;
 use App\Models\User;
 use App\Notifications\ProjectCreatedNotification;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -26,6 +27,7 @@ class ProjectsDialog extends Component implements HasForms
     public function mount(): void {
         $this->form->fill([
             'name' => $this->project->name,
+            'ticket_prefix' => $this->project->ticket_prefix,
             'description' => $this->project->description,
             'owner_id' => $this->project->owner_id ?? auth()->user()->id,
         ]);
@@ -50,10 +52,22 @@ class ProjectsDialog extends Component implements HasForms
                 ->searchable()
                 ->options(User::all()->pluck('name', 'id')),
 
-            TextInput::make('name')
-                ->label(__('Full name'))
-                ->maxLength(255)
-                ->required(),
+            Grid::make(3)
+                ->schema([
+                    TextInput::make('ticket_prefix')
+                        ->label(__('Ticket prefix'))
+                        ->minLength(4)
+                        ->maxLength(4)
+                        ->columnSpan(1)
+                        ->helperText(__('Used to generate tickets numbers'))
+                        ->required(),
+
+                    TextInput::make('name')
+                        ->label(__('Full name'))
+                        ->maxLength(255)
+                        ->columnSpan(2)
+                        ->required(),
+                ]),
 
             RichEditor::make('description')
                 ->label(__('Description'))
@@ -74,7 +88,8 @@ class ProjectsDialog extends Component implements HasForms
             Project::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'owner_id' => $data['owner_id']
+                'owner_id' => $data['owner_id'],
+                'ticket_prefix' => $data['ticket_prefix']
             ]);
             Notification::make()
                 ->success()
@@ -85,6 +100,7 @@ class ProjectsDialog extends Component implements HasForms
             $this->project->name = $data['name'];
             $this->project->description = $data['description'];
             $this->project->owner_id = $data['owner_id'];
+            $this->project->ticket_prefix = $data['ticket_prefix'];
             $this->project->save();
             Notification::make()
                 ->success()

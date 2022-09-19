@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Jobs\TicketCreatedJob;
 use App\Models\Project;
 use App\Models\Ticket;
-use App\Models\User;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -14,6 +13,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class TicketsDialog extends Component implements HasForms
@@ -109,6 +109,17 @@ class TicketsDialog extends Component implements HasForms
             ->success()
             ->title(__('Ticket created'))
             ->body(__('The ticket has been successfully created'))
+            ->actions([
+                Action::make('redirect')
+                    ->label(__('See details'))
+                    ->color('success')
+                    ->button()
+                    ->close()
+                    ->url(fn() => route('tickets.details', [
+                        'ticket' => $ticket,
+                        'slug' => Str::slug($ticket->title)
+                    ]))
+            ])
             ->send();
         $this->emit('ticketSaved');
         TicketCreatedJob::dispatch($ticket);

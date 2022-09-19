@@ -267,5 +267,11 @@
     "Are you sure you want to delete this type?": "Êtes-vous sûr de vouloir supprimé ce type ?",
     "Check the <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>fontawesome icons here</a> to choose your right icon": "Voir <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>les icônes fontawesome ici</a> pour choisir votre icône",
     "Selected icon:": "Icône sélectionnée",
-    "Icon": "Icône"
+    "Icon": "Icône",
+    "Ticket prefix": "Préfixe des tickets",
+    "Used to generate tickets numbers": "Utilisé pour générer les numéros des tickets",
+    "See details": "Voir les détails",
+    "Click to copy url to ticket": "Cliquez pour copier le lien vers le ticket",
+    "Ticket url copied": "Url du ticket copié",
+    "The ticket url successfully copied to your clipboard": "L'URL du ticket a été copiée avec succès dans votre presse-papiers"
 }

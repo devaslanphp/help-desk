@@ -68,9 +68,13 @@
                         <span class="text-xs font-medium text-gray-500 flex flex-row justify-start items-center gap-2">
                             <i class="fa fa-tag"></i>
                             {{ $ticket->project->name }}
+                            <span class="text-xs text-gray-300">/</span>
+                            <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl({{ $ticket }})" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
                         </span>
                         <div class="w-full flex flex-row justify-between items-start gap-5">
-                            <a href="{{ route('tickets.details', ['ticket' => $ticket, 'slug' => Str::slug($ticket->title)]) }}" class="text-lg font-medium text-gray-700 hover:underline">{{ $ticket->title }}</a>
+                            <a href="{{ route('tickets.details', ['ticket' => $ticket, 'slug' => Str::slug($ticket->title)]) }}" class="text-lg font-medium text-gray-700 hover:underline">
+                                {{ $ticket->title }}
+                            </a>
                             <span class="text-sm font-medium text-gray-700">{{ $ticket->created_at->diffForHumans() }}</span>
                         </div>
                         <span class="text-sm font-light text-gray-500">
@@ -120,7 +124,7 @@
     </div>
 
     <div id="ticketModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex items-center justify-center w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <div class="relative p-4 w-full max-w-4xl h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -146,6 +150,10 @@
             window.addEventListener('toggleTicketModal', () => {
                 const toggleTicketModalBtn = document.querySelector('#toggleTicketModal');
                 toggleTicketModalBtn.click();
+            });
+
+            window.addEventListener('ticketUrlCopied', (event) => {
+                navigator.clipboard.writeText(event.detail.url);
             });
         </script>
     @endpush

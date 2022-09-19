@@ -31,17 +31,17 @@ VALUES (6, 4, 2, '2022-09-11 17:09:33', '2022-09-11 17:09:33'),
        (11, 4, 1, '2022-09-12 11:50:42', '2022-09-12 11:50:42');
 
 INSERT INTO `tickets` (`id`, `title`, `content`, `status`, `priority`, `owner_id`, `responsible_id`, `deleted_at`,
-                       `created_at`, `updated_at`, `project_id`, `type`)
+                       `created_at`, `updated_at`, `project_id`, `type`, `number`)
 VALUES (2, 'Cannot access the platform',
         '<p>Hello,</p><p>I cannot access the platform with the credentials received by email.</p><p>Can you see what is the problem, please?</p><p>Thanks</p>',
-        'validated', 'highest', 4, 5, NULL, '2022-09-11 18:27:55', '2022-09-12 11:48:00', 1, 'bug'),
+        'validated', 'highest', 4, 5, NULL, '2022-09-11 18:27:55', '2022-09-12 11:48:00', 1, 'bug', '0001'),
        (3, 'Design enhancement', '<p>Add a logo of the company to the login page.</p>', 'created', 'low', 5, 4, NULL,
-        '2022-09-11 18:45:55', '2022-09-12 13:08:05', 2, 'improvement'),
+        '2022-09-11 18:45:55', '2022-09-12 13:08:05', 2, 'improvement', '0001'),
        (4, 'Quiz wizard', '<p>Add a wizard system to the quiz page</p>', 'created', 'normal', 4, NULL, NULL,
-        '2022-09-11 20:37:14', '2022-09-11 20:37:14', 2, 'improvement'),
+        '2022-09-11 20:37:14', '2022-09-11 20:37:14', 2, 'improvement', '0002'),
        (9, 'Internal error - Login page',
         '<p>We got an internal error when we visit the login page (url: /auth/login)</p>', 'created', 'highest', 5, 4,
-        NULL, '2022-09-11 20:58:37', '2022-09-12 13:08:12', 4, 'bug');
+        NULL, '2022-09-11 20:58:37', '2022-09-12 13:08:12', 4, 'bug', '0001');
 
 INSERT INTO `comments` (`id`, `owner_id`, `ticket_id`, `content`, `deleted_at`, `created_at`, `updated_at`)
 VALUES (1, 4, 2, '<p>Hello,</p><p>We are working on it, I let you know ASAP.</p><p>Best regards.</p>', NULL,
