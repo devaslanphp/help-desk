@@ -11,6 +11,7 @@ module.exports = {
         "./config/system.php",
         "./app/Http/Livewire/**/*.php",
         "./app/View/**/*.php",
+        "./app/Models/**/*.php",
     ],
     theme: {
         extend: {

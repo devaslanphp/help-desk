@@ -56,7 +56,7 @@ class TicketTypes extends Component implements HasForms
     }
 
     /**
-     * Search for tickets statutses
+     * Search for tickets types
      *
      * @return void
      */
