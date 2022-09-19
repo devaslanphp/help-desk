@@ -29,13 +29,15 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 ![Help Desk](github-contents/banner.jpg)
 
 ## Screenshots
-<img src="github-contents/Help-Desk-Home-page.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-Analytics.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-Tickets.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-Tickets-Cannot-access-the-platform.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-Kanban-Board.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-Administration.png" width="20%"></img> 
-<img src="github-contents/Help-Desk-My-profile-Dark-Vador.png" width="20%"></img> 
+<kbd>
+    <img src="github-contents/Help-Desk-Home-page.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-Analytics.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-Tickets.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-Tickets-Cannot-access-the-platform.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-Kanban-Board.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-Administration.png" width="20%"></img> 
+    <img src="github-contents/Help-Desk-My-profile-Dark-Vador.png" width="20%"></img> 
+</kbd>
 
 ## Online demo
 
