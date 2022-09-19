@@ -153,7 +153,7 @@
             });
 
             window.addEventListener('ticketUrlCopied', (event) => {
-                navigator.clipboard.writeText(event.detail.url);
+                window.unsecuredCopyToClipboard(event.detail.url);
             });
         </script>
     @endpush
