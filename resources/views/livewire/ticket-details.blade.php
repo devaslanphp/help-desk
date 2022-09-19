@@ -36,8 +36,8 @@
                     @case($activeMenu === 'Comments')
                         @livewire('ticket-details-comments', ['ticket' => $ticket])
                         @break
-                    @case($activeMenu === 'Activities')
-
+                    @case($activeMenu === 'Chat')
+                        @livewire('chat', ['ticket' => $ticket])
                         @break
                 @endswitch
             </div>
@@ -84,6 +84,9 @@
         <script>
             window.addEventListener('ticketUrlCopied', (event) => {
                 window.unsecuredCopyToClipboard(event.detail.url);
+            });
+            window.addEventListener('initMagnificPopupOnTicketComments', (e) => {
+                window.initMagnificPopupOnTicketComments();
             });
         </script>
     @endpush

@@ -18,7 +18,7 @@ class TicketDetails extends Component
     {
         $this->menu = [
             'Comments',
-            'Activities',
+            'Chat',
         ];
         $this->activeMenu = $this->menu[0];
     }
@@ -37,6 +37,7 @@ class TicketDetails extends Component
     public function selectMenu($item)
     {
         $this->activeMenu = $item;
+        $this->dispatchBrowserEvent('initMagnificPopupOnTicketComments');
     }
 
     /**
