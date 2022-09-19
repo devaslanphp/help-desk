@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Administration;
 
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
@@ -33,7 +33,7 @@ class UsersDialog extends Component implements HasForms
 
     public function render()
     {
-        return view('livewire.users-dialog');
+        return view('livewire.administration.users-dialog');
     }
 
     /**

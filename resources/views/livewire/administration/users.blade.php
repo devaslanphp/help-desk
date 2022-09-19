@@ -1,14 +1,18 @@
 <div class="w-full flex flex-col justify-start items-start gap-5">
     <div class="w-full flex md:flex-row flex-col justify-between items-start gap-2">
         <div class="flex flex-col justify-center items-start gap-1">
-                <span class="lg:text-4xl md:text-2xl text-xl font-medium text-gray-700">
-                    @lang('Users')
-                </span>
+            <a href="{{ route('administration') }}" class="text-xs text-blue-500 hover:text-blue-600 font-light flex items-center gap-2">
+                <i class="fa fa-long-arrow-left"></i>
+                @lang('Go back to administration')
+            </a>
+            <span class="lg:text-4xl md:text-2xl text-xl font-medium text-gray-700">
+                @lang('Users')
+            </span>
             <span class="lg:text-lg md:text-sm text-xs font-light text-gray-500">
-                    @lang('Below is the list of configured users having access to :app', [
-                        'app' => config('app.name')
-                    ])
-                </span>
+                @lang('Below is the list of configured users having access to :app', [
+                    'app' => config('app.name')
+                ])
+            </span>
         </div>
         <button type="button" wire:click="createUser()" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-base">
             @lang('Create a new user')
@@ -109,7 +113,7 @@
                             </button>
                         </div>
                         @if($selectedUser)
-                            @livewire('users-dialog', ['user' => $selectedUser])
+                            @livewire('administration.users-dialog', ['user' => $selectedUser])
                         @endif
                     </div>
                 </div>

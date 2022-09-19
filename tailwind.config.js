@@ -9,6 +9,8 @@ module.exports = {
         "./node_modules/flowbite/**/*.js",
         "./vendor/filament/**/*.blade.php",
         "./config/system.php",
+        "./app/Http/Livewire/**/*.php",
+        "./app/View/**/*.php",
     ],
     theme: {
         extend: {

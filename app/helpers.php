@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\TicketPriority;
+use App\Models\TicketStatus;
+use App\Models\TicketType;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -90,11 +93,7 @@ if (!function_exists('statuses_list')) {
      */
     function statuses_list(): array
     {
-        $statuses = [];
-        foreach (config('system.statuses') as $key => $value) {
-            $statuses[$key] = __($value['title']);
-        }
-        return $statuses;
+        return TicketStatus::all()->pluck('title', 'slug')->toArray();
     }
 }
 
@@ -106,16 +105,12 @@ if (!function_exists('statuses_list_for_kanban')) {
      */
     function statuses_list_for_kanban(): array
     {
-        $statuses = [];
-        foreach (config('system.statuses') as $key => $value) {
-            $statuses[] = [
-                'id' => $key,
-                'title' => __($value['title']),
-                'text-color' => $value['text-color'],
-                'bg-color' => $value['bg-color'],
-            ];
-        }
-        return $statuses;
+        return TicketStatus::all()->map(fn($item) => [
+            'id' => $item->slug,
+            'title' => $item->title,
+            'text-color' => $item->text_color,
+            'bg-color' => $item->bg_color
+        ])->toArray();
     }
 }
 
@@ -127,11 +122,7 @@ if (!function_exists('priorities_list')) {
      */
     function priorities_list(): array
     {
-        $priorities = [];
-        foreach (config('system.priorities') as $key => $value) {
-            $priorities[$key] = __($value['title']);
-        }
-        return $priorities;
+        return TicketPriority::all()->pluck('title', 'slug')->toArray();
     }
 }
 
@@ -143,13 +134,10 @@ if (!function_exists('default_ticket_status')) {
      */
     function default_ticket_status(): string|null
     {
-        $default = null;
-        foreach (config('system.statuses') as $key => $status) {
-            if ($status['default']) {
-                $default = $key;
-            }
+        if ($default = TicketStatus::where('default', true)->first()) {
+            return Str::slug($default->title);
         }
-        return $default;
+        return null;
     }
 }
 
@@ -161,11 +149,7 @@ if (!function_exists('types_list')) {
      */
     function types_list(): array
     {
-        $priorities = [];
-        foreach (config('system.types') as $key => $value) {
-            $priorities[$key] = __($value['title']);
-        }
-        return $priorities;
+        return TicketType::all()->pluck('title', 'slug')->toArray();
     }
 }
 

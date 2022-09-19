@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Administration;
 
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
@@ -33,7 +33,7 @@ class Users extends Component implements HasForms
                 ->orWhere('email', 'like', '%' . $this->search . '%');
         }
         $users = $query->paginate();
-        return view('livewire.users', compact('users'));
+        return view('livewire.administration.users', compact('users'));
     }
 
     /**

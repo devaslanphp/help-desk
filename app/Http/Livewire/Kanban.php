@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Jobs\TicketUpdatedJob;
 use App\Models\Ticket;
+use App\Models\TicketPriority;
+use App\Models\TicketType;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
@@ -44,17 +46,17 @@ class Kanban extends FilamentKanbanBoard
         }
         return $query->get()
             ->map(function (Ticket $ticket) {
-                $priority = config('system.priorities.' . $ticket->priority);
-                $type = config('system.types.' . $ticket->type);
+                $priority = TicketPriority::where('slug', $ticket->priority)->withTrashed()->first();
+                $type = TicketType::where('slug', $ticket->type)->withTrashed()->first();
                 return [
                     'id' => $ticket->id,
                     'title' => new HtmlString('
                         <div class="w-full flex flex-col space-y-3">
                             <div class="w-full flex items-center gap-2">
-                                <div title="' . $type['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center ' . $type['text-color'] . ' ' . $type['bg-color'] . '">
+                                <div title="' . $type['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center" style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';">
                                     <i class="fa ' . $type['icon'] . '"></i>
                                 </div>
-                                <div title="' . $priority['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center ' . $priority['text-color'] . ' ' . $priority['bg-color'] . '">
+                                <div title="' . $priority['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center" style="color: ' . $priority->text_color . '; background-color: ' . $priority->bg_color . ';">
                                     <i class="fa ' . $priority['icon'] . '"></i>
                                 </div>
                                 <span class="text-sm font-normal" title="' . $ticket->title . '">' . Str::limit($ticket->title, 15) . '</span>
@@ -64,12 +66,12 @@ class Kanban extends FilamentKanbanBoard
                             </div>
                             <div class="w-full flex items-center space-x-4">
                                 <div class="flex items-center gap-1">
-                                    '.
-                                        ($ticket->responsible ? '
+                                    ' .
+                        ($ticket->responsible ? '
                                             <img src="' . $ticket->responsible->avatar_url . '" alt="' . $ticket->responsible->name . '" class="rounded-full shadow" style="width: 20px; height: 20px;" />
                                             <span class="font-light text-xs">' . $ticket->responsible->name . '</span>
                                         ' : '<span class="text-xs font-normal text-gray-400">' . __('Not assigned yet!') . '</span>')
-                                    .'
+                        . '
                                 </div>
                                 <div class="flex items-center gap-1 text-xs text-gray-500">
                                     ' . $ticket->comments_count . '
