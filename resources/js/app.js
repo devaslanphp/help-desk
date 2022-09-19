@@ -1,8 +1,6 @@
 import './bootstrap';
 
 import jQuery from '$';
-window.$ = jQuery;
-
 import 'flowbite';
 
 import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
@@ -17,6 +15,8 @@ import 'magnific-popup/dist/jquery.magnific-popup.min';
 import Alpine from 'alpinejs'
 import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
 import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
+
+window.$ = jQuery;
 
 Alpine.plugin(FormsAlpinePlugin)
 Alpine.plugin(NotificationsAlpinePlugin)
@@ -47,4 +47,19 @@ if ($('.magnificpopup-container').length) {
             }
         }
     });
+}
+
+// Copy text to clipboard
+window.unsecuredCopyToClipboard = function (text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+    } catch (err) {
+        console.error('Unable to copy to clipboard', err);
+    }
+    document.body.removeChild(textArea);
 }
