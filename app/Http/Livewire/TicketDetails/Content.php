@@ -79,6 +79,6 @@ class Content extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Content'), htmlspecialchars(strip_tags($before)), htmlspecialchars(strip_tags($this->ticket->content)));
+        TicketUpdatedJob::dispatch($this->ticket, __('Content'), htmlspecialchars(strip_tags($before)), htmlspecialchars(strip_tags($this->ticket->content)), auth()->user());
     }
 }

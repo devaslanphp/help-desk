@@ -78,6 +78,6 @@ class Type extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Type'), $before, __(config('system.types.' . $this->ticket->type . '.title') ?? '-'));
+        TicketUpdatedJob::dispatch($this->ticket, __('Type'), $before, __(config('system.types.' . $this->ticket->type . '.title') ?? '-'), auth()->user());
     }
 }

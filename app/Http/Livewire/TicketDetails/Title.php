@@ -77,6 +77,6 @@ class Title extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Title'), $before, $this->ticket->title);
+        TicketUpdatedJob::dispatch($this->ticket, __('Title'), $before, $this->ticket->title, auth()->user());
     }
 }

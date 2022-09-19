@@ -80,7 +80,7 @@ class Responsible extends Component implements HasForms
         $this->updating = false;
         $this->ticket = $this->ticket->refresh();
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Responsible'), $before, ($this->ticket->responsible?->name ?? '-'));
+        TicketUpdatedJob::dispatch($this->ticket, __('Responsible'), $before, ($this->ticket->responsible?->name ?? '-'), auth()->user());
     }
 
     /**
