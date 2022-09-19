@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends Model implements HasLogsActivity
@@ -79,4 +80,10 @@ class Ticket extends Model implements HasLogsActivity
     {
         return route('tickets.number', $this->ticket_number);
     }
+
+    public function chat(): HasOne
+    {
+        return $this->hasOne(Chat::class);
+    }
+
 }

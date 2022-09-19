@@ -277,5 +277,11 @@
     "Activity logs": "Journaux d'activité",
     "Here you can see all activity logs of :app": "Ici vous pouvez voir tous les journaux d'activité de :app",
     "Below is the list of activity logs of :app": "Ci-dessous les journaux d'activité de :app",
-    "Search for activity logs": "Rechercher les journaux d'activité"
+    "Search for activity logs": "Rechercher les journaux d'activité",
+    "Chat": "Chat",
+    "Chat section": "Section de chat",
+    "Use the section below to chat with the speakers of this ticket": "Utilisez la section ci-dessous pour échanger avec les intervenants de ce ticket",
+    "Type a message..": "Tapez un message..",
+    "Send": "Envoyer",
+    "No messages yet!": "Aucun message pour le moment !"
 }

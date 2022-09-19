@@ -25,29 +25,33 @@ window.Alpine = Alpine
 
 Alpine.start()
 
-// Open image as magnific popup
-if ($('.magnificpopup-container').length) {
-    $('.magnificpopup-container').magnificPopup({
-        type: 'image',
-        delegate: 'img',
-        gallery: {
-            enabled: true
-        },
-        callbacks: {
-            elementParse: function (qw) {
-                qw.src = qw.el.attr('src');
+// Open image as magnific popup (Ticket comments)
+window.initMagnificPopupOnTicketComments = function () {
+    if ($('.magnificpopup-container').length) {
+        $('.magnificpopup-container').magnificPopup({
+            type: 'image',
+            delegate: 'img',
+            gallery: {
+                enabled: true
+            },
+            callbacks: {
+                elementParse: function (qw) {
+                    qw.src = qw.el.attr('src');
+                }
+            },
+            image: {
+                titleSrc: function (item) {
+                    let title = '';
+                    if (item.el.closest('figure').children('figcaption'))
+                        title = item.el.closest('figure').children('figcaption').text();
+                    return title;
+                }
             }
-        },
-        image: {
-            titleSrc: function (item) {
-                let title = '';
-                if (item.el.closest('figure').children('figcaption'))
-                    title = item.el.closest('figure').children('figcaption').text();
-                return title;
-            }
-        }
-    });
-}
+        });
+    }
+};
+
+(() => window.initMagnificPopupOnTicketComments())();
 
 // Copy text to clipboard
 window.unsecuredCopyToClipboard = function (text) {
