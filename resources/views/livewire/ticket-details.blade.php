@@ -10,7 +10,7 @@
                     <i class="fa fa-tag"></i>
                     {{ $ticket->project->name }}
                     <span class="text-xs text-gray-300">/</span>
-                    <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl({{ $ticket }})" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
+                    <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl('{{ $ticket->id }}')" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
                 </span>
                 <div class="w-full">
                     @livewire('ticket-details.title', ['ticket' => $ticket])
