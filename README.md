@@ -52,6 +52,10 @@ You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
 You can find a full documentation here: [Documentation](http://helpdesk.devaslan.com/docs/)
 
+## Work in progress
+
+We are always working to make Help Desk a better application, to have more information about tasks and features that in progress, you can see the [Help Desk project](https://github.com/orgs/devaslanphp/projects/1).
+
 ## Credits
 
 - [All Contributors](https://github.com/devaslanphp/help-desk/graphs/contributors)
