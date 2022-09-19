@@ -24,6 +24,7 @@ class ActivityLogs extends Component implements HasForms
     public function render()
     {
         $query = Activity::query();
+        $query->orderby('created_at', 'desc');
         if ($this->search) {
             $query->where('description', 'like', '%' . $this->search . '%');
         }
