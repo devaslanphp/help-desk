@@ -58,14 +58,14 @@ class TicketDetailsCommentsContent extends Component implements HasForms
     /**
      * Launch the update function
      *
-     * @param Comment $comment
+     * @param int $comment
      * @return void
      */
-    public function updateComment(Comment $comment): void
+    public function updateComment(int $comment): void
     {
-        $this->selectedComment = $comment;
+        $this->selectedComment = Comment::where('id', $comment)->first();
         $this->form->fill([
-            'content' => $comment->content
+            'content' => $this->selectedComment->content
         ]);
         $this->updating = true;
     }

@@ -34,7 +34,7 @@
                     @endif
                     @if($comment->owner_id === auth()->user()->id && (!$updating || $comment->id !== $selectedComment?->id))
                         <div class="w-full flex flex-row justify-start items-center gap-5">
-                            <button type="button" wire:click="updateComment({{ $comment }})"
+                            <button type="button" wire:click="updateComment('{{ $comment->id }}')"
                                     class="text-gray-400 text-xs hover:text-primary-500 flex flex-row justify-start items-center gap-1">
                                 <i class="fa fa-pencil"></i> @lang('Edit')
                             </button>
