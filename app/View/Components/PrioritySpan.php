@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\TicketPriority;
 use Illuminate\View\Component;
 
 class PrioritySpan extends Component
@@ -15,7 +16,7 @@ class PrioritySpan extends Component
      */
     public function __construct($priority)
     {
-        $this->priority = $priority;
+        $this->priority = TicketPriority::where('slug', $priority)->first();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\TicketStatus;
 use Illuminate\View\Component;
 
 class StatusSpan extends Component
@@ -15,7 +16,7 @@ class StatusSpan extends Component
      */
     public function __construct($status)
     {
-        $this->status = $status;
+        $this->status = TicketStatus::where('slug', $status)->first();
     }
 
     /**
