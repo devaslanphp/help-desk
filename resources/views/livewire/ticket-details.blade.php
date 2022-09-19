@@ -9,6 +9,8 @@
                 <span class="w-full text-sm font-medium text-gray-500 flex flex-row justify-start items-center gap-2">
                     <i class="fa fa-tag"></i>
                     {{ $ticket->project->name }}
+                    <span class="text-xs text-gray-300">/</span>
+                    <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl({{ $ticket }})" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
                 </span>
                 <div class="w-full">
                     @livewire('ticket-details.title', ['ticket' => $ticket])
@@ -77,4 +79,12 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            window.addEventListener('ticketUrlCopied', (event) => {
+                navigator.clipboard.writeText(event.detail.url);
+            });
+        </script>
+    @endpush
 </div>

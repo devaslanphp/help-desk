@@ -12,7 +12,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Tickets extends Component implements HasForms
@@ -230,5 +232,24 @@ class Tickets extends Component implements HasForms
     public function ticketDeleted()
     {
         $this->ticketSaved();
+    }
+
+    /**
+     * Copy a ticket url
+     *
+     * @param Ticket $ticket
+     * @return void
+     */
+    public function copyTicketUrl(Ticket $ticket): void {
+        Notification::make()
+            ->success()
+            ->title(__('Ticket url copied'))
+            ->body(__('The ticket url successfully copied to your clipboard'))
+            ->send();
+        $this->dispatchBrowserEvent('ticketUrlCopied', [
+            'url' => route('tickets.number', [
+                'number' => $ticket->ticket_number
+            ])
+        ]);
     }
 }

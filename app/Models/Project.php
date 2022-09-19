@@ -17,7 +17,8 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
-        'owner_id'
+        'owner_id',
+        'ticket_prefix'
     ];
 
     protected static function boot()

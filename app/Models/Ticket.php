@@ -23,11 +23,11 @@ class Ticket extends Model
         'owner_id',
         'responsible_id',
         'project_id',
+        'number',
     ];
 
     protected $appends = [
-        'status_object',
-        'priority_object',
+        'ticket_number'
     ];
 
     protected static function boot()
@@ -35,6 +35,9 @@ class Ticket extends Model
         parent::boot();
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('created_at', 'desc');
+        });
+        static::creating(function (Ticket $ticket) {
+            $ticket->number = str_pad(Ticket::where('project_id', $ticket->project_id)->withTrashed()->count() + 1, 4, '0', STR_PAD_LEFT);
         });
     }
 
@@ -53,22 +56,15 @@ class Ticket extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function statusObject(): Attribute
-    {
-        return new Attribute(
-            get: fn() => config('system.statuses.' . $this->status) ?? null
-        );
-    }
-
-    public function priorityObject(): Attribute
-    {
-        return new Attribute(
-            get: fn() => config('system.priorities.' . $this->priority) ?? null
-        );
-    }
-
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function ticketNumber(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->project->ticket_prefix . '' . $this->number
+        );
     }
 }
