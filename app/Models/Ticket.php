@@ -64,7 +64,7 @@ class Ticket extends Model
     public function ticketNumber(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->project->ticket_prefix . '' . $this->number
+            get: fn() => $this->project?->ticket_prefix . '' . $this->number
         );
     }
 }
