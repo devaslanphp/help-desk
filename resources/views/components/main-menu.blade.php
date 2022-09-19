@@ -1,7 +1,7 @@
 <nav class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="flex flex-wrap justify-start items-center w-full gap-8 xl:px-32 lg:px-22 md:px-18 px-14">
         <a href="{{ route('home') }}" class="flex items-center">
-            <img src="{{ asset('images/logo.png') }}" class="mr-3 h-6 sm:h-7" alt="{{ config('app.name') }}" />
+            <img src="{{ asset('images/logo.png') }}" class="mr-3 w-32" alt="{{ config('app.name') }}" />
         </a>
         <div class="flex xl:order-2 ml-auto space-x-2">
             <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 xl:hidden rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
