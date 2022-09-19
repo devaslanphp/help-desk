@@ -56,7 +56,7 @@ class TicketPriorities extends Component implements HasForms
     }
 
     /**
-     * Search for tickets statutses
+     * Search for tickets priorities
      *
      * @return void
      */

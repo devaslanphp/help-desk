@@ -55,7 +55,7 @@ class TicketStatuses extends Component implements HasForms
     }
 
     /**
-     * Search for tickets statutses
+     * Search for tickets statuses
      *
      * @return void
      */

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Core\HasLogsActivity;
+use App\Core\LogsActivity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,9 +16,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasLogsActivity
 {
-    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -85,11 +87,6 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class, 'responsible_id');
     }
 
-    public function assignedProjects(): BelongsToMany
-    {
-        return $this->belongsToMany(Project::class, 'user_projects', 'user_id', 'project_id')->withPivot('role');
-    }
-
     public function favoriteProjects(): BelongsToMany
     {
         $query = $this->belongsToMany(Project::class, 'favorite_projects', 'user_id', 'project_id');
@@ -102,5 +99,15 @@ class User extends Authenticatable
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'owner_id');
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function activityLogLink(): string
+    {
+        return route('administration.users');
     }
 }
