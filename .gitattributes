@@ -9,4 +9,7 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
 resources/* linguist-vendored
+public/* linguist-vendored
+project/docs/* linguist-documentation
