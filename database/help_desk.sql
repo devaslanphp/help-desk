@@ -13,16 +13,16 @@ VALUES (4, 'Dark Vador', 'darkvador@gmail.com', NULL, '$2y$10$4f8HPTwKhVzpAP5kas
         '$2y$10$MR51TVg3xzUXs308oTxp8.Pw9sjs7ijaeGYLJZsq85CdY/azYD0bG', NULL, '2022-09-11 15:31:51',
         '2022-09-11 15:31:55', 'employee', '82c93eba-9a33-4dbe-abac-22f11f5c1f54', NULL);
 
-INSERT INTO `projects` (`id`, `name`, `description`, `owner_id`, `deleted_at`, `created_at`, `updated_at`)
+INSERT INTO `projects` (`id`, `name`, `description`, `owner_id`, `deleted_at`, `created_at`, `updated_at`, `ticket_prefix`)
 VALUES (1, 'Default project',
         '<p>This is the default project to associate to any created ticket that are not related to any other projects.</p>',
-        4, NULL, '2022-09-11 16:29:08', '2022-09-11 16:35:48'),
+        4, NULL, '2022-09-11 16:29:08', '2022-09-11 16:35:48', 'DEFP'),
        (2, 'IDEAO', '<p>Project for managing tickets linked to the IDEAO project</p>', 4, NULL, '2022-09-11 17:09:31',
-        '2022-09-11 17:12:47'),
+        '2022-09-11 17:12:47', 'IDEA'),
        (3, 'Arena job', '<p>Project for managing tickets linked to the Arena job project</p>', 4, NULL,
-        '2022-09-11 17:13:05', '2022-09-11 17:13:17'),
+        '2022-09-11 17:13:05', '2022-09-11 17:13:17', 'ARJO'),
        (4, 'ARP', '<p>Project for managing tickets linked to the ARP project</p>', 5, NULL, '2022-09-11 17:13:25',
-        '2022-09-11 17:15:04');
+        '2022-09-11 17:15:04', 'ARPT');
 
 INSERT INTO `favorite_projects` (`id`, `user_id`, `project_id`, `created_at`, `updated_at`)
 VALUES (6, 4, 2, '2022-09-11 17:09:33', '2022-09-11 17:09:33'),
