@@ -11,5 +11,8 @@ CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 
 resources/* linguist-vendored
+*.scss liguist-vendored
+*.css liguist-vendored
+*.js liguist-vendored
 public/* linguist-vendored
 public/docs/* linguist-documentation
