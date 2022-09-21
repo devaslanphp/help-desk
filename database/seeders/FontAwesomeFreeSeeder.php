@@ -22,7 +22,7 @@ class FontAwesomeFreeSeeder extends Seeder
                 $table->string('icon');
             });
         }
-        DB::table('icon')
+        DB::table('icons')
             ->insert([
                 ['id' => 1, 'icon' => 'fa-glass'],
                 ['id' => 2, 'icon' => 'fa-music'],
