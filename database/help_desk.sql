@@ -13,16 +13,16 @@ VALUES (4, 'Dark Vador', 'darkvador@gmail.com', NULL, '$2y$10$4f8HPTwKhVzpAP5kas
         '$2y$10$MR51TVg3xzUXs308oTxp8.Pw9sjs7ijaeGYLJZsq85CdY/azYD0bG', NULL, '2022-09-11 15:31:51',
         '2022-09-11 15:31:55', 'employee', '82c93eba-9a33-4dbe-abac-22f11f5c1f54', NULL);
 
-INSERT INTO `projects` (`id`, `name`, `description`, `owner_id`, `deleted_at`, `created_at`, `updated_at`)
+INSERT INTO `projects` (`id`, `name`, `description`, `owner_id`, `deleted_at`, `created_at`, `updated_at`, `ticket_prefix`)
 VALUES (1, 'Default project',
         '<p>This is the default project to associate to any created ticket that are not related to any other projects.</p>',
-        4, NULL, '2022-09-11 16:29:08', '2022-09-11 16:35:48'),
+        4, NULL, '2022-09-11 16:29:08', '2022-09-11 16:35:48', 'DEFP'),
        (2, 'IDEAO', '<p>Project for managing tickets linked to the IDEAO project</p>', 4, NULL, '2022-09-11 17:09:31',
-        '2022-09-11 17:12:47'),
+        '2022-09-11 17:12:47', 'IDEA'),
        (3, 'Arena job', '<p>Project for managing tickets linked to the Arena job project</p>', 4, NULL,
-        '2022-09-11 17:13:05', '2022-09-11 17:13:17'),
+        '2022-09-11 17:13:05', '2022-09-11 17:13:17', 'ARJO'),
        (4, 'ARP', '<p>Project for managing tickets linked to the ARP project</p>', 5, NULL, '2022-09-11 17:13:25',
-        '2022-09-11 17:15:04');
+        '2022-09-11 17:15:04', 'ARPT');
 
 INSERT INTO `favorite_projects` (`id`, `user_id`, `project_id`, `created_at`, `updated_at`)
 VALUES (6, 4, 2, '2022-09-11 17:09:33', '2022-09-11 17:09:33'),
@@ -31,17 +31,17 @@ VALUES (6, 4, 2, '2022-09-11 17:09:33', '2022-09-11 17:09:33'),
        (11, 4, 1, '2022-09-12 11:50:42', '2022-09-12 11:50:42');
 
 INSERT INTO `tickets` (`id`, `title`, `content`, `status`, `priority`, `owner_id`, `responsible_id`, `deleted_at`,
-                       `created_at`, `updated_at`, `project_id`, `type`)
+                       `created_at`, `updated_at`, `project_id`, `type`, `number`)
 VALUES (2, 'Cannot access the platform',
         '<p>Hello,</p><p>I cannot access the platform with the credentials received by email.</p><p>Can you see what is the problem, please?</p><p>Thanks</p>',
-        'validated', 'highest', 4, 5, NULL, '2022-09-11 18:27:55', '2022-09-12 11:48:00', 1, 'bug'),
+        'validated', 'highest', 4, 5, NULL, '2022-09-11 18:27:55', '2022-09-12 11:48:00', 1, 'bug', '0001'),
        (3, 'Design enhancement', '<p>Add a logo of the company to the login page.</p>', 'created', 'low', 5, 4, NULL,
-        '2022-09-11 18:45:55', '2022-09-12 13:08:05', 2, 'improvement'),
+        '2022-09-11 18:45:55', '2022-09-12 13:08:05', 2, 'improvement', '0001'),
        (4, 'Quiz wizard', '<p>Add a wizard system to the quiz page</p>', 'created', 'normal', 4, NULL, NULL,
-        '2022-09-11 20:37:14', '2022-09-11 20:37:14', 2, 'improvement'),
+        '2022-09-11 20:37:14', '2022-09-11 20:37:14', 2, 'improvement', '0002'),
        (9, 'Internal error - Login page',
         '<p>We got an internal error when we visit the login page (url: /auth/login)</p>', 'created', 'highest', 5, 4,
-        NULL, '2022-09-11 20:58:37', '2022-09-12 13:08:12', 4, 'bug');
+        NULL, '2022-09-11 20:58:37', '2022-09-12 13:08:12', 4, 'bug', '0001');
 
 INSERT INTO `comments` (`id`, `owner_id`, `ticket_id`, `content`, `deleted_at`, `created_at`, `updated_at`)
 VALUES (1, 4, 2, '<p>Hello,</p><p>We are working on it, I let you know ASAP.</p><p>Best regards.</p>', NULL,
@@ -67,7 +67,7 @@ VALUES (1, 'Lowest', '#dcfce7', '#22c55e', 'fa-arrow-down', NULL, '2022-09-19 10
 INSERT INTO `ticket_statuses` (`id`, `title`, `text_color`, `bg_color`, `default`, `deleted_at`, `created_at`,
                                `updated_at`, `slug`)
 VALUES (1, 'Created', '#6b7280', '#f3f4f6', 1, NULL, '2022-09-19 09:17:50', '2022-09-19 11:30:48', 'created'),
-       (2, 'In progress', '#0ea5e9', '#e0f2fe', 0, NULL, '2022-09-19 09:19:17', '2022-09-19 11:30:48', 'in-progress'),
+       (2, 'In progress', '#0ea5e9', '#e0f2fe', 0, NULL, '2022-09-19 09:19:17', '2022-09-19 11:30:48', 'in_progress'),
        (3, 'Done', '#f97316', '#ffedd5', 0, NULL, '2022-09-19 09:21:17', '2022-09-19 11:30:48', 'done'),
        (4, 'Validated', '#22c55e', '#dcfce7', 0, NULL, '2022-09-19 09:21:29', '2022-09-19 11:30:48', 'validated'),
        (5, 'Rejected', '#ef4444', '#fee2e2', 0, NULL, '2022-09-19 09:21:41', '2022-09-19 11:30:48', 'rejected');

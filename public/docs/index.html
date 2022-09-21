@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
-  <link href="/docs/assets/images/favicon.png" rel="icon" />
+  <link href="/docs/assets/images/favicon.ico" rel="icon" />
   <title>Help Desk - Documentation</title>
   <meta name="description" content="Help Desk - Documentation">
   <meta name="author" content="EL OUFIR Hatim">
@@ -54,7 +54,7 @@
           <!-- Logo -->
           <a class="logo ml-md-3" href="index.html" title="Help Desk">
             <img src="/docs/assets/images/logo.png" alt="Help Desk" width="120" /> </a>
-          <span class="text-2 ml-2">v1.1.0</span>
+          <span class="text-2 ml-2">v1.3.0</span>
           <!-- Logo End -->
 
           <!-- Navbar Toggler -->
@@ -91,6 +91,12 @@
           <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
           <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
             <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="#v1-3-0">v1.3.0</a></li>
+                <li class="nav-item"><a class="nav-link" href="#v1-2-4">v1.2.4</a></li>
+                <li class="nav-item"><a class="nav-link" href="#v1-2-3">v1.2.3</a></li>
+                <li class="nav-item"><a class="nav-link" href="#v1-2-2">v1.2.2</a></li>
+                <li class="nav-item"><a class="nav-link" href="#v1-2-1">v1.2.1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#v1-2-0">v1.2.0</a></li>
                 <li class="nav-item"><a class="nav-link" href="#v1-1-0">v1.1.0</a></li>
                 <li class="nav-item"><a class="nav-link" href="#v1-0-2">v1.0.2</a></li>
                 <li class="nav-item"><a class="nav-link" href="#v1-0-1">v1.0.1</a></li>
@@ -119,7 +125,7 @@
             <div class="row">
               <div class="col-sm-6 col-lg-4">
                 <ul class="list-unstyled">
-                  <li><strong>Version:</strong> 1.1.0</li>
+                  <li><strong>Version:</strong> 1.3.0</li>
                   <li><strong>Author:</strong> <a href="mailto:eloufirhatim@gmail.com"
                       target="_blank">heloufir</a>
                   </li>
@@ -128,7 +134,7 @@
               <div class="col-sm-6 col-lg-4">
                 <ul class="list-unstyled">
                   <li><strong class="font-weight-700">Created:</strong> 12 September, 2022</li>
-                  <li><strong>Update:</strong> 17 September, 2022</li>
+                  <li><strong>Update:</strong> 19 September, 2022</li>
                 </ul>
               </div>
             </div>
@@ -165,6 +171,7 @@
                 </li>
                 <li>Install docker container <code>./vendor/sail/bin up -d</code></li>
                 <li>Database migration: using the docker terminal for <strong>laravel.test-1 container run this command </strong> <code>php artisan migrate</code></li>
+                <li>Database seed: using the docker terminal for <strong>laravel.test-1 container run this command </strong> <code>php artisan db:seed</code></li>
                 <li>
                     <strong>Optional</strong> if you wan't some demo data:
                     <ul>
@@ -315,14 +322,50 @@
           <section id="idocs_changelog">
             <h2>Changelog</h2>
             <p class="text-4">See what's new added, changed, fixed, improved or updated in the latest versions. </p>
+            <h3 id="v1-3-0">Version 1.3.0 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Chat system: Integrate a simple chat system into ticket details</li>
+            </ul>
+            <h3 id="v1-2-4">Version 1.2.4 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Activity logs: integration of <code>spatie/laravel-activitylog</code></li>
+            </ul>
+            <h3 id="v1-2-3">Version 1.2.3 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Bug-fix: Ticket creation</li>
+              <li>Larabug integration</li>
+            </ul>
+            <h3 id="v1-2-2">Version 1.2.2 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Add ticket number</li>
+            </ul>
+            <h3 id="v1-2-1">Version 1.2.1 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Layout design enhancement</li>
+              <li>Change Main menu from vertical sidebar to horizontal nav bar</li>
+            </ul>
+            <h3 id="v1-2-0">Version 1.2.0 <small class="text-muted">(19 September, 2022)</small></h3>
+            <ul>
+              <li>Migrate tickets configuration (statuses, types and priorities) to database</li>
+              <li>Add new administration page, to manage tickets statuses, types and priorities</li>
+              <li>Design enhancement (administration page)</li>
+            </ul>
             <h3 id="v1-1-0">Version 1.1.0 <small class="text-muted">(17 September, 2022)</small></h3>
-            <p>Kanban Board: Add a view to show Tickets as a Kanban Board</p>
+            <ul>
+                <li>Kanban Board: Add a view to show Tickets as a Kanban Board</li>
+            </ul>
             <h3 id="v1-0-2">Version 1.0.2 <small class="text-muted">(15 September, 2022)</small></h3>
-            <p>Add translations: Locale switcher, french translation file</p>
+            <ul>
+                <li>Add translations: Locale switcher, french translation file</li>
+            </ul>
             <h3 id="v1-0-1">Version 1.0.1 <small class="text-muted">(14 September, 2022)</small></h3>
-            <p>My notifications: Notifications page listing the authenticated user's received notifications</p>
+            <ul>
+                <li>My notifications: Notifications page listing the authenticated user's received notifications</li>
+            </ul>
             <h3 id="v1-0-0">Version 1.0.0 <small class="text-muted">(12 September, 2022)</small></h3>
-            <p>Initial Release</p>
+            <ul>
+                <li>Initial Release</li>
+            </ul>
           </section>
 
         </div>

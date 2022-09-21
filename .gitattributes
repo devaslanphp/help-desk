@@ -9,3 +9,10 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+resources/* linguist-vendored=true
+*.scss liguist-vendored=true
+*.css liguist-vendored=true
+*.js liguist-vendored=true
+public/* linguist-vendored=true
+public/docs/* linguist-documentation=true

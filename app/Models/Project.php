@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Core\HasLogsActivity;
+use App\Core\LogsActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,14 +12,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Project extends Model implements HasLogsActivity
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $fillable = [
         'name',
         'description',
-        'owner_id'
+        'owner_id',
+        'ticket_prefix'
     ];
 
     protected static function boot()
@@ -33,11 +36,6 @@ class Project extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'user_projects', 'project_id', 'user_id')->withPivot('role');
-    }
-
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
@@ -50,5 +48,15 @@ class Project extends Model
             $query->where('user_id', auth()->user()->id);
         }
         return $query;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function activityLogLink(): string
+    {
+        return route('home');
     }
 }

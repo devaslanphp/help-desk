@@ -5,7 +5,8 @@
                 {{ $this->form }}
             </div>
             <div class="w-full flex flex-row gap-2 justify-between items-center px-5">
-                <button type="submit" wire:loading.attr="disabled" class="rounded-lg flex flex-row justify-center items-center text-center gap-2 text-white bg-primary-700 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg px-10 py-3 text-sm">
+                <button type="submit" wire:loading.attr="disabled"
+                        class="rounded-lg flex flex-row justify-center items-center text-center gap-2 text-white bg-primary-700 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg px-10 py-3 text-sm">
                     @lang('Add comment')
                     <div wire:loading>
                         <i class="fa fa-spin fa-spinner"></i>
@@ -18,7 +19,7 @@
         @livewire('ticket-details-comments-content', ['ticket' => $ticket])
     @else
         <div class="w-full flex flex-col justify-center items-center gap-2 text-center">
-            <img src="{{ asset('images/comments-empty.jpeg') }}" alt="No comments" class="w-14 opacity-50" />
+            <img src="{{ asset('images/comments-empty.jpeg') }}" alt="No comments" class="w-14 opacity-50"/>
             <span class="text-lg text-neutral-400 font-light">
                 @lang('No comments yet!')
             </span>

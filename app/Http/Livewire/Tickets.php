@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\FavoriteProject;
 use App\Models\Project;
 use App\Models\Ticket;
 use App\Models\User;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MultiSelect;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -230,5 +228,26 @@ class Tickets extends Component implements HasForms
     public function ticketDeleted()
     {
         $this->ticketSaved();
+    }
+
+    /**
+     * Copy a ticket url
+     *
+     * @param int $ticketId
+     * @return void
+     */
+    public function copyTicketUrl(int $ticketId): void
+    {
+        $ticket = Ticket::where('id', $ticketId)->first();
+        Notification::make()
+            ->success()
+            ->title(__('Ticket url copied'))
+            ->body(__('The ticket url successfully copied to your clipboard'))
+            ->send();
+        $this->dispatchBrowserEvent('ticketUrlCopied', [
+            'url' => route('tickets.number', [
+                'number' => $ticket->ticket_number
+            ])
+        ]);
     }
 }
