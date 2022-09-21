@@ -13,8 +13,8 @@ import 'magnific-popup/dist/magnific-popup.css';
 import 'magnific-popup/dist/jquery.magnific-popup.min';
 
 import Alpine from 'alpinejs'
-import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
-import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
+import FormsAlpinePlugin from '/vendor/filament/forms/dist/module.esm'
+import NotificationsAlpinePlugin from '/vendor/filament/notifications/dist/module.esm'
 
 window.$ = jQuery;
 
