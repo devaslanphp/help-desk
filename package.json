@@ -2,7 +2,12 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "heroku-postbuild": "vite build"
+    },
+    "engines": {
+        "node": "18.x",
+        "npm": "7.x"
     },
     "devDependencies": {
         "@awcodes/alpine-floating-ui": "^3.4.0",
