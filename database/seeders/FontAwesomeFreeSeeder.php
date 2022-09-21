@@ -17,7 +17,7 @@ class FontAwesomeFreeSeeder extends Seeder
     public function run()
     {
         if (!Schema::hasTable('icons')) {
-            Schema::create('chats', function (Blueprint $table) {
+            Schema::create('icons', function (Blueprint $table) {
                 $table->id();
                 $table->string('icon');
             });
