@@ -62,13 +62,13 @@ VALUES (1, 'Lowest', '#dcfce7', '#22c55e', 'fa-arrow-down', NULL, '2022-09-19 10
        (5, 'Highest', '#ef4444', '#fee2e2', 'fa-arrow-up', NULL, '2022-09-19 10:37:37', '2022-09-19 11:41:39',
         'highest');
 
-INSERT INTO ticket_statuses (id, title, text_color, bg_color, default, deleted_at, created_at,
+INSERT INTO ticket_statuses (id, title, text_color, bg_color, "default", deleted_at, created_at,
                              updated_at, slug)
-VALUES (1, 'Created', '#6b7280', '#f3f4f6', 1, NULL, '2022-09-19 09:17:50', '2022-09-19 11:30:48', 'created'),
-       (2, 'In progress', '#0ea5e9', '#e0f2fe', 0, NULL, '2022-09-19 09:19:17', '2022-09-19 11:30:48', 'in_progress'),
-       (3, 'Done', '#f97316', '#ffedd5', 0, NULL, '2022-09-19 09:21:17', '2022-09-19 11:30:48', 'done'),
-       (4, 'Validated', '#22c55e', '#dcfce7', 0, NULL, '2022-09-19 09:21:29', '2022-09-19 11:30:48', 'validated'),
-       (5, 'Rejected', '#ef4444', '#fee2e2', 0, NULL, '2022-09-19 09:21:41', '2022-09-19 11:30:48', 'rejected');
+VALUES (1, 'Created', '#6b7280', '#f3f4f6', true, NULL, '2022-09-19 09:17:50', '2022-09-19 11:30:48', 'created'),
+       (2, 'In progress', '#0ea5e9', '#e0f2fe', false, NULL, '2022-09-19 09:19:17', '2022-09-19 11:30:48', 'in_progress'),
+       (3, 'Done', '#f97316', '#ffedd5', false, NULL, '2022-09-19 09:21:17', '2022-09-19 11:30:48', 'done'),
+       (4, 'Validated', '#22c55e', '#dcfce7', false, NULL, '2022-09-19 09:21:29', '2022-09-19 11:30:48', 'validated'),
+       (5, 'Rejected', '#ef4444', '#fee2e2', false, NULL, '2022-09-19 09:21:41', '2022-09-19 11:30:48', 'rejected');
 
 INSERT INTO ticket_types (id, title, text_color, bg_color, icon, deleted_at, created_at, updated_at,
                           slug)
@@ -79,4 +79,6 @@ VALUES (1, 'Improvement', '#dbeafe', '#3b82f6', 'fa-arrow-up', NULL, '2022-09-19
        (4, 'Task', '#f97316', '#ffedd5', 'fa-check-square-o', NULL, '2022-09-19 10:37:09', '2022-09-19 11:31:04',
         'task'),
        (5, 'Bug', '#ef4444', '#fee2e2', 'fa-bug', NULL, '2022-09-19 10:37:37', '2022-09-19 11:31:04', 'bug');
+
+
 
