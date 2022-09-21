@@ -1,6 +1,6 @@
 @use 'media-queries' as *;
 
-@import './filament/forms/dist/module.esm.css';
+@import '../../vendor/filament/forms/dist/module.esm.css';
 
 @tailwind base;
 @tailwind components;
