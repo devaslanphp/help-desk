@@ -40,9 +40,6 @@
                         <th scope="col" class="py-3 px-6 min-w-table">
                             @lang('Created at')
                         </th>
-                        <th scope="col" class="py-3 px-6 min-w-table">
-                            @lang('Actions')
-                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,9 +54,6 @@
                                         <span class="text-base font-semibold">{{ $log->created_at->diffForHumans() }}</span>
                                         <span class="font-normal text-gray-500">{{ $log->created_at->format(__('Y-m-d g:i A')) }}</span>
                                     </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <button wire:click="updatePriority('{{ $log->id }}')" type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">@lang('Edit log')</button>
                                 </td>
                             </tr>
                         @endforeach
