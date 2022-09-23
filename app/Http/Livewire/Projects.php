@@ -4,32 +4,40 @@ namespace App\Http\Livewire;
 
 use App\Models\FavoriteProject;
 use App\Models\Project;
-use App\Notifications\ProjectCreatedNotification;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use App\Tables\Columns\UserColumn;
 use Filament\Notifications\Notification;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Projects extends Component implements HasForms
+class Projects extends Component implements HasTable
 {
-    use InteractsWithForms;
+    use InteractsWithTable;
 
-    public $search;
     public $selectedProject;
 
     protected $listeners = ['projectSaved', 'projectDeleted'];
 
-    public function mount(): void
-    {
-        $this->form->fill();
-    }
-
     public function render()
     {
+        return view('livewire.projects');
+    }
+
+    /**
+     * Table query definition
+     *
+     * @return Builder|Relation
+     */
+    protected function getTableQuery(): Builder|Relation
+    {
         $query = Project::query();
-        $query->with('favoriteUsers');
+        $query->withCount('tickets');
         if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
@@ -38,42 +46,69 @@ class Projects extends Component implements HasForms
                     });
             });
         }
-        if ($this->search) {
-            $query->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('description', 'like', '%' . $this->search . '%');
-        }
-        $projects = $query->paginate();
-        return view('livewire.projects', compact('projects'));
+        return $query;
     }
 
     /**
-     * Form schema definition
+     * Table definition
      *
      * @return array
      */
-    protected function getFormSchema(): array
+    protected function getTableColumns(): array
     {
         return [
-            Grid::make(1)
-                ->schema([
-                    TextInput::make('search')
-                        ->label(__('Search for projects'))
-                        ->disableLabel()
-                        ->type('search')
-                        ->placeholder(__('Search for projects')),
-                ]),
+            TextColumn::make('make_favorite')
+                ->label('')
+                ->formatStateUsing(function (Project $record) {
+                    $btnClass = $record->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'text-warning-500' : 'text-gray-500';
+                    $iconClass = $record->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'fa-star' : 'fa-star-o';
+                    return new HtmlString('
+                        <button wire:click="toggleFavoriteProject(' . $record->id . ')" type="button" class="' . $btnClass . '">
+                            <i class="fa ' . $iconClass . '"></i>
+                        </button>
+                    ');
+                }),
+
+            TextColumn::make('name')
+                ->label(__('Project name'))
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('description')
+                ->label(__('Description'))
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn(string $state) => Str::limit(htmlspecialchars(strip_tags($state)), 50)),
+
+            UserColumn::make('owner')
+                ->label(__('Owner')),
+
+            TextColumn::make('tickets_count')
+                ->label(__('Tickets'))
+                ->sortable(),
+
+            TextColumn::make('created_at')
+                ->label(__('Created at'))
+                ->sortable()
+                ->searchable()
+                ->dateTime(),
         ];
     }
 
     /**
-     * Search for projects
+     * Table actions definition
      *
-     * @return void
+     * @return array
      */
-    public function search(): void
+    protected function getTableActions(): array
     {
-        $data = $this->form->getState();
-        $this->search = $data['search'] ?? null;
+        return [
+            Action::make('edit')
+                ->icon('heroicon-o-pencil')
+                ->link()
+                ->label(__('Edit project'))
+                ->action(fn(Project $record) => $this->updateProject($record->id))
+        ];
     }
 
     /**
@@ -115,8 +150,8 @@ class Projects extends Component implements HasForms
      *
      * @return void
      */
-    public function projectSaved() {
-        $this->search();
+    public function projectSaved()
+    {
         $this->cancelProject();
     }
 
@@ -125,17 +160,20 @@ class Projects extends Component implements HasForms
      *
      * @return void
      */
-    public function projectDeleted() {
+    public function projectDeleted()
+    {
         $this->projectSaved();
     }
 
     /**
      * Add / Remove project from authenticated user favorite projects
      *
-     * @param Project $project
+     * @param int $projectId
      * @return void
      */
-    public function toggleFavoriteProject(Project $project) {
+    public function toggleFavoriteProject(int $projectId)
+    {
+        $project = Project::find($projectId);
         if (FavoriteProject::where('user_id', auth()->user()->id)->where('project_id', $project->id)->count()) {
             FavoriteProject::where('user_id', auth()->user()->id)->where('project_id', $project->id)->delete();
             Notification::make()
@@ -154,6 +192,5 @@ class Projects extends Component implements HasForms
                 ->body(__('The project has been successfully added to your favorite projects'))
                 ->send();
         }
-        $this->search();
     }
 }
