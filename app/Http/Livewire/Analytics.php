@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Project;
 use App\Models\Ticket;
+use App\Models\TicketStatus;
 use Livewire\Component;
 
 class Analytics extends Component
@@ -85,8 +86,12 @@ class Analytics extends Component
         }
         $tickets = $query->get()->groupBy('status');
         $this->ticketsByStatuses = [];
+        $statuses = TicketStatus::all();
         foreach ($tickets as $key => $ticket) {
-            $this->ticketsByStatuses[config('system.statuses.' . $ticket->first()->status . '.title')] = $ticket->count();
+            $status = $statuses->where('slug', $ticket->first()->status)->first();
+            if ($status) {
+                $this->ticketsByStatuses[$status->title] = $ticket->count();
+            }
         }
     }
 }

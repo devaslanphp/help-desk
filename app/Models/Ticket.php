@@ -46,17 +46,17 @@ class Ticket extends Model implements HasLogsActivity
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class, 'owner_id')->withTrashed();
     }
 
     public function responsible(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'responsible_id');
+        return $this->belongsTo(User::class, 'responsible_id')->withTrashed();
     }
 
     public function project(): BelongsTo
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class)->withTrashed();
     }
 
     public function comments(): HasMany
