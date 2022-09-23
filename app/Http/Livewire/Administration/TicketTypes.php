@@ -2,68 +2,105 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Models\TicketStatus;
 use App\Models\TicketType;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
-class TicketTypes extends Component implements HasForms
+class TicketTypes extends Component implements HasTable
 {
-    use InteractsWithForms;
+    use InteractsWithTable;
 
-    public $search;
     public $selectedType;
 
     protected $listeners = ['typeSaved', 'typeDeleted'];
 
-    public function mount(): void
-    {
-        $this->form->fill();
-    }
-
     public function render()
     {
-        $query = TicketType::query();
-        if ($this->search) {
-            $query->where('title', 'like', '%' . $this->search . '%')
-                ->orWhere('text_color', 'like', '%' . $this->search . '%')
-                ->orWhere('bg_color', 'like', '%' . $this->search . '%')
-                ->orWhere('icon', 'like', '%' . $this->search . '%');
-        }
-        $types = $query->paginate();
-        return view('livewire.administration.ticket-types', compact('types'));
+        return view('livewire.administration.ticket-types');
     }
 
     /**
-     * Form schema definition
+     * Table query definition
+     *
+     * @return Builder|Relation
+     */
+    protected function getTableQuery(): Builder|Relation
+    {
+        return TicketType::query();
+    }
+
+    /**
+     * Table definition
      *
      * @return array
      */
-    protected function getFormSchema(): array
+    protected function getTableColumns(): array
     {
         return [
-            Grid::make(1)
-                ->schema([
-                    TextInput::make('search')
-                        ->label(__('Search for tickets types'))
-                        ->disableLabel()
-                        ->type('search')
-                        ->placeholder(__('Search for tickets types')),
-                ]),
+            TextColumn::make('title')
+                ->label(__('Title'))
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn (TicketType $record) => new HtmlString('
+                    <span class="px-2 py-1 rounded-full text-sm flex items-center gap-2" style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">
+                    <i class="fa ' . $record->icon . '"></i>' . $record->title . '
+                    </span>
+                ')),
+
+            TextColumn::make('created_at')
+                ->label(__('Created at'))
+                ->sortable()
+                ->searchable()
+                ->dateTime(),
         ];
     }
 
     /**
-     * Search for tickets types
+     * Table actions definition
      *
-     * @return void
+     * @return array
      */
-    public function search(): void
+    protected function getTableActions(): array
     {
-        $data = $this->form->getState();
-        $this->search = $data['search'] ?? null;
+        return [
+            Action::make('edit')
+                ->icon('heroicon-o-pencil')
+                ->link()
+                ->label(__('Edit type'))
+                ->action(fn(TicketType $record) => $this->updateType($record->id))
+        ];
+    }
+
+    /**
+     * Table default sort column definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'created_at';
+    }
+
+    /**
+     * Table default sort direction definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
     }
 
     /**
@@ -106,7 +143,6 @@ class TicketTypes extends Component implements HasForms
      * @return void
      */
     public function typeSaved() {
-        $this->search();
         $this->cancelType();
     }
 

@@ -238,6 +238,8 @@
     "Text color": "Couleur de texte",
     "Background color": "Couleur de fond",
     "Edit status": "Modifier le statut",
+    "Edit priority": "Modifier la priorité",
+    "Edit type": "Modifier le type",
     "No ticket statuses to show!": "Aucun statuts de ticket à afficher !",
     "Update user": "Modifier l'utilisateur",
     "Update status": "Modifier le statut",
