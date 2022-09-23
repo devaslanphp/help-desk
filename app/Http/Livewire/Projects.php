@@ -78,7 +78,7 @@ class Projects extends Component implements HasTable
                 ->label(__('Description'))
                 ->searchable()
                 ->sortable()
-                ->formatStateUsing(fn(string $state) => Str::limit(htmlspecialchars(strip_tags($state)), 50)),
+                ->formatStateUsing(fn(string $state) => Str::limit(htmlspecialchars(strip_tags($state ?? '')), 50)),
 
             UserColumn::make('owner')
                 ->label(__('Owner')),
