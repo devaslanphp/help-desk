@@ -100,4 +100,11 @@ class User extends Authenticatable implements HasLogsActivity
     {
         return route('administration.users');
     }
+
+    public function isAccountActivated(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->register_token == null
+        );
+    }
 }

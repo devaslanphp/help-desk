@@ -112,6 +112,26 @@ class Projects extends Component implements HasTable
     }
 
     /**
+     * Table default sort column definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'created_at';
+    }
+
+    /**
+     * Table default sort direction definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
+
+    /**
      * Show update project dialog
      *
      * @param $id

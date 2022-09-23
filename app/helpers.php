@@ -22,6 +22,22 @@ if (!function_exists('roles_list')) {
     }
 }
 
+if (!function_exists('roles_list_badges')) {
+    /**
+     * Return roles list as an array of KEY (role id) => VALUE (role title)
+     *
+     * @return array
+     */
+    function roles_list_badges(): array
+    {
+        $roles = [];
+        foreach (config('system.roles') as $key => $value) {
+            $roles[$value['badge-color']] = $key;
+        }
+        return $roles;
+    }
+}
+
 if (!function_exists('has_all_permissions')) {
     /**
      * Check if the user has all the permissions passed as parameters
