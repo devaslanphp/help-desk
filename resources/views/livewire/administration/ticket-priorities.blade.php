@@ -20,66 +20,8 @@
     </div>
     <div class="w-full mt-5">
         <div class="w-full flex flex-col justify-start items-start gap-5">
-            <div class="w-full flex flex-row justify-end items-center pb-4 bg-white dark:bg-gray-900">
-                <form wire:submit.prevent="search" class="relative flex flex-row justify-end items-center gap-5 md:w-1/3 w-2/3">
-                    {{ $this->form }}
-                    <button type="submit" class="py-2 px-3 rounded-lg shadow hover:shadow-lg bg-primary-700 hover:bg-primary-800 text-white text-base">
-                        <div wire:loading.remove>
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <div wire:loading>
-                            <i class="fa fa-spin fa-spinner"></i>
-                        </div>
-                    </button>
-                </form>
-            </div>
             <div class="w-full overflow-x-auto relative sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="py-3 px-6 min-w-table">
-                            @lang('Title')
-                        </th>
-                        <th scope="col" class="py-3 px-6 min-w-table">
-                            @lang('Created at')
-                        </th>
-                        <th scope="col" class="py-3 px-6 min-w-table">
-                            @lang('Actions')
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @if($priorities->count())
-                        @foreach($priorities as $priority)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="py-4 px-6">
-                                    <span class="px-3 py-1 rounded-full text-sm" style="color: {{ $priority->text_color }}; background-color: {{ $priority->bg_color }}">
-                                        <i class="fa {{ $priority->icon }}"></i> {{ $priority->title }}
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex flex-col">
-                                        <span class="text-base font-semibold">{{ $priority->created_at->diffForHumans() }}</span>
-                                        <span class="font-normal text-gray-500">{{ $priority->created_at->format(__('Y-m-d g:i A')) }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <button wire:click="updatePriority('{{ $priority->id }}')" type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">@lang('Edit priority')</button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td colspan="3" class="py-4 px-6 text-center dark:text-white">
-                                @lang('No ticket priorities to show!')
-                            </td>
-                        </tr>
-                    @endif
-                    </tbody>
-                </table>
-            </div>
-            <div class="w-full flex flex-row justify-start items-center">
-                {{ $priorities->links('pagination::tailwind') }}
+                {{ $this->table }}
             </div>
         </div>
 

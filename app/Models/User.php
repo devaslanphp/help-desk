@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Core\HasLogsActivity;
 use App\Core\LogsActivity;
+use Devaslanphp\FilamentAvatar\Core\HasAvatarUrl;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -18,7 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements HasLogsActivity
 {
-    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes, LogsActivity;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes, LogsActivity, HasAvatarUrl;
 
     /**
      * The attributes that are mass assignable.
@@ -53,23 +54,12 @@ class User extends Authenticatable implements HasLogsActivity
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = [
-        'avatar_url'
-    ];
-
     protected static function boot()
     {
         parent::boot();
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('created_at', 'desc');
         });
-    }
-
-    public function avatarUrl(): Attribute
-    {
-        return new Attribute(
-            get: fn() => 'https://ui-avatars.com/api/?color=FFFFFF&background=111827&name=' . $this->name
-        );
     }
 
     public function projects(): HasMany
@@ -109,5 +99,12 @@ class User extends Authenticatable implements HasLogsActivity
     public function activityLogLink(): string
     {
         return route('administration.users');
+    }
+
+    public function isAccountActivated(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->register_token == null
+        );
     }
 }

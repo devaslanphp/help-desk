@@ -4,66 +4,115 @@ namespace App\Http\Livewire\Administration;
 
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Livewire\Component;
 
-class Users extends Component implements HasForms
+class Users extends Component implements HasTable
 {
-    use InteractsWithForms;
+    use InteractsWithTable;
 
-    public $search;
     public $selectedUser;
 
     protected $listeners = ['userSaved', 'userDeleted'];
 
-    public function mount(): void
-    {
-        $this->form->fill();
-    }
-
     public function render()
     {
-        $query = User::query();
-        if ($this->search) {
-            $query->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%');
-        }
-        $users = $query->paginate();
-        return view('livewire.administration.users', compact('users'));
+        return view('livewire.administration.users');
     }
 
     /**
-     * Form schema definition
+     * Table query definition
+     *
+     * @return Builder|Relation
+     */
+    protected function getTableQuery(): Builder|Relation
+    {
+        return User::query();
+    }
+
+    /**
+     * Table definition
      *
      * @return array
      */
-    protected function getFormSchema(): array
+    protected function getTableColumns(): array
     {
         return [
-            Grid::make(1)
-                ->schema([
-                    TextInput::make('search')
-                        ->label(__('Search for users'))
-                        ->disableLabel()
-                        ->type('search')
-                        ->placeholder(__('Search for users')),
-                ]),
+            TextColumn::make('name')
+                ->label(__('Full name'))
+                ->searchable()
+                ->sortable(),
+
+            BadgeColumn::make('role')
+                ->label(__('Role'))
+                ->searchable()
+                ->sortable()
+                ->enum(roles_list())
+                ->colors(roles_list_badges()),
+
+            BooleanColumn::make('isAccountActivated')
+                ->label(__('Account activated'))
+                ->sortable()
+                ->searchable(),
+
+            TextColumn::make('created_at')
+                ->label(__('Created at'))
+                ->sortable()
+                ->searchable()
+                ->dateTime(),
         ];
     }
 
     /**
-     * Search for users
+     * Table actions definition
      *
-     * @return void
+     * @return array
      */
-    public function search(): void
+    protected function getTableActions(): array
     {
-        $data = $this->form->getState();
-        $this->search = $data['search'] ?? null;
+        return [
+            Action::make('resend_email_registration')
+                ->icon('heroicon-o-at-symbol')
+                ->link()
+                ->color('warning')
+                ->label(__('Resend activation email'))
+                ->visible(fn(User $record) => $record->register_token)
+                ->action(fn(User $record) => $this->resendActivationEmail($record->id)),
+
+            Action::make('edit')
+                ->icon('heroicon-o-pencil')
+                ->link()
+                ->label(__('Edit user'))
+                ->action(fn(User $record) => $this->updateUser($record->id))
+        ];
+    }
+
+    /**
+     * Table default sort column definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'created_at';
+    }
+
+    /**
+     * Table default sort direction definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
     }
 
     /**
@@ -105,8 +154,8 @@ class Users extends Component implements HasForms
      *
      * @return void
      */
-    public function userSaved() {
-        $this->search();
+    public function userSaved()
+    {
         $this->cancelUser();
     }
 
@@ -115,17 +164,20 @@ class Users extends Component implements HasForms
      *
      * @return void
      */
-    public function userDeleted() {
+    public function userDeleted()
+    {
         $this->userSaved();
     }
 
     /**
      * Resend the account activation email to a specific user
      *
-     * @param User $user
+     * @param int $userId
      * @return void
      */
-    public function resendActivationEmail(User $user) {
+    public function resendActivationEmail(int $userId)
+    {
+        $user = User::find($userId);
         if ($user->register_token) {
             $user->notify(new UserCreatedNotification($user));
             Notification::make()

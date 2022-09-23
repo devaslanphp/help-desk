@@ -24,6 +24,7 @@ return [
     | updating them, you can change it as you like
     |
     | 'text-color' and 'bg-color' are tailwindcss based css classes
+    | 'badge-color' uses the colors defined on 'tailwind.config.js'
     | 'permissions' contains the rights to access "pages" and "functions"
     | 'pages' contains the pages accessible by the role
     |   -> Same declared in App\View\Components\MainMenu component)
@@ -55,6 +56,7 @@ return [
             'title' => 'Administrator',
             'text-color' => 'bg-red-50',
             'bg-color' => 'text-red-500',
+            'badge-color' => 'danger',
             'permissions' => [
                 'pages' => ['analytics', 'tickets', 'kanban', 'administration'],
                 'functions' => [
@@ -67,6 +69,7 @@ return [
             'title' => 'Employee',
             'text-color' => 'bg-gray-50',
             'bg-color' => 'text-gray-500',
+            'badge-color' => 'warning',
             'permissions' => [
                 'pages' => ['analytics', 'tickets', 'kanban'],
                 'functions' => [
@@ -79,6 +82,7 @@ return [
             'title' => 'Customer',
             'text-color' => 'bg-blue-50',
             'bg-color' => 'text-blue-500',
+            'badge-color' => 'primary',
             'permissions' => [
                 'pages' => ['analytics', 'tickets', 'kanban'],
                 'functions' => [

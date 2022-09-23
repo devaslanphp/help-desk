@@ -3,67 +3,98 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\TicketPriority;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
-class TicketPriorities extends Component implements HasForms
+class TicketPriorities extends Component implements HasTable
 {
-    use InteractsWithForms;
+    use InteractsWithTable;
 
-    public $search;
     public $selectedPriority;
 
     protected $listeners = ['prioritySaved', 'priorityDeleted'];
 
-    public function mount(): void
-    {
-        $this->form->fill();
-    }
-
     public function render()
     {
-        $query = TicketPriority::query();
-        if ($this->search) {
-            $query->where('title', 'like', '%' . $this->search . '%')
-                ->orWhere('text_color', 'like', '%' . $this->search . '%')
-                ->orWhere('bg_color', 'like', '%' . $this->search . '%')
-                ->orWhere('icon', 'like', '%' . $this->search . '%');
-        }
-        $priorities = $query->paginate();
-        return view('livewire.administration.ticket-priorities', compact('priorities'));
+        return view('livewire.administration.ticket-priorities');
     }
 
     /**
-     * Form schema definition
+     * Table query definition
+     *
+     * @return Builder|Relation
+     */
+    protected function getTableQuery(): Builder|Relation
+    {
+        return TicketPriority::query();
+    }
+
+    /**
+     * Table definition
      *
      * @return array
      */
-    protected function getFormSchema(): array
+    protected function getTableColumns(): array
     {
         return [
-            Grid::make(1)
-                ->schema([
-                    TextInput::make('search')
-                        ->label(__('Search for tickets priorities'))
-                        ->disableLabel()
-                        ->type('search')
-                        ->placeholder(__('Search for tickets priorities')),
-                ]),
+            TextColumn::make('title')
+                ->label(__('Title'))
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn(TicketPriority $record) => new HtmlString('
+                    <span class="px-2 py-1 rounded-full text-sm flex items-center gap-2" style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">
+                    <i class="fa ' . $record->icon . '"></i>' . $record->title . '
+                    </span>
+                ')),
+
+            TextColumn::make('created_at')
+                ->label(__('Created at'))
+                ->sortable()
+                ->searchable()
+                ->dateTime(),
         ];
     }
 
     /**
-     * Search for tickets priorities
+     * Table actions definition
      *
-     * @return void
+     * @return array
      */
-    public function search(): void
+    protected function getTableActions(): array
     {
-        $data = $this->form->getState();
-        $this->search = $data['search'] ?? null;
+        return [
+            Action::make('edit')
+                ->icon('heroicon-o-pencil')
+                ->link()
+                ->label(__('Edit priority'))
+                ->action(fn(TicketPriority $record) => $this->updatePriority($record->id))
+        ];
+    }
+
+    /**
+     * Table default sort column definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'created_at';
+    }
+
+    /**
+     * Table default sort direction definition
+     *
+     * @return string|null
+     */
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
     }
 
     /**
@@ -105,8 +136,8 @@ class TicketPriorities extends Component implements HasForms
      *
      * @return void
      */
-    public function prioritySaved() {
-        $this->search();
+    public function prioritySaved()
+    {
         $this->cancelPriority();
     }
 
@@ -115,7 +146,8 @@ class TicketPriorities extends Component implements HasForms
      *
      * @return void
      */
-    public function priorityDeleted() {
+    public function priorityDeleted()
+    {
         $this->prioritySaved();
     }
 }
