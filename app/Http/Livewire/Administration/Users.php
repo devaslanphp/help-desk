@@ -4,8 +4,6 @@ namespace App\Http\Livewire\Administration;
 
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BadgeColumn;
@@ -86,7 +84,7 @@ class Users extends Component implements HasTable
                 ->link()
                 ->color('warning')
                 ->label(__('Resend activation email'))
-                ->visible(fn (User $record) => $record->register_token)
+                ->visible(fn(User $record) => $record->register_token)
                 ->action(fn(User $record) => $this->resendActivationEmail($record->id)),
 
             Action::make('edit')
