@@ -10,6 +10,7 @@
         "npm": "7.x"
     },
     "devDependencies": {
+        "@alpinejs/focus": "^3.10.3",
         "@awcodes/alpine-floating-ui": "^3.4.0",
         "@tailwindcss/forms": "^0.5.3",
         "@tailwindcss/typography": "^0.5.7",
