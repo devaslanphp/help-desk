@@ -61,7 +61,7 @@ You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
 ## Documentation
 
-You can find a full documentation here: [Documentation](http://laravel-help-desk.herokuapp.com/)
+You can find a full documentation here: [Documentation](http://laravel-help-desk.herokuapp.com/docs)
 
 ## Work in progress
 
