@@ -13,11 +13,14 @@
 
     @livewireStyles
     @livewireScripts
-    @stack('scripts')
+
 </head>
 <body>
 
 {{$slot}}
+
+<script src="{{ asset('js/chart.min.js') }}"></script>
+@stack('scripts')
 
 @livewire('notifications')
 </body>

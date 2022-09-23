@@ -210,76 +210,73 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/chart.min.js') }}"></script>
     <script>
-        setTimeout(() => {
-            let ctx = document.getElementById('ticketsAssignments').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: @json(array_keys($ticketsAssignments)),
-                    datasets: [{
-                        label: '@lang('Tickets assignments')',
-                        data: @json(array_values($ticketsAssignments)),
-                        backgroundColor: [
-                            'rgba(240, 82, 82, 0.8)',
-                            'rgba(56, 187, 132, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(153, 102, 255, 0.8)',
-                            'rgba(255, 159, 64, 0.8)'
-                        ],
-                        offset: 10
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+        let ctx = document.getElementById('ticketsAssignments').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: @json(array_keys($ticketsAssignments)),
+                datasets: [{
+                    label: '@lang('Tickets assignments')',
+                    data: @json(array_values($ticketsAssignments)),
+                    backgroundColor: [
+                        'rgba(240, 82, 82, 0.8)',
+                        'rgba(56, 187, 132, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    offset: 10
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
-            });
+            }
+        });
 
-            ctx = document.getElementById('ticketsByStatuses').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: @json(array_keys($ticketsByStatuses)),
-                    datasets: [{
-                        label: '@lang('Tickets assignments')',
-                        data: @json(array_values($ticketsByStatuses)),
-                        backgroundColor: [
-                            'rgba(240, 82, 82, 0.8)',
-                            'rgba(56, 187, 132, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(153, 102, 255, 0.8)',
-                            'rgba(255, 159, 64, 0.8)'
-                        ],
-                        offset: 10
-                    }]
+        ctx = document.getElementById('ticketsByStatuses').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @json(array_keys($ticketsByStatuses)),
+                datasets: [{
+                    label: '@lang('Tickets assignments')',
+                    data: @json(array_values($ticketsByStatuses)),
+                    backgroundColor: [
+                        'rgba(240, 82, 82, 0.8)',
+                        'rgba(56, 187, 132, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    offset: 10
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 },
-                options: {
-                    plugins: {
-                        legend: {
+                scales: {
+                    x: {
+                        grid: {
                             display: false
                         }
                     },
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false
-                            }
+                    y: {
+                        grid: {
+                            display: false
                         }
                     }
                 }
-            });
-        }, 1);
+            }
+        });
     </script>
 @endpush
