@@ -285,5 +285,22 @@
     "Use the section below to chat with the speakers of this ticket": "Utilisez la section ci-dessous pour échanger avec les intervenants de ce ticket",
     "Type a message..": "Tapez un message..",
     "Send": "Envoyer",
-    "No messages yet!": "Aucun message pour le moment !"
+    "No messages yet!": "Aucun message pour le moment !",
+    "Company name": "Nom de l'entreprise",
+    "Logo": "Logo",
+    "Companies": "Entreprises",
+    "Below is the list of configured companies in :app": "Ci-dessous est la liste des entreprises configurées sur :app",
+    "Create a new company": "Créer une nouvelle entreprise",
+    "Disable access to this company": "Désactiver l'accès à cette entreprise",
+    "Company created": "Entreprise créée",
+    "The company has been created": "L'entreprise est créée avec succès",
+    "Company updated": "Entreprise mise à jour",
+    "The company's details has been updated": "L'entreprise est mise à jour avec succès",
+    "Company deleted": "Entreprise supprimée",
+    "The company has been deleted": "L'entreprise est supprimée avec succès",
+    "Company deletion": "Suppression de l'entreprise",
+    "Are you sure you want to delete this company?": "Êtes-vous sûr de vouloir supprimer cette entreprise ?",
+    "Companies Management": "Gestion des entreprises",
+    "Here you can show and manage the companies list configured on :app": "Ici vous pouvez visualiser et gérer la liste des entreprises de :app",
+    "Manage companies": "Gérer les entreprises"
 }
