@@ -28,6 +28,7 @@
         "flowbite": "^1.5.3",
         "jquery": "^3.6.1",
         "magnific-popup": "^1.1.0",
-        "sass": "^1.54.9"
+        "sass": "^1.54.9",
+        "tippy.js": "^6.3.7"
     }
 }
