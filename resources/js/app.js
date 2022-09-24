@@ -3,6 +3,9 @@ import './bootstrap';
 import jQuery from '$';
 import 'flowbite';
 
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+
 import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 import '@fortawesome/fontawesome-free/scss/brands.scss';
 import '@fortawesome/fontawesome-free/scss/regular.scss';
@@ -66,4 +69,11 @@ window.unsecuredCopyToClipboard = function (text) {
         console.error('Unable to copy to clipboard', err);
     }
     document.body.removeChild(textArea);
+}
+
+// Tippy helper
+window.makeTippy = function (selector, title) {
+    tippy(selector, {
+        content: title,
+    });
 }
