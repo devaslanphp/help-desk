@@ -303,5 +303,6 @@
     "Companies Management": "Gestion des entreprises",
     "Here you can show and manage the companies list configured on :app": "Ici vous pouvez visualiser et gérer la liste des entreprises de :app",
     "Manage companies": "Gérer les entreprises",
-    "Company activated": "Entreprise activée"
+    "Company activated": "Entreprise activée",
+    "Edit company": "Modifier l'entreprise"
 }
