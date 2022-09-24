@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Models\Icon;
 use App\Models\TicketType;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
@@ -70,9 +71,10 @@ class TicketTypesDialog extends Component implements HasForms
                 ->reactive()
                 ->searchable()
                 ->required()
+                ->getSearchResultsUsing(fn (string $search) => Icon::where('icon', 'like', "%{$search}%")->limit(50)->pluck('icon', 'icon'))
+                ->getOptionLabelUsing(fn ($value): ?string => Icon::where('icon', $value)->first()?->icon)
                 ->hint(fn (Closure $get) => $get('icon') ? new HtmlString(__('Selected icon:') . ' <i class="fa fa-2x ' . $get('icon') . '"></i>') : '')
-                ->helperText(new HtmlString(__("Check the <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>fontawesome icons here</a> to choose your right icon")))
-                ->options(DB::table('icons')->get()->pluck('icon', 'icon')->toArray()),
+                ->helperText(new HtmlString(__("Check the <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>fontawesome icons here</a> to choose your right icon"))),
         ];
     }
 
