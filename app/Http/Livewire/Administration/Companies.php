@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Administration;
 use App\Models\Company;
 use App\Tables\Columns\UserColumn;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -56,6 +57,15 @@ class Companies extends Component implements HasTable
 
             UserColumn::make('responsible')
                 ->label(__('Responsible'))
+                ->searchable()
+                ->sortable(),
+
+            BooleanColumn::make('is_disabled')
+                ->label(__('Company activated'))
+                ->trueIcon('heroicon-o-x-circle')
+                ->falseIcon('heroicon-o-check-circle')
+                ->trueColor('danger')
+                ->falseColor('success')
                 ->searchable()
                 ->sortable(),
 
