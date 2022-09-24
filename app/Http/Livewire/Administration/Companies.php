@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\Company;
+use App\Tables\Columns\UserColumn;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -50,6 +51,11 @@ class Companies extends Component implements HasTable
 
             TextColumn::make('name')
                 ->label(__('Company name'))
+                ->searchable()
+                ->sortable(),
+
+            UserColumn::make('responsible')
+                ->label(__('Responsible'))
                 ->searchable()
                 ->sortable(),
 

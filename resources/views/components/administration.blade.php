@@ -1,8 +1,8 @@
-<div class="w-full flex flex-col gap-8">
+<div class="w-full flex flex-row flex-wrap">
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/users.jpg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/users.jpg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('User Management')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can show and manage the users list configured on :app', [
                 'app' => config('app.name')
@@ -16,9 +16,9 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/companies.jpeg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/companies.jpeg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('Companies Management')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can show and manage the companies list configured on :app', [
                 'app' => config('app.name')
@@ -32,9 +32,9 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/workflow.jpg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/workflow.jpg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('Statuses Management')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can show and manage the tickets statuses list configured on :app', [
                 'app' => config('app.name')
@@ -48,9 +48,9 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/priorities.jpg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/priorities.jpg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('Priorities Management')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can show and manage the tickets priorities list configured on :app', [
                 'app' => config('app.name')
@@ -64,9 +64,9 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/types.jpg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/types.jpg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('Types Management')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can show and manage the tickets types list configured on :app', [
                 'app' => config('app.name')
@@ -80,9 +80,9 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg border-r border-gray-200" style="background-image: url('{{ asset('images/administration/activity-logs.jpg') }}')"></div>
-        <div class="flex flex-col justify-between p-4 leading-normal">
+    <div class="flex flex-row xl:w-1/2 w-full items-center bg-white w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="w-52 h-36 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg" style="background-image: url('{{ asset('images/administration/activity-logs.jpg') }}')"></div>
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
             <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">@lang('Activity logs')</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">@lang('Here you can see all activity logs of :app', [
                 'app' => config('app.name')
