@@ -83,7 +83,7 @@ VALUES (1, 'Improvement', '#dbeafe', '#3b82f6', 'fa-arrow-up', NULL, '2022-09-19
        (5, 'Bug', '#ef4444', '#fee2e2', 'fa-bug', NULL, '2022-09-19 10:37:37', '2022-09-19 11:31:04', 'bug');
 
 INSERT INTO `companies` (`id`, `name`, `logo`, `description`, `is_disabled`, `responsible_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Google', 'AdMZvIIRz0ZAggtLBzo7GKOTdrSTIq-metaZ29vZ2xlbG9nb19jb2xvcl8yNzJ4OTJkcC5wbmc=-.png', '<p>Google is an American technology services company founded in 1998 in Silicon Valley, California, by Larry Page and Sergey Brin, creators of the Google search engine. It has been a subsidiary of the Alphabet company since August 2015.</p>', 0, 4, NULL, '2022-09-24 23:31:50', '2022-09-24 23:44:50'),
-(2, 'Meta', 'sVFt9gfVmnab5BSYsQZ39EVrfcvqGt-metaTWV0YV9QbGF0Zm9ybXNfSW5jLl9sb2dvLnN2Zy5wbmc=-.png', '<p>Meta Platforms, Inc., better known by the trade name Meta, is an American company created in 2004 by Mark Zuckerberg. It is one of the giants of the Web, grouped under the acronym GAFAM, alongside Google, Apple, Amazon and Microsoft.</p>', 1, 5, NULL, '2022-09-24 23:46:26', '2022-09-24 23:46:47');
+(1, 'Google', null, '<p>Google is an American technology services company founded in 1998 in Silicon Valley, California, by Larry Page and Sergey Brin, creators of the Google search engine. It has been a subsidiary of the Alphabet company since August 2015.</p>', 0, 4, NULL, '2022-09-24 23:31:50', '2022-09-24 23:44:50'),
+(2, 'Meta', null, '<p>Meta Platforms, Inc., better known by the trade name Meta, is an American company created in 2004 by Mark Zuckerberg. It is one of the giants of the Web, grouped under the acronym GAFAM, alongside Google, Apple, Amazon and Microsoft.</p>', 1, 5, NULL, '2022-09-24 23:46:26', '2022-09-24 23:46:47');
 
 SET foreign_key_checks = 1;
