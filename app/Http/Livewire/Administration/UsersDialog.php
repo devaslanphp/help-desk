@@ -175,18 +175,18 @@ class UsersDialog extends Component implements HasForms
                 ->title(__('User created'))
                 ->body(__('An email has been sent to the user'))
                 ->send();
-            if (isset($data['company'])) {
+            /*if (isset($data['company'])) {
                 CompanyUser::create([
                     'user_id' => $user->id,
                     'company_id' => $data['company']
                 ]);
-            }
+            }*/
         } else {
             $this->user->name = $data['name'];
             $this->user->email = $data['email'];
             $this->user->locale = $data['locale'];
             // $this->user->save();
-            $this->user->syncPermissions($this->permissions);
+            // $this->user->syncPermissions($this->permissions);
             Notification::make()
                 ->success()
                 ->title(__('User updated'))
@@ -196,12 +196,12 @@ class UsersDialog extends Component implements HasForms
             if ($this->user->id == auth()->user()->id) {
                 session()->put('locale', $this->user->locale);
             }
-            if (isset($data['company'])) {
+            /*if (isset($data['company'])) {
                 CompanyUser::create([
                     'user_id' => $this->user->id,
                     'company_id' => $data['company']
                 ]);
-            }
+            }*/
         }
         $this->emit('userSaved');
     }
