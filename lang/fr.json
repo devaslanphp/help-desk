@@ -308,5 +308,9 @@
     "Use same permissions of": "Utiliser les mêmes permission que",
     "Update the permissions of this user based on another user's permissions": "Mettre à jour les permissions de cet utilisateur en se basant sur les permissions d'un autre utilisateur",
     "Assign all permissions": "Assigner toutes les permissions",
-    "Remove all permissions": "Enlever toutes les permissions"
+    "Remove all permissions": "Enlever toutes les permissions",
+    "Company users": "Utilisateurs de l'entreprise",
+    "Yes": "Oui",
+    "No": "Non",
+    "All users": "Tous les utilisateurs"
 }

@@ -107,4 +107,14 @@ class User extends Authenticatable implements HasLogsActivity
             get: fn() => $this->register_token == null
         );
     }
+
+    public function ownCompanies(): HasMany
+    {
+        return $this->hasMany(Company::class, 'responsible_id');
+    }
+
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, 'company_users', 'user_id', 'company_id');
+    }
 }

@@ -41,7 +41,7 @@ class MainMenu extends Component
                 'icon' => 'fa-ticket',
                 'always_shown' => false,
                 'show_notification_indicator' => false,
-                'permission' => 'Can view tickets page'
+                'permission' => 'Can view Tickets page'
             ],
             'kanban' => [
                 'title' => 'Kanban Board',

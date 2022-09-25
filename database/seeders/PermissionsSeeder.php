@@ -29,6 +29,21 @@ class PermissionsSeeder extends Seeder
         'Can view Tickets page',
         'Can view Kanban page',
         'Can view Administration page',
+        'View all users',
+        'View company users',
+        'Create users',
+        'Update users',
+        'Delete users',
+        'Assign permissions',
+        'View all companies',
+        'View own companies',
+        'Create companies',
+        'Update companies',
+        'Delete companies',
+        'Manage ticket statuses',
+        'Manage ticket priorities',
+        'Manage ticket types',
+        'View activity log',
     ];
 
     /**

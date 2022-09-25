@@ -7,6 +7,7 @@ use App\Tables\Columns\UserColumn;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -35,7 +36,14 @@ class Companies extends Component implements HasTable
      */
     protected function getTableQuery(): Builder|Relation
     {
-        return Company::query();
+        $query = Company::query();
+        if (auth()->user()->can('View own companies') && !auth()->user()->can('View all companies')) {
+            $query->where('responsible_id', auth()->user()->id);
+        } elseif (!auth()->user()->can('View all companies')) {
+            // Get empty list
+            $query->whereNull('id');
+        }
+        return $query;
     }
 
     /**
@@ -69,6 +77,12 @@ class Companies extends Component implements HasTable
                 ->searchable()
                 ->sortable(),
 
+            TagsColumn::make('users.name')
+                ->label(__('Company users'))
+                ->limit(1)
+                ->searchable()
+                ->sortable(),
+
             TextColumn::make('created_at')
                 ->label(__('Created at'))
                 ->sortable()
@@ -89,6 +103,7 @@ class Companies extends Component implements HasTable
                 ->icon('heroicon-o-pencil')
                 ->link()
                 ->label(__('Edit company'))
+                ->visible(fn () => auth()->user()->can('Update companies'))
                 ->action(fn(Company $record) => $this->updateCompany($record->id))
         ];
     }

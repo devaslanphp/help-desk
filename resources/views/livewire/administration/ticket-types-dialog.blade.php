@@ -1,5 +1,5 @@
 <form wire:submit.prevent="save" class="w-full">
-    <div class="w-full p-5">
+    <div class="modal-container">
         {{ $this->form }}
     </div>
 

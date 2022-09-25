@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Models\CompanyUser;
 use App\Models\Icon;
 use App\Models\Company;
 use App\Models\User;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -39,6 +42,7 @@ class CompaniesDialog extends Component implements HasForms
             'description' => $this->company->description,
             'is_disabled' => $this->company->is_disabled,
             'responsible_id' => $this->company->responsible_id,
+            'users' => $this->company->users->pluck('id')->toArray()
         ]);
     }
 
@@ -60,33 +64,33 @@ class CompaniesDialog extends Component implements HasForms
             Grid::make(5)
                 ->schema([
 
-                Grid::make(1)
-                    ->columnSpan(2)
-                    ->schema([
-                        FileUpload::make('logo')
-                            ->image()
-                            ->maxSize(10240)
-                            ->label(__('Logo')),
-                    ]),
+                    Grid::make(1)
+                        ->columnSpan(2)
+                        ->schema([
+                            FileUpload::make('logo')
+                                ->image()
+                                ->maxSize(10240)
+                                ->label(__('Logo')),
+                        ]),
 
-                Grid::make(1)
-                    ->columnSpan(3)
-                    ->schema([
+                    Grid::make(1)
+                        ->columnSpan(3)
+                        ->schema([
 
-                        TextInput::make('name')
-                            ->label(__('Company name'))
-                            ->maxLength(255)
-                            ->unique(table: Company::class, column: 'name', ignorable: fn () => $this->company, callback: function (Unique $rule) {
-                                return $rule->withoutTrashed();
-                            })
-                            ->required(),
+                            TextInput::make('name')
+                                ->label(__('Company name'))
+                                ->maxLength(255)
+                                ->unique(table: Company::class, column: 'name', ignorable: fn() => $this->company, callback: function (Unique $rule) {
+                                    return $rule->withoutTrashed();
+                                })
+                                ->required(),
 
-                        Select::make('responsible_id')
-                            ->label(__('Responsible'))
-                            ->searchable()
-                            ->required()
-                            ->options(User::all()->pluck('name', 'id')->toArray()),
-                    ]),
+                            Select::make('responsible_id')
+                                ->label(__('Responsible'))
+                                ->searchable()
+                                ->required()
+                                ->options(User::all()->pluck('name', 'id')->toArray()),
+                        ]),
 
                 ]),
 
@@ -98,6 +102,10 @@ class CompaniesDialog extends Component implements HasForms
 
             Toggle::make('is_disabled')
                 ->label(__('Disable access to this company')),
+
+            MultiSelect::make('users')
+                ->label(__('Company users'))
+                ->options(User::all()->pluck('name', 'id')->toArray())
         ];
     }
 
@@ -117,6 +125,12 @@ class CompaniesDialog extends Component implements HasForms
                 'is_disabled' => $data['is_disabled'] ?? false,
                 'responsible_id' => $data['responsible_id'],
             ]);
+            foreach ($data['users'] as $user) {
+                CompanyUser::create([
+                    'company_id' => $company->id,
+                    'user_id' => $user
+                ]);
+            }
             Notification::make()
                 ->success()
                 ->title(__('Company created'))
@@ -129,6 +143,13 @@ class CompaniesDialog extends Component implements HasForms
             $this->company->is_disabled = $data['is_disabled'];
             $this->company->responsible_id = $data['responsible_id'];
             $this->company->save();
+            CompanyUser::where('company_id', $this->company->id)->delete();
+            foreach ($data['users'] as $user) {
+                CompanyUser::create([
+                    'company_id' => $this->company->id,
+                    'user_id' => $user
+                ]);
+            }
             Notification::make()
                 ->success()
                 ->title(__('Company updated'))
