@@ -1,15 +1,15 @@
 INSERT INTO users (id, name, email, email_verified_at, password, remember_token, created_at,
-                   updated_at, role, register_token, deleted_at)
+                   updated_at, register_token, deleted_at)
 VALUES (4, 'Dark Vador', 'darkvador@gmail.com', NULL, '$2y$10$4f8HPTwKhVzpAP5kas6PN.VP5TlJrgZ0nEcbhrnk6OFtkiUA9czbK',
         'OHEZUT3JTudVaM98f52WUSEIBYt2iFVe4x3fIIh5ppc6mbLQkfcvdd7g7Rcq', '2022-09-09 20:04:18', '2022-09-12 14:43:54',
-        'administrator', NULL, NULL),
+        NULL, NULL),
        (5, 'John DOE', 'johndoe@gmail.com', NULL, '$2y$10$dhwupOVEiVsQpQZeSIJhWutsBYF8pde7/BTViD5j9f8c1CregT9Gq', NULL,
-        '2022-09-11 14:37:09', '2022-09-12 11:39:04', 'employee', NULL, NULL),
+        '2022-09-11 14:37:09', '2022-09-12 11:39:04', NULL, NULL),
        (6, 'Jane DOE', 'janedoe@gmail.com', NULL, '$2y$10$l1pWnJh2iUDttzLLlmG5weeTNT7O/UAwsWnPrD8XH8yszCzrhFh82', NULL,
-        '2022-09-11 14:48:37', '2022-09-11 15:08:21', 'customer', NULL, NULL),
+        '2022-09-11 14:48:37', '2022-09-11 15:08:21', NULL, NULL),
        (10, 'Thomas Edison', 'thomasedison@gmail.com', NULL,
         '$2y$10$MR51TVg3xzUXs308oTxp8.Pw9sjs7ijaeGYLJZsq85CdY/azYD0bG', NULL, '2022-09-11 15:31:51',
-        '2022-09-11 15:31:55', 'employee', '82c93eba-9a33-4dbe-abac-22f11f5c1f54', NULL);
+        '2022-09-11 15:31:55', '82c93eba-9a33-4dbe-abac-22f11f5c1f54', NULL);
 
 INSERT INTO projects (id, name, description, owner_id, deleted_at, created_at, updated_at, ticket_prefix)
 VALUES (1, 'Default project',
@@ -84,6 +84,45 @@ VALUES (1, 'Improvement', '#dbeafe', '#3b82f6', 'fa-arrow-up', NULL, '2022-09-19
 INSERT INTO companies (id, name, logo, description, is_disabled, responsible_id, deleted_at, created_at, updated_at) VALUES
 (1, 'Google', null, '<p>Google is an American technology services company founded in 1998 in Silicon Valley, California, by Larry Page and Sergey Brin, creators of the Google search engine. It has been a subsidiary of the Alphabet company since August 2015.</p>', false, 4, NULL, '2022-09-24 23:31:50', '2022-09-24 23:44:50'),
 (2, 'Meta', null, '<p>Meta Platforms, Inc., better known by the trade name Meta, is an American company created in 2004 by Mark Zuckerberg. It is one of the giants of the Web, grouped under the acronym GAFAM, alongside Google, Apple, Amazon and Microsoft.</p>', true, 5, NULL, '2022-09-24 23:46:26', '2022-09-24 23:46:47');
+
+
+TRUNCATE TABLE permissions CASCADE;
+INSERT INTO permissions (id, name, guard_name, created_at, updated_at) VALUES
+(1, 'View all projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(2, 'Update all projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(3, 'Delete all projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(4, 'Create projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(5, 'View own projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(6, 'Update own projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(7, 'Delete own projects', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(8, 'View all tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(9, 'Update all tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(10, 'Delete all tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(11, 'Create tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(12, 'View own tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(13, 'Update own tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(14, 'Delete own tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(15, 'Assign tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(16, 'Change status tickets', 'web', '2022-09-25 15:51:10', '2022-09-25 15:51:10'),
+(17, 'Can view Analytics page', 'web', '2022-09-25 16:32:37', '2022-09-25 16:32:37'),
+(18, 'Can view Tickets page', 'web', '2022-09-25 16:32:37', '2022-09-25 16:32:37'),
+(19, 'Can view Kanban page', 'web', '2022-09-25 16:32:37', '2022-09-25 16:32:37'),
+(20, 'Can view Administration page', 'web', '2022-09-25 16:32:37', '2022-09-25 16:32:37'),
+(21, 'View all users', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(22, 'View company users', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(25, 'Manage ticket statuses', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(26, 'Manage ticket priorities', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(27, 'Manage ticket types', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(28, 'View activity log', 'web', '2022-09-25 16:41:08', '2022-09-25 16:41:08'),
+(29, 'Create users', 'web', '2022-09-25 17:05:37', '2022-09-25 17:05:37'),
+(30, 'Update users', 'web', '2022-09-25 17:05:37', '2022-09-25 17:05:37'),
+(31, 'Delete users', 'web', '2022-09-25 17:05:37', '2022-09-25 17:05:37'),
+(32, 'Assign permissions', 'web', '2022-09-25 17:05:37', '2022-09-25 17:05:37'),
+(33, 'View all companies', 'web', '2022-09-25 17:14:01', '2022-09-25 17:14:01'),
+(34, 'View own companies', 'web', '2022-09-25 17:14:02', '2022-09-25 17:14:02'),
+(38, 'Create companies', 'web', '2022-09-25 17:19:38', '2022-09-25 17:19:38'),
+(39, 'Update companies', 'web', '2022-09-25 17:19:38', '2022-09-25 17:19:38'),
+(40, 'Delete companies', 'web', '2022-09-25 17:19:38', '2022-09-25 17:19:38');
 
 INSERT INTO model_has_permissions (permission_id, model_type, model_id) VALUES
 (1, 'App\\Models\\User', 4),
