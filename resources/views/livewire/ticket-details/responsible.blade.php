@@ -27,7 +27,7 @@
             @else
                 <span class="text-gray-400 font-medium text-sm">@lang('Not assigned yet!')</span>
             @endif
-            @if((has_all_permissions(auth()->user(), 'update-all-tickets') || (has_all_permissions(auth()->user(), 'update-own-tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && has_all_permissions(auth()->user(), 'assign-tickets'))
+            @if((auth()->user()->can('update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && has_all_permissions(auth()->user(), 'assign-tickets'))
                 <button type="button" wire:click="update" class="bg-gray-100 shadow hover:bg-gray-200 hover:shadow-lg w-6 h-6 text-xs flex-row justify-center items-center rounded-lg text-gray-400">
                     <i class="fa fa-pencil"></i>
                 </button>

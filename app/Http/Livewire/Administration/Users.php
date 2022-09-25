@@ -4,10 +4,12 @@ namespace App\Http\Livewire\Administration;
 
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
+use Filament\Forms\Components\TagsInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -51,17 +53,16 @@ class Users extends Component implements HasTable
                 ->searchable()
                 ->sortable(),
 
-            BadgeColumn::make('role')
-                ->label(__('Role'))
-                ->searchable()
-                ->sortable()
-                ->enum(roles_list())
-                ->colors(roles_list_badges()),
-
             BooleanColumn::make('isAccountActivated')
                 ->label(__('Account activated'))
                 ->sortable()
                 ->searchable(),
+
+            TagsColumn::make('permissions.name')
+                ->label(__('Permissions'))
+                ->limit(1)
+                ->searchable()
+                ->sortable(),
 
             TextColumn::make('created_at')
                 ->label(__('Created at'))

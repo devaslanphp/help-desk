@@ -16,10 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasLogsActivity
 {
-    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes, LogsActivity, HasAvatarUrl;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes, LogsActivity, HasAvatarUrl, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +31,6 @@ class User extends Authenticatable implements HasLogsActivity
         'name',
         'email',
         'password',
-        'role',
         'register_token',
         'locale',
     ];
@@ -80,7 +80,7 @@ class User extends Authenticatable implements HasLogsActivity
     public function favoriteProjects(): BelongsToMany
     {
         $query = $this->belongsToMany(Project::class, 'favorite_projects', 'user_id', 'project_id');
-        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+        if (auth()->user()->can('View own projects') && !auth()->user()->can('View all projects')) {
             $query->where('user_id', auth()->user()->id);
         }
         return $query;

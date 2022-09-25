@@ -44,7 +44,7 @@ class Project extends Model implements HasLogsActivity
     public function favoriteUsers(): BelongsToMany
     {
         $query = $this->belongsToMany(User::class, 'favorite_projects', 'project_id', 'user_id');
-        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+        if (auth()->user()->can('View own projects') && !auth()->user()->can('View all projects')) {
             $query->where('user_id', auth()->user()->id);
         }
         return $query;

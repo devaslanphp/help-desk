@@ -10,7 +10,7 @@
                 <i class="fa fa-spin fa-spinner"></i>
             </div>
         </button>
-        @if($project->id && (has_all_permissions(auth()->user(), 'delete-all-projects') || (has_all_permissions(auth()->user(), 'delete-own-projects') && $project->owner_id === auth()->user()->id)))
+        @if($project->id && (auth()->user()->can('Delete all projects') || (auth()->user()->can('Delete own projects') && $project->owner_id === auth()->user()->id)))
             <button type="button" wire:loading.attr="disabled" {!! $deleteConfirmationOpened ? 'disabled' : '' !!} wire:click="deleteProject" class="rounded-lg flex flex-row justify-center items-center text-center text-white bg-red-700 disabled:bg-red-400 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg disabled:hover:shadow px-10 py-3 text-sm mt-5">
                 @lang('Delete')
             </button>

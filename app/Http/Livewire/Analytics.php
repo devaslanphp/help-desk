@@ -55,7 +55,7 @@ class Analytics extends Component
     private function loadTicketsAssignments(): void
     {
         $query = Ticket::query();
-        if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
+        if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
                     ->orWhere('responsible_id', auth()->user()->id);
@@ -78,7 +78,7 @@ class Analytics extends Component
     private function loadTicketsByStatuses(): void
     {
         $query = Ticket::query();
-        if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
+        if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
                     ->orWhere('responsible_id', auth()->user()->id);

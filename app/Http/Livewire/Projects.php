@@ -38,7 +38,7 @@ class Projects extends Component implements HasTable
     {
         $query = Project::query();
         $query->withCount('tickets');
-        if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+        if (auth()->user()->can('View own projects') && !auth()->user()->can('View all projects')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
                     ->orWhereHas('tickets', function ($query) {
