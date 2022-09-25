@@ -211,8 +211,7 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteUser(): void
-    {
+    public function doDeleteUser(): void {
         $this->user->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('userDeleted');

@@ -16,7 +16,7 @@
         <img src="https://img.shields.io/github/issues/devaslanphp/help-desk?style=for-the-badge" alt="issues - help-desk">
     </a>
     <br/>
-    <a href="http://laravel-help-desk.herokuapp.com/docs" title="Go to project documentation">
+    <a href="https://laravel-help-desk.herokuapp.com/docs" title="Go to project documentation">
         <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
     </a>
 </p>
@@ -61,7 +61,7 @@ You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
 ## Documentation
 
-You can find a full documentation here: [Documentation](http://laravel-help-desk.herokuapp.com/docs)
+You can find a full documentation here: [Documentation](https://laravel-help-desk.herokuapp.com/docs)
 
 ## Work in progress
 
