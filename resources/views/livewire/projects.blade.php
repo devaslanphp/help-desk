@@ -10,11 +10,11 @@
                 ])
             </span>
         </div>
-        @if(has_all_permissions(auth()->user(), 'create-projects'))
+        @can('Create projects')
             <button type="button" wire:click="createProject()" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-base">
                 @lang('Create a new project')
             </button>
-        @endif
+        @endCan
     </div>
     @if(auth()->user()->favoriteProjects()->count())
         <div class="w-full mt-5 flex flex-col justify-start items-start gap-2">

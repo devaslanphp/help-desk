@@ -20,7 +20,7 @@
             <span class="lg:text-4xl md:text-2xl text-xl font-medium text-gray-700 flex items-center gap-3">
                 {{ $ticket->title }}
             </span>
-            @if(has_all_permissions(auth()->user(), 'update-all-tickets') || (has_all_permissions(auth()->user(), 'update-own-tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id)))
+            @if(auth()->user()->can('update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id)))
                 <button type="button" wire:click="update" class="bg-gray-100 shadow hover:bg-gray-200 hover:shadow-lg w-6 h-6 text-xs flex-row justify-center items-center rounded-lg text-gray-400">
                     <i class="fa fa-pencil"></i>
                 </button>

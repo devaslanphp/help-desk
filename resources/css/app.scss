@@ -85,3 +85,9 @@ table {
         }
     }
 }
+
+.modal-container {
+    @apply w-full overflow-y-auto max-h-screen p-5;
+
+    max-height: calc(100vh - 200px);
+}

@@ -13,11 +13,11 @@
                     ])
                 </span>
         </div>
-        @if(has_all_permissions(auth()->user(), 'create-tickets'))
+        @can('Create tickets')
             <button type="button" wire:click="createTicket()" class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow hover:shadow-lg text-base">
                 @lang('Create a new ticket')
             </button>
-        @endif
+        @endCan
     </div>
     <div class="w-full mt-5">
         <div class="w-full flex flex-col justify-start items-start gap-5" id="tickets">

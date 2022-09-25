@@ -63,6 +63,7 @@ class ActivateAccount extends Component implements HasForms
         $this->user->save();
         $this->user->notify(new UserActivatedNotification());
         Auth::login($this->user);
+        session()->put('locale', $this->user->locale);
         redirect()->to(route('home'));
     }
 }

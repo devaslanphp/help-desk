@@ -1476,7 +1476,9 @@ class FontAwesomeFreeSeeder extends Seeder
     public function run()
     {
         foreach (self::icons as $icon) {
-            Icon::create(['icon' => $icon]);
+            if (!Icon::where('icon', $icon)->count()) {
+                Icon::create(['icon' => $icon]);
+            }
         }
     }
 }

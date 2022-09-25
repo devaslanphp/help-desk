@@ -49,9 +49,9 @@ class TicketUpdatedJob implements ShouldQueue
             $users = User::whereNull('register_token')->where('id', '<>', $this->user->id)->get();
             foreach ($users as $u) {
                 if (
-                    (has_all_permissions($u, 'view-all-tickets') && $this->ticket->owner_id !== $u->id)
+                    (auth()->user()->can('View all tickets') && $this->ticket->owner_id !== $u->id)
                     ||
-                    (has_all_permissions($u, 'view-own-tickets') && ($this->ticket->owner_id === $u->id || $this->ticket->responsible_id === $u->id) && $this->ticket->owner_id !== $u->id)
+                    (auth()->user()->can('View own tickets') && ($this->ticket->owner_id === $u->id || $this->ticket->responsible_id === $u->id) && $this->ticket->owner_id !== $u->id)
                 ) {
                     $u->notify(new TicketUpdatedNotification($this->ticket, $this->field, $this->before, $this->after, $this->user));
                 }

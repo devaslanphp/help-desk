@@ -22,7 +22,7 @@ trait LogsActivity
             ->logOnly($this->getFillable())
             ->setDescriptionForEvent(fn(string $eventName) => new HtmlString(
                 '<div class="flex flex-col gap-1">'
-                . auth()->user()->name . " " . $eventName . " " . $this->fromCamelCase((new \ReflectionClass($this))->getShortName()) . " " . $this
+                . (auth()->user()->name ?? '') . " " . $eventName . " " . $this->fromCamelCase((new \ReflectionClass($this))->getShortName()) . " " . $this
                 . ' <a class="text-primary-500 hover:underline hover:cursor-pointer" target="_blank" href="' . $this->activityLogLink() . '">' . __('See details') . '</a>'
                 . '</div>'
             ));

@@ -2,15 +2,19 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Models\Company;
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
+use Filament\Forms\Components\TagsInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Livewire\Component;
@@ -35,7 +39,18 @@ class Users extends Component implements HasTable
      */
     protected function getTableQuery(): Builder|Relation
     {
-        return User::query();
+        $query = User::query();
+        if (auth()->user()->can('View company users') && !auth()->user()->can('View all users')) {
+            $query->whereHas('companies', fn ($query) =>
+                $query->whereIn('companies.id',
+                    auth()->user()->ownCompanies->pluck('id')->toArray()
+                )
+            );
+        } elseif (!auth()->user()->can('View all users')) {
+            // Get empty list
+            $query->whereNull('id');
+        }
+        return $query;
     }
 
     /**
@@ -51,17 +66,23 @@ class Users extends Component implements HasTable
                 ->searchable()
                 ->sortable(),
 
-            BadgeColumn::make('role')
-                ->label(__('Role'))
-                ->searchable()
-                ->sortable()
-                ->enum(roles_list())
-                ->colors(roles_list_badges()),
-
             BooleanColumn::make('isAccountActivated')
                 ->label(__('Account activated'))
                 ->sortable()
                 ->searchable(),
+
+            TagsColumn::make('permissions.name')
+                ->label(__('Permissions'))
+                ->limit(1)
+                ->visible(fn () => auth()->user()->can('Assign permissions'))
+                ->searchable()
+                ->sortable(),
+
+            TagsColumn::make('companies.name')
+                ->label(__('Companies'))
+                ->limit(1)
+                ->searchable()
+                ->sortable(),
 
             TextColumn::make('created_at')
                 ->label(__('Created at'))
@@ -84,13 +105,14 @@ class Users extends Component implements HasTable
                 ->link()
                 ->color('warning')
                 ->label(__('Resend activation email'))
-                ->visible(fn(User $record) => $record->register_token)
+                ->visible(fn(User $record) => $record->register_token && auth()->user()->can('Update users'))
                 ->action(fn(User $record) => $this->resendActivationEmail($record->id)),
 
             Action::make('edit')
                 ->icon('heroicon-o-pencil')
                 ->link()
                 ->label(__('Edit user'))
+                ->visible(fn () => auth()->user()->can('Update users'))
                 ->action(fn(User $record) => $this->updateUser($record->id))
         ];
     }
@@ -113,6 +135,32 @@ class Users extends Component implements HasTable
     protected function getDefaultTableSortDirection(): ?string
     {
         return 'desc';
+    }
+
+    /**
+     * Table filters definition
+     *
+     * @return array
+     */
+    protected function getTableFilters(): array
+    {
+        return [
+            SelectFilter::make('isAccountActivated')
+                ->label(__('Account activated'))
+                ->placeholder(__('All users'))
+                ->options([
+                    'yes' => __('Yes'),
+                    'no' => __('No'),
+                ])
+                ->query(function ($state, $query) {
+                    if ($state['value'] === 'yes') {
+                        $query->whereNull('register_token');
+                    }
+                    if ($state['value'] === 'no') {
+                        $query->whereNotNull('register_token');
+                    }
+                })
+        ];
     }
 
     /**

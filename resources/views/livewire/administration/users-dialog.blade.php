@@ -1,5 +1,5 @@
 <form wire:submit.prevent="save" class="w-full">
-    <div class="w-full p-5">
+    <div class="modal-container">
         {{ $this->form }}
     </div>
 
@@ -10,7 +10,7 @@
                 <i class="fa fa-spin fa-spinner"></i>
             </div>
         </button>
-        @if($user->id)
+        @if($user->id && auth()->user()->can('Delete users'))
             <button type="button" wire:loading.attr="disabled" {!! $deleteConfirmationOpened ? 'disabled' : '' !!} wire:click="deleteUser" class="rounded-lg flex flex-row justify-center items-center text-center text-white bg-red-700 disabled:bg-red-400 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg disabled:hover:shadow px-10 py-3 text-sm mt-5">
                 @lang('Delete')
             </button>

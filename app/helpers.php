@@ -6,101 +6,6 @@ use App\Models\TicketType;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
-if (!function_exists('roles_list')) {
-    /**
-     * Return roles list as an array of KEY (role id) => VALUE (role title)
-     *
-     * @return array
-     */
-    function roles_list(): array
-    {
-        $roles = [];
-        foreach (config('system.roles') as $key => $value) {
-            $roles[$key] = __($value['title']);
-        }
-        return $roles;
-    }
-}
-
-if (!function_exists('roles_list_badges')) {
-    /**
-     * Return roles list as an array of KEY (role id) => VALUE (role title)
-     *
-     * @return array
-     */
-    function roles_list_badges(): array
-    {
-        $roles = [];
-        foreach (config('system.roles') as $key => $value) {
-            $roles[$value['badge-color']] = $key;
-        }
-        return $roles;
-    }
-}
-
-if (!function_exists('has_all_permissions')) {
-    /**
-     * Check if the user has all the permissions passed as parameters
-     *
-     * @param User|Authenticatable $user
-     * @param ...$permissions
-     * @return bool
-     */
-    function has_all_permissions(User|Authenticatable $user, ...$permissions): bool
-    {
-        if ($user->role) {
-            $role = config('system.roles.' . $user->role);
-            if ($role) {
-                return sizeof(array_intersect($role['permissions']['functions'], $permissions)) === sizeof($permissions);
-            }
-            return false;
-        }
-        return false;
-    }
-}
-
-if (!function_exists('has_any_permissions')) {
-    /**
-     * Check if the user has any of the permissions passed as parameters
-     *
-     * @param User|Authenticatable $user
-     * @param ...$permissions
-     * @return bool
-     */
-    function has_any_permissions(User|Authenticatable $user, ...$permissions): bool
-    {
-        if ($user->role) {
-            $role = config('system.roles.' . $user->role);
-            if ($role) {
-                return sizeof(array_intersect($role['permissions']['functions'], $permissions));
-            }
-            return false;
-        }
-        return false;
-    }
-}
-
-if (!function_exists('can_access_page')) {
-    /**
-     * Check if the user can access the pages passed as parameters
-     *
-     * @param User|Authenticatable $user
-     * @param ...$pages
-     * @return bool
-     */
-    function can_access_page(User|Authenticatable $user, ...$pages): bool
-    {
-        if ($user->role) {
-            $role = config('system.roles.' . $user->role);
-            if ($role) {
-                return sizeof(array_intersect($role['permissions']['pages'], $pages));
-            }
-            return false;
-        }
-        return false;
-    }
-}
-
 if (!function_exists('statuses_list')) {
     /**
      * Return statuses list as an array of KEY (status id) => VALUE (status title)
@@ -177,10 +82,10 @@ if (!function_exists('locales')) {
      */
     function locales(): array
     {
-        $roles = [];
+        $locales = [];
         foreach (config('system.locales') as $key => $value) {
-            $roles[$key] = __($value);
+            $locales[$key] = __($value);
         }
-        return $roles;
+        return $locales;
     }
 }

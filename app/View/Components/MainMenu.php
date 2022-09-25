@@ -26,37 +26,43 @@ class MainMenu extends Component
                 'title' => 'Overview',
                 'icon' => 'fa-table-columns',
                 'always_shown' => true,
-                'show_notification_indicator' => false
+                'show_notification_indicator' => false,
+                'permission' => ''
             ],
             'analytics' => [
                 'title' => 'Analytics',
                 'icon' => 'fa-chart-bar',
                 'always_shown' => false,
-                'show_notification_indicator' => false
+                'show_notification_indicator' => false,
+                'permission' => 'Can view Analytics page'
             ],
             'tickets' => [
                 'title' => 'Tickets',
                 'icon' => 'fa-ticket',
                 'always_shown' => false,
-                'show_notification_indicator' => false
+                'show_notification_indicator' => false,
+                'permission' => 'Can view Tickets page'
             ],
             'kanban' => [
                 'title' => 'Kanban Board',
                 'icon' => 'fa-clipboard-check',
                 'always_shown' => false,
-                'show_notification_indicator' => false
+                'show_notification_indicator' => false,
+                'permission' => 'Can view Kanban page'
             ],
             'administration' => [
                 'title' => 'Administration',
                 'icon' => 'fa-cogs',
                 'always_shown' => false,
-                'show_notification_indicator' => false
+                'show_notification_indicator' => false,
+                'permission' => 'Can view Administration page'
             ],
             'notifications' => [
                 'title' => 'Notifications',
                 'icon' => 'fa-bell',
                 'always_shown' => true,
-                'show_notification_indicator' => true
+                'show_notification_indicator' => true,
+                'permission' => ''
             ],
         ];
     }
