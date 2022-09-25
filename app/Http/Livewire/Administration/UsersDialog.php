@@ -161,7 +161,7 @@ class UsersDialog extends Component implements HasForms
     {
         $data = $this->form->getState();
         if (!$this->user?->id) {
-            $user = User::create([
+            /*$user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'locale' => $data['locale'],
@@ -169,7 +169,7 @@ class UsersDialog extends Component implements HasForms
                 'register_token' => Uuid::uuid4()->toString()
             ]);
             $user->syncPermissions($this->permissions);
-            $user->notify(new UserCreatedNotification($user));
+            $user->notify(new UserCreatedNotification($user));*/
             Notification::make()
                 ->success()
                 ->title(__('User created'))
@@ -185,7 +185,7 @@ class UsersDialog extends Component implements HasForms
             $this->user->name = $data['name'];
             $this->user->email = $data['email'];
             $this->user->locale = $data['locale'];
-            $this->user->save();
+            // $this->user->save();
             $this->user->syncPermissions($this->permissions);
             Notification::make()
                 ->success()
@@ -211,9 +211,8 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteUser(): void
-    {
-        $this->user->delete();
+    public function doDeleteUser(): void {
+        // $this->user->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('userDeleted');
         Notification::make()
