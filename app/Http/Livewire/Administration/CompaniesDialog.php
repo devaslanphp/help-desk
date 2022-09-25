@@ -56,21 +56,39 @@ class CompaniesDialog extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Grid::make()
-                ->schema([
-                    FileUpload::make('logo')
-                        ->image()
-                        ->maxSize(10240)
-                        ->label(__('Logo')),
-                ]),
 
-            TextInput::make('name')
-                ->label(__('Company name'))
-                ->maxLength(255)
-                ->unique(table: Company::class, column: 'name', ignorable: fn () => $this->company, callback: function (Unique $rule) {
-                    return $rule->withoutTrashed();
-                })
-                ->required(),
+            Grid::make(5)
+                ->schema([
+
+                Grid::make(1)
+                    ->columnSpan(2)
+                    ->schema([
+                        FileUpload::make('logo')
+                            ->image()
+                            ->maxSize(10240)
+                            ->label(__('Logo')),
+                    ]),
+
+                Grid::make(1)
+                    ->columnSpan(3)
+                    ->schema([
+
+                        TextInput::make('name')
+                            ->label(__('Company name'))
+                            ->maxLength(255)
+                            ->unique(table: Company::class, column: 'name', ignorable: fn () => $this->company, callback: function (Unique $rule) {
+                                return $rule->withoutTrashed();
+                            })
+                            ->required(),
+
+                        Select::make('responsible_id')
+                            ->label(__('Responsible'))
+                            ->searchable()
+                            ->required()
+                            ->options(User::all()->pluck('name', 'id')->toArray()),
+                    ]),
+
+                ]),
 
             RichEditor::make('description')
                 ->label(__('Description'))
@@ -78,14 +96,8 @@ class CompaniesDialog extends Component implements HasForms
                 ->fileAttachmentsDirectory('companies')
                 ->fileAttachmentsVisibility('private'),
 
-            Select::make('responsible_id')
-                ->label(__('Responsible'))
-                ->searchable()
-                ->required()
-                ->options(User::all()->pluck('name', 'id')->toArray()),
-
             Toggle::make('is_disabled')
-                ->label(__('Disable access to this company'))
+                ->label(__('Disable access to this company')),
         ];
     }
 
