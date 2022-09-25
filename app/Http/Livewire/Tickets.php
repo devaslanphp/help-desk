@@ -49,7 +49,7 @@ class Tickets extends Component implements HasForms
     {
         $query = Ticket::query();
         $query->withCount('comments');
-        if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
+        if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
                     ->orWhere('responsible_id', auth()->user()->id);
@@ -118,7 +118,7 @@ class Tickets extends Component implements HasForms
                         ->placeholder(__('Project'))
                         ->options(function () {
                             $query = Project::query();
-                            if (has_all_permissions(auth()->user(), 'view-own-projects') && !has_all_permissions(auth()->user(), 'view-all-projects')) {
+                            if (auth()->user()->can('View own projects') && !auth()->user()->can('View all projects')) {
                                 $query->where('owner_id', auth()->user()->id);
                             }
                             return $query->get()->pluck('name', 'id');

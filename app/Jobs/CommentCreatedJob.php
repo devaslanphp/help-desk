@@ -39,9 +39,9 @@ class CommentCreatedJob implements ShouldQueue
         $users = User::whereNull('register_token')->get();
         foreach ($users as $user) {
             if (
-                (has_all_permissions($user, 'view-all-tickets') && $this->comment->owner_id !== $user->id)
+                (auth()->user()->can('View all tickets') && $this->comment->owner_id !== $user->id)
                 ||
-                (has_all_permissions($user, 'view-own-tickets') && ($this->comment->ticket->owner_id === $user->id || $this->comment->ticket->responsible_id === $user->id) && $this->comment->owner_id !== $user->id)
+                (auth()->user()->can('View own tickets') && ($this->comment->ticket->owner_id === $user->id || $this->comment->ticket->responsible_id === $user->id) && $this->comment->owner_id !== $user->id)
             ) {
                 $user->notify(new CommentCreateNotification($this->comment, $user));
             }

@@ -38,7 +38,7 @@ class Kanban extends FilamentKanbanBoard
     {
         $query = Ticket::query();
         $query->withCount('comments');
-        if (has_all_permissions(auth()->user(), 'view-own-tickets') && !has_all_permissions(auth()->user(), 'view-all-tickets')) {
+        if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
                     ->orWhere('responsible_id', auth()->user()->id);
@@ -116,7 +116,7 @@ class Kanban extends FilamentKanbanBoard
     public function onStatusChanged($recordId, $statusId, $fromOrderedIds, $toOrderedIds): void
     {
         $ticket = Ticket::find($recordId);
-        if ((has_all_permissions(auth()->user(), 'update-all-tickets') || (has_all_permissions(auth()->user(), 'update-own-tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && has_all_permissions(auth()->user(), 'change-status-tickets')) {
+        if ((auth()->user()->can('Update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && auth()->user()->can('Change status tickets')) {
             $before = __(config('system.statuses.' . $ticket->status . '.title')) ?? '-';
             $ticket->status = $statusId;
             $ticket->save();

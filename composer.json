@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "phpsa/filament-password-reveal": "^1.1",
-        "spatie/laravel-activitylog": "^4.5"
+        "spatie/laravel-activitylog": "^4.5",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

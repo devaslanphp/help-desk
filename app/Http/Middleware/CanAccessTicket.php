@@ -19,10 +19,10 @@ class CanAccessTicket
     {
         $ticket = $request->route('ticket');
         if (!(
-            has_all_permissions(auth()->user(), 'view-all-tickets')
+            auth()->user()->can('View all tickets')
             ||
             (
-                has_all_permissions(auth()->user(), 'view-own-tickets')
+                auth()->user()->can('View own tickets')
                 && in_array(auth()->user()->id, [$ticket->owner_id, $ticket->responsible_id])
             )
         )) {
