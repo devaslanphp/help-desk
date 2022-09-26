@@ -18,7 +18,7 @@
     @else
         <div class="w-full flex flex-row justify-start items-center gap-5 updating-section">
             <x-status-span :status="$ticket->status" />
-            @if((auth()->user()->can('update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && has_all_permissions(auth()->user(), 'change-status-tickets'))
+            @if((auth()->user()->can('update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && auth()->user()->can('change-status-tickets'))
                 <button type="button" wire:click="update" class="bg-gray-100 shadow hover:bg-gray-200 hover:shadow-lg w-6 h-6 text-xs flex-row justify-center items-center rounded-lg text-gray-400">
                     <i class="fa fa-pencil"></i>
                 </button>
