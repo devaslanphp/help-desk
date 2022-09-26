@@ -67,9 +67,7 @@ class Users extends Component implements HasTable
                 ->sortable(),
 
             BooleanColumn::make('isAccountActivated')
-                ->label(__('Account activated'))
-                ->sortable()
-                ->searchable(),
+                ->label(__('Account activated')),
 
             TagsColumn::make('permissions.name')
                 ->label(__('Permissions'))
