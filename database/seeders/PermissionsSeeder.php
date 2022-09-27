@@ -28,7 +28,6 @@ class PermissionsSeeder extends Seeder
         'Can view Analytics page',
         'Can view Tickets page',
         'Can view Kanban page',
-        'Can view Administration page',
         'View all users',
         'View company users',
         'Create users',

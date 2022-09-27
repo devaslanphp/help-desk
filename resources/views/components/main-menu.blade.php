@@ -34,34 +34,66 @@
         <div class="hidden justify-between items-center w-full xl:flex xl:w-auto xl:order-1" id="navbar-sticky">
             <ul class="flex flex-col p-2 bg-gray-50 rounded-lg border border-gray-100 xl:flex-row xl:space-x-8 xl:mt-0 xl:text-sm xl:font-medium xl:border-0 xl:bg-white dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
                 @foreach($menu as $key => $value)
-                    @if($value['always_shown'] || auth()->user()->can($value['permission']))
-                        <li>
-                            <a
-                                href="{{ route($key) }}"
-                                id="{{ $key }}"
-                                class="relative xl:flex hidden items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                                <div class="relative">
-                                    <i class="fa {{ $value['icon'] }}"></i>
-                                    @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
-                                        <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                    @if($value['always_shown'] || auth()->user()->hasAnyPermission($value['permissions']))
+                        @isset($value['children'])
+                            <li>
+                                <button id="{{ $key }}" data-dropdown-toggle="{{ $key . '-navbar' }}"
+                                        class="relative xl:flex hidden items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                                    <div class="relative">
+                                        <i class="fa {{ $value['icon'] }}"></i>
+                                        @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
+                                            <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                                        @endif
+                                    </div>
+                                    @if((Route::is($key) || Route::is($key . '.*')))
+                                        <span>@lang($value['title'])</span>
                                     @endif
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div id="{{ $key . '-navbar' }}" class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                        @foreach($value['children'] as $item)
+                                            @if($item['always_shown'] || auth()->user()->hasAnyPermission($item['permissions']))
+                                                <li>
+                                                    <a href="{{ route($item['route']) }}" class="flex items-center gap-2 block py-2 px-4 hover:bg-gray-100 {{ (Route::is($item['route']) || Route::is($item['route'] . '.*')) ? 'text-primary-500 font-medium' : 'text-gray-500' }}">
+                                                        <i class="fa {{ $item['icon'] }}"></i>
+                                                        <span>{{ __($item['title']) }}</span>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </div>
-                                @if((Route::is($key) || Route::is($key . '.*')))
+                            </li>
+                        @else
+                            <li>
+                                <a
+                                    href="{{ route($key) }}"
+                                    id="{{ $key }}"
+                                    class="relative xl:flex hidden items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                                    <div class="relative">
+                                        <i class="fa {{ $value['icon'] }}"></i>
+                                        @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
+                                            <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                                        @endif
+                                    </div>
+                                    @if((Route::is($key) || Route::is($key . '.*')))
+                                        <span>@lang($value['title'])</span>
+                                    @endif
+                                </a>
+                                <a
+                                    href="{{ route($key) }}"
+                                    class="relative xl:hidden flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                                    <div class="relative">
+                                        <i class="fa {{ $value['icon'] }}"></i>
+                                        @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
+                                            <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                                        @endif
+                                    </div>
                                     <span>@lang($value['title'])</span>
-                                @endif
-                            </a>
-                            <a
-                                href="{{ route($key) }}"
-                                class="relative xl:hidden flex items-center justify-between gap-2 py-2 px-3 text-base rounded-lg dark:text-white {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white bg-primary-500 font-medium' : 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                                <div class="relative">
-                                    <i class="fa {{ $value['icon'] }}"></i>
-                                    @if($value['show_notification_indicator'] && auth()->user()->unreadNotifications()->count())
-                                        <i class="fa fa-circle fa-beat-fade {{ (Route::is($key) || Route::is($key . '.*')) ? 'text-white' : 'text-primary-500' }} absolute -right-1" style="font-size: .4rem; --fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
-                                    @endif
-                                </div>
-                                <span>@lang($value['title'])</span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        @endisset
                     @endif
                 @endforeach
             </ul>

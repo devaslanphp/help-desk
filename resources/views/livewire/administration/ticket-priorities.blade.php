@@ -1,4 +1,3 @@
-<x-administration-layout>
 <div class="w-full flex flex-col justify-start items-start gap-5">
     <div class="w-full flex md:flex-row flex-col justify-between items-start gap-2">
         <div class="flex flex-col justify-center items-start gap-1">
@@ -54,4 +53,3 @@
         </script>
     @endpush
 </div>
-</x-administration-layout>

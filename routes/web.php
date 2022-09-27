@@ -50,7 +50,6 @@ Route::middleware(['auth', 'set_locale'])
         Route::get('/tickets/{number}', TicketNumberController::class)->name('tickets.number');
 
         // Administration
-        Route::view('/administration', 'administration')->name('administration');
         Route::view('/administration/users', 'administration.users')->name('administration.users');
         Route::view('/administration/companies', 'administration.companies')->name('administration.companies');
         Route::view('/administration/ticket-statuses', 'administration.ticket-statuses')->name('administration.ticket-statuses');
