@@ -104,7 +104,6 @@ class TicketStatusesDialog extends Component implements HasForms
             $this->status->text_color = $data['text_color'];
             $this->status->bg_color = $data['bg_color'];
             $this->status->default = $data['default'];
-            $this->status->slug = Str::slug($data['title'], '_');
             $this->status->save();
             Notification::make()
                 ->success()
