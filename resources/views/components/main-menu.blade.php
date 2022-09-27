@@ -78,13 +78,13 @@
                         @isset($value['children'])
                             <li>
                                 <button id="{{ $key }}" data-dropdown-toggle="{{ $key . '-navbar' }}"
-                                        class="relative xl:flex hidden items-center justify-between gap-2 py-2 px-3
-                                        text-base rounded-lg dark:text-white
+                                        class="relative xl:flex hidden items-center justify-start gap-2
+                                        gap-2 py-2 px-3 text-base rounded-lg dark:text-white
                                         {{ (Route::is($key) || Route::is($key . '.*'))
-                                            ?
-                                            'text-white bg-primary-500 font-medium'
-                                            :
-                                            'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700'
+                                                ?
+                                                'text-white bg-primary-500 font-medium'
+                                                :
+                                                'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700'
                                         }}"
                                 >
                                     <div class="relative">
@@ -113,7 +113,39 @@
                                         <span>@lang($value['title'])</span>
                                     @endif
                                 </button>
-                                <!-- Dropdown menu -->
+                                <button data-dropdown-toggle="{{ $key . '-navbar' }}"
+                                        class="relative xl:hidden flex items-center justify-start gap-2 py-2 px-3
+                                        text-base rounded-lg dark:text-white w-full
+                                        {{ (Route::is($key) || Route::is($key . '.*'))
+                                                ? 'text-white bg-primary-500 font-medium'
+                                                :
+                                                'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700'
+                                        }}"
+                                    >
+                                    <div class="relative">
+                                        <em class="fa {{ $value['icon'] }}"></em>
+                                        @if(
+                                            $value['show_notification_indicator']
+                                            && auth()->user()->unreadNotifications()->count()
+                                            )
+                                            <em
+                                                class="fa fa-circle fa-beat-fade
+                                                {{ (Route::is($key) || Route::is($key . '.*'))
+                                                    ?
+                                                    'text-white'
+                                                    :
+                                                    'text-primary-500'
+                                                }} absolute -right-1"
+                                                style="
+                                                    font-size: .4rem;
+                                                    --fa-beat-fade-opacity: .65;
+                                                    --fa-beat-fade-scale: 1.075;"
+                                            >
+                                            </em>
+                                        @endif
+                                    </div>
+                                    <span>@lang($value['title'])</span>
+                                </button>
                                 <div
                                     id="{{ $key . '-navbar' }}"
                                     class="hidden z-10 w-44 font-normal bg-white rounded divide-y
@@ -157,7 +189,7 @@
                                     href="{{ route($key) }}"
                                     id="{{ $key }}"
                                     class="relative xl:flex hidden items-center justify-between
-                                    gap-2 py-2 px-3 text-base rounded-lg dark:text-white
+                                    gap-2 py-2 px-3 text-base xl:flex hidden rounded-lg dark:text-white
                                     {{ (Route::is($key) || Route::is($key . '.*'))
                                             ?
                                             'text-white bg-primary-500 font-medium'
@@ -192,7 +224,7 @@
                                 </a>
                                 <a
                                     href="{{ route($key) }}"
-                                    class="relative xl:hidden flex items-center justify-between gap-2 py-2 px-3
+                                    class="relative xl:hidden flex items-center justify-start gap-2 py-2 px-3
                                     text-base rounded-lg dark:text-white
                                     {{ (Route::is($key) || Route::is($key . '.*'))
                                             ? 'text-white bg-primary-500 font-medium'
