@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Core\CrudDialogHelper;
 use App\Models\CompanyUser;
 use App\Models\Icon;
 use App\Models\Company;
@@ -28,9 +29,9 @@ use Livewire\WithFileUploads;
 class CompaniesDialog extends Component implements HasForms
 {
     use WithFileUploads, InteractsWithForms;
+    use CrudDialogHelper;
 
     public Company $company;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeleteCompany', 'cancelDeleteCompany'];
 
@@ -197,24 +198,11 @@ class CompaniesDialog extends Component implements HasForms
      */
     public function deleteCompany(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('Company deletion'))
-            ->body(__('Are you sure you want to delete this company?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeleteCompany'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeleteCompany')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('Company deletion'),
+            __('Are you sure you want to delete this company?'),
+            'doDeleteCompany',
+            'cancelDeleteCompany'
+        );
     }
 }

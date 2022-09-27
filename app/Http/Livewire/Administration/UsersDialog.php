@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Core\CrudDialogHelper;
 use App\Models\CompanyUser;
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
@@ -23,9 +24,9 @@ use Spatie\Permission\Models\Permission;
 class UsersDialog extends Component implements HasForms
 {
     use InteractsWithForms;
+    use CrudDialogHelper;
 
     public User $user;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeleteUser', 'cancelDeleteUser'];
 
@@ -260,24 +261,11 @@ class UsersDialog extends Component implements HasForms
      */
     public function deleteUser(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('User deletion'))
-            ->body(__('Are you sure you want to delete this user?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeleteUser'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeleteUser')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('User deletion'),
+            __('Are you sure you want to delete this user?'),
+            'doDeleteUser',
+            'cancelDeleteUser'
+        );
     }
 }
