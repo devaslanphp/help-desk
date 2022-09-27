@@ -125,7 +125,6 @@ class TicketTypesDialog extends Component implements HasForms
             $this->type->text_color = $data['text_color'];
             $this->type->bg_color = $data['bg_color'];
             $this->type->icon = $data['icon'];
-            $this->type->slug = Str::slug($data['title'], '_');
             $this->type->save();
             Notification::make()
                 ->success()
