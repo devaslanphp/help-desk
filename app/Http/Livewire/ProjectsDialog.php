@@ -24,7 +24,8 @@ class ProjectsDialog extends Component implements HasForms
 
     protected $listeners = ['doDeleteProject', 'cancelDeleteProject'];
 
-    public function mount(): void {
+    public function mount(): void
+    {
         $this->form->fill([
             'name' => $this->project->name,
             'ticket_prefix' => $this->project->ticket_prefix,
@@ -82,7 +83,8 @@ class ProjectsDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function save(): void {
+    public function save(): void
+    {
         $data = $this->form->getState();
         if (!$this->project?->id) {
             Project::create([
@@ -116,7 +118,8 @@ class ProjectsDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteProject(): void {
+    public function doDeleteProject(): void
+    {
         $this->project->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('projectDeleted');
@@ -132,7 +135,8 @@ class ProjectsDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function cancelDeleteProject(): void {
+    public function cancelDeleteProject(): void
+    {
         $this->deleteConfirmationOpened = false;
     }
 
@@ -142,7 +146,8 @@ class ProjectsDialog extends Component implements HasForms
      * @return void
      * @throws \Exception
      */
-    public function deleteProject(): void {
+    public function deleteProject(): void
+    {
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()

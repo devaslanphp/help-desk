@@ -14,13 +14,16 @@
     <div class="w-full flex flex-row flex-wrap">
         @if(auth()->user()->unreadNotifications()->count())
             <div class="w-full flex flex-row justify-end items-center pb-5">
-                <button type="button" class="text-primary-500 hover:text-primary-600 text-sm hover:underline" wire:click="markAllRead">
+                <button type="button"
+                        class="text-primary-500 hover:text-primary-600 text-sm hover:underline"
+                        wire:click="markAllRead">
                     @lang('Mark all unread notification as read')
                 </button>
             </div>
         @endif
         <div class="w-full overflow-x-auto relative sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption class="hidden">@lang('Notifications')</caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="py-3 px-6"></th>
@@ -36,10 +39,14 @@
                 <tbody>
                 @if($notifications->count())
                     @foreach($notifications as $notification)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                            hover:bg-gray-50 dark:hover:bg-gray-600"
+                        >
                             <td class="py-4 px-6">
                                 @if(!$notification->read_at)
-                                    <i class="fa fa-circle fa-beat-fade text-primary-500" style="--fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"></i>
+                                    <em class="fa fa-circle fa-beat-fade text-primary-500"
+                                        style="--fa-beat-fade-opacity: .65; --fa-beat-fade-scale: 1.075;"
+                                    ></em>
                                 @endif
                             </td>
                             <td class="py-4 px-6">
@@ -47,13 +54,23 @@
                             </td>
                             <td class="py-4 px-6">
                                 <div class="flex flex-col">
-                                    <span class="text-base font-semibold">{{ $notification->created_at->diffForHumans() }}</span>
-                                    <span class="font-normal text-gray-500">{{ $notification->created_at->format(__('Y-m-d g:i A')) }}</span>
+                                    <span
+                                        class="text-base font-semibold">
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </span>
+                                    <span
+                                        class="font-normal text-gray-500">
+                                        {{ $notification->created_at->format(__('Y-m-d g:i A')) }}
+                                    </span>
                                 </div>
                             </td>
                             <td class="py-4 px-6">
                                 @if(!$notification->read_at)
-                                    <button class="text-primary-500 hover:text-primary-600 text-sm hover:underline" type="button" wire:click="markRead('{{ $notification->id }}')">
+                                    <button
+                                        class="text-primary-500 hover:text-primary-600
+                                            text-sm hover:underline" type="button"
+                                        wire:click="markRead('{{ $notification->id }}')"
+                                    >
                                         @lang('Mark as read')
                                     </button>
                                 @endif
@@ -61,7 +78,10 @@
                         </tr>
                     @endforeach
                 @else
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                        hover:bg-gray-50 dark:hover:bg-gray-600"
+                    >
                         <td colspan="4" class="py-4 px-6 text-center dark:text-white">
                             @lang('No notifications received yet!')
                         </td>

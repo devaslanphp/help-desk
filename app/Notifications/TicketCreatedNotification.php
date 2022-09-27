@@ -54,8 +54,23 @@ class TicketCreatedNotification extends Notification implements ShouldQueue
                     ->line(__('Below are the details of this ticket:'))
                     ->line(__('- Title: :title', ['title' => $this->ticket->title]))
                     ->line(__('- Type: :type', ['type' => config('system.types.' . $this->ticket->type . '.title')]))
-                    ->line(__('- Priority: :priority', ['priority' => config('system.priorities.' . $this->ticket->priority . '.title')]))
-                    ->action(__('Ticket details'), route('tickets.details', ['ticket' => $this->ticket, 'slug' => Str::slug($this->ticket->title)]))
+                    ->line(
+                        __(
+                            '- Priority: :priority',
+                            [
+                                'priority' => config('system.priorities.' . $this->ticket->priority . '.title')
+                            ]
+                        )
+                    )
+                    ->action(
+                        __('Ticket details'),
+                        route(
+                            'tickets.details',
+                            [
+                                'ticket' => $this->ticket,
+                                'slug' => Str::slug($this->ticket->title)
+                            ]
+                        ))
                     ->line(__('Thank you for using our application!'));
     }
 

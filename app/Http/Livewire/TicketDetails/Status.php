@@ -78,6 +78,12 @@ class Status extends Component implements HasForms
         ]);
         $this->updating = false;
         $this->emit('ticketSaved');
-        TicketUpdatedJob::dispatch($this->ticket, __('Status'), $before, __(config('system.statuses.' . $this->ticket->status . '.title') ?? '-'), auth()->user());
+        TicketUpdatedJob::dispatch(
+            $this->ticket,
+            __('Status'),
+            $before,
+            __(config('system.statuses.' . $this->ticket->status . '.title') ?? '-'),
+            auth()->user()
+        );
     }
 }

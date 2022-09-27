@@ -17,10 +17,10 @@ class TicketNumberController extends Controller
      */
     public function __invoke(string $number)
     {
-        $ticket_prefix = substr($number, 0, 4);
-        $ticket_number = str_replace($ticket_prefix, "", $number);
-        $ticket = Ticket::where('number', $ticket_number)
-            ->whereHas('project', fn($query) => $query->where('ticket_prefix', $ticket_prefix))
+        $ticketPrefix = substr($number, 0, 4);
+        $ticketNumber = str_replace($ticketPrefix, "", $number);
+        $ticket = Ticket::where('number', $ticketNumber)
+            ->whereHas('project', fn($query) => $query->where('ticket_prefix', $ticketPrefix))
             ->first();
         if ($ticket) {
             return redirect()->route('tickets.details', [

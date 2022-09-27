@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\TicketNumberController;
-use App\Models\User;
 use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,16 @@ Route::middleware(['guest', 'set_locale'])
         Route::view('/auth/forgot-password', 'auth.forgot-password')->name('password.request');
 
         // Recover password
-        Route::get('/auth/recover-password/{token}', fn(string $token) => view('auth.recover-password', compact('token')))->name('password.reset');
+        Route::get(
+            '/auth/recover-password/{token}',
+            fn(string $token) => view('auth.recover-password', compact('token'))
+        )->name('password.reset');
 
         // Account activation
-        Route::get('/auth/activate-account/{user:register_token}', fn (User $user) => view('auth.activate-account', compact('user')))->name('auth.activate-account');
+        Route::get(
+            '/auth/activate-account/{user:register_token}',
+            fn(User $user) => view('auth.activate-account', compact('user'))
+        )->name('auth.activate-account');
     });
 Route::middleware(['auth', 'set_locale'])
     ->group(function () {
@@ -46,16 +52,23 @@ Route::middleware(['auth', 'set_locale'])
 
         // Tickets
         Route::view('/tickets', 'tickets')->name('tickets');
-        Route::get('/tickets/{ticket:id}/{slug}', fn (Ticket $ticket) => view('ticket-details', compact('ticket')))->name('tickets.details')->middleware('can_access_ticket');
+        Route::get(
+            '/tickets/{ticket:id}/{slug}',
+            fn(Ticket $ticket) => view('ticket-details', compact('ticket'))
+        )->name('tickets.details')->middleware('can_access_ticket');
         Route::get('/tickets/{number}', TicketNumberController::class)->name('tickets.number');
 
         // Administration
         Route::view('/administration/users', 'administration.users')->name('administration.users');
         Route::view('/administration/companies', 'administration.companies')->name('administration.companies');
-        Route::view('/administration/ticket-statuses', 'administration.ticket-statuses')->name('administration.ticket-statuses');
-        Route::view('/administration/ticket-priorities', 'administration.ticket-priorities')->name('administration.ticket-priorities');
-        Route::view('/administration/ticket-types', 'administration.ticket-types')->name('administration.ticket-types');
-        Route::view('/administration/activity-logs', 'administration.activity-logs')->name('administration.activity-logs');
+        Route::view('/administration/ticket-statuses', 'administration.ticket-statuses')
+            ->name('administration.ticket-statuses');
+        Route::view('/administration/ticket-priorities', 'administration.ticket-priorities')
+            ->name('administration.ticket-priorities');
+        Route::view('/administration/ticket-types', 'administration.ticket-types')
+            ->name('administration.ticket-types');
+        Route::view('/administration/activity-logs', 'administration.activity-logs')
+            ->name('administration.activity-logs');
 
         // Notifications
         Route::view('/notifications', 'notifications')->name('notifications');

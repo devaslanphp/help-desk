@@ -3,13 +3,7 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\TicketStatus;
-use App\Models\User;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -54,8 +48,11 @@ class TicketStatuses extends Component implements HasTable
                 ->label(__('Title'))
                 ->searchable()
                 ->sortable()
-                ->formatStateUsing(fn (TicketStatus $record) => new HtmlString('
-                    <span class="px-2 py-1 rounded-full text-sm" style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">' . $record->title . '</span>
+                ->formatStateUsing(fn(TicketStatus $record) => new HtmlString('
+                    <span class="px-2 py-1 rounded-full text-sm"
+                        style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">
+                            ' . $record->title . '
+                        </span>
                 ')),
 
             BooleanColumn::make('default')
@@ -146,7 +143,8 @@ class TicketStatuses extends Component implements HasTable
      *
      * @return void
      */
-    public function statusSaved() {
+    public function statusSaved()
+    {
         $this->cancelStatus();
     }
 
@@ -155,7 +153,8 @@ class TicketStatuses extends Component implements HasTable
      *
      * @return void
      */
-    public function statusDeleted() {
+    public function statusDeleted()
+    {
         $this->statusSaved();
     }
 }

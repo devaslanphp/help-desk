@@ -40,7 +40,14 @@ class Ticket extends Model implements HasLogsActivity
             $builder->orderBy('created_at', 'desc');
         });
         static::creating(function (Ticket $ticket) {
-            $ticket->number = str_pad(Ticket::where('project_id', $ticket->project_id)->withTrashed()->count() + 1, 4, '0', STR_PAD_LEFT);
+            $ticket->number = str_pad(
+                Ticket::where('project_id', $ticket->project_id)
+                        ->withTrashed()
+                        ->count() + 1,
+                4,
+                '0',
+                STR_PAD_LEFT
+            );
         });
     }
 

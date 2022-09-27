@@ -60,10 +60,17 @@ class Projects extends Component implements HasTable
             TextColumn::make('make_favorite')
                 ->label('')
                 ->formatStateUsing(function (Project $record) {
-                    $btnClass = $record->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'text-warning-500' : 'text-gray-500';
-                    $iconClass = $record->favoriteUsers()->where('user_id', auth()->user()->id)->count() ? 'fa-star' : 'fa-star-o';
+                    $btnClass = $record->favoriteUsers()
+                        ->where('user_id', auth()->user()->id)
+                        ->count() ? 'text-warning-500' : 'text-gray-500';
+                    $iconClass = $record->favoriteUsers()
+                        ->where('user_id', auth()->user()->id)
+                        ->count() ? 'fa-star' : 'fa-star-o';
                     return new HtmlString('
-                        <button wire:click="toggleFavoriteProject(' . $record->id . ')" type="button" class="' . $btnClass . '">
+                        <button wire:click="toggleFavoriteProject(' . $record->id . ')"
+                                type="button"
+                                class="' . $btnClass . '"
+                            >
                             <i class="fa ' . $iconClass . '"></i>
                         </button>
                     ');
@@ -78,7 +85,9 @@ class Projects extends Component implements HasTable
                 ->label(__('Description'))
                 ->searchable()
                 ->sortable()
-                ->formatStateUsing(fn(string|null $state) => Str::limit(htmlspecialchars(strip_tags($state ?? '')), 50)),
+                ->formatStateUsing(
+                    fn(string|null $state) => Str::limit(htmlspecialchars(strip_tags($state ?? '')), 50)
+                ),
 
             UserColumn::make('owner')
                 ->label(__('Owner')),

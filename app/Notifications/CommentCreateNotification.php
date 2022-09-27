@@ -56,7 +56,14 @@ class CommentCreateNotification extends Notification implements ShouldQueue
             ->line(__('Below are the details of this comment:'))
             ->line(__('- Owner: :owner', ['owner' => $this->comment->owner->name]))
             ->line(__('- Content: :content', ['content' => htmlspecialchars(strip_tags($this->comment->content))]))
-            ->action(__('Ticket details'), route('tickets.details', ['ticket' => $this->comment->ticket, 'slug' => Str::slug($this->comment->ticket->title)]))
+            ->action(
+                __('Ticket details'),
+                route('tickets.details', [
+                        'ticket' => $this->comment->ticket,
+                        'slug' => Str::slug($this->comment->ticket->title)
+                    ]
+                )
+            )
             ->line(__('Thank you for using our application!'));
     }
 

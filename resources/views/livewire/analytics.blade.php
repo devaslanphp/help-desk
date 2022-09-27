@@ -18,7 +18,10 @@
                     <span class="text-lg text-gray-500 font-medium">@lang('My assigned tickets')</span>
                     <div class="w-full overflow-x-auto relative sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <caption class="hidden">@lang('My assigned tickets')</caption>
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                            >
                             <tr>
                                 <th scope="col" class="py-3 px-6">
                                     @lang('Type')
@@ -37,25 +40,42 @@
                             <tbody>
                             @if($assignedTickets->count())
                                 @foreach($assignedTickets as $ticket)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                        hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    >
                                         <td class="py-4 px-6">
-                                            <x-type-span :type="$ticket->type" :min="true" />
+                                            <x-type-span :type="$ticket->type" :min="true"/>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <x-priority-span :priority="$ticket->priority" />
+                                            <x-priority-span :priority="$ticket->priority"/>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <a href="{{ route('tickets.details', ['ticket' => $ticket, 'slug' => Str::slug($ticket->title)]) }}" class="text-gray-500 text-sm hover:underline hover:text-primary-500">
+                                            <a
+                                                href="{{
+                                                            route(
+                                                                'tickets.details',
+                                                                [
+                                                                    'ticket' => $ticket,
+                                                                    'slug' => Str::slug($ticket->title)
+                                                                ]
+                                                            )
+                                                        }}"
+                                                class="text-gray-500 text-sm hover:underline hover:text-primary-500"
+                                            >
                                                 {{ $ticket->title }}
                                             </a>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <x-status-span :status="$ticket->status" />
+                                            <x-status-span :status="$ticket->status"/>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                    hover:bg-gray-50 dark:hover:bg-gray-600"
+                                >
                                     <td colspan="4" class="py-4 px-6 text-center dark:text-white">
                                         @lang('No assigned tickets yet!')
                                     </td>
@@ -67,14 +87,22 @@
                 </div>
             </div>
             <div class="w-full p-5">
-                <div class="w-full flex flex-col justify-center items-center gap-5 p-5 rounded-lg border border-gray-100 shadow-lg bg-white">
-                    <span class="text-lg text-gray-500 font-medium w-full text-left">@lang('Tickets by statuses')</span>
+                <div
+                    class="w-full flex flex-col justify-center items-center gap-5 p-5
+                        rounded-lg border border-gray-100 shadow-lg bg-white"
+                >
+                    <span class="text-lg text-gray-500 font-medium w-full text-left">
+                        @lang('Tickets by statuses')
+                    </span>
                     <div class="overflow-x-auto relative sm:rounded-lg w-full">
                         <canvas id="ticketsByStatuses" style="height: 200px;"></canvas>
                     </div>
                     <div class="w-full overflow-x-auto relative sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <caption class="hidden">@lang('Tickets by statuses')</caption>
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                            >
                             <tr>
                                 <th scope="col" class="py-3 px-6">
                                     @lang('Status')
@@ -87,7 +115,10 @@
                             <tbody>
                             @if(sizeof($ticketsByStatuses))
                                 @foreach($ticketsByStatuses as $status => $count)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                        hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    >
                                         <td class="py-4 px-6">
                                             {{ $status }}
                                         </td>
@@ -97,7 +128,10 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                    hover:bg-gray-50 dark:hover:bg-gray-600"
+                                >
                                     <td colspan="4" class="py-4 px-6 text-center dark:text-white">
                                         @lang('No tickets configured!')
                                     </td>
@@ -111,14 +145,23 @@
         </div>
         <div class="lg:w-1/2 w-full flex flex-col">
             <div class="w-full p-5">
-                <div class="w-full flex flex-col justify-center items-center gap-5 p-5 rounded-lg border border-gray-100 shadow-lg bg-white">
-                    <span class="text-lg text-gray-500 font-medium w-full text-left">@lang('Tickets assignments')</span>
+                <div
+                    class="w-full flex flex-col justify-center items-center
+                    gap-5 p-5 rounded-lg border border-gray-100 shadow-lg bg-white"
+                >
+                    <span class="text-lg text-gray-500 font-medium w-full text-left">
+                        @lang('Tickets assignments')
+                    </span>
                     <div class="overflow-x-auto relative sm:rounded-lg" style="width: 400px; max-width: 100%;">
                         <canvas id="ticketsAssignments"></canvas>
                     </div>
                     <div class="w-full overflow-x-auto relative sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <caption class="hidden">@lang('Tickets assignments')</caption>
+                            <thead
+                                class="text-xs text-gray-700 uppercase
+                                bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                            >
                             <tr>
                                 <th scope="col" class="py-3 px-6">
                                     @lang('Responsible')
@@ -131,7 +174,10 @@
                             <tbody>
                             @if(sizeof($ticketsAssignments))
                                 @foreach($ticketsAssignments as $responbile => $count)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                        hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    >
                                         <td class="py-4 px-6">
                                             {{ $responbile }}
                                         </td>
@@ -141,7 +187,10 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                    hover:bg-gray-50 dark:hover:bg-gray-600"
+                                >
                                     <td colspan="4" class="py-4 px-6 text-center dark:text-white">
                                         @lang('No tickets assigned!')
                                     </td>
@@ -157,7 +206,11 @@
                     <span class="text-lg text-gray-500 font-medium">@lang('Not assigned tickets')</span>
                     <div class="w-full overflow-x-auto relative sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <caption class="hidden">@lang('Not assigned tickets')</caption>
+                            <thead
+                                class="text-xs text-gray-700 uppercase
+                                bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                            >
                             <tr>
                                 <th scope="col" class="py-3 px-6">
                                     @lang('Type')
@@ -176,25 +229,41 @@
                             <tbody>
                             @if($notAssignedTickets->count())
                                 @foreach($notAssignedTickets as $ticket)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                        hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    >
                                         <td class="py-4 px-6">
-                                            <x-type-span :type="$ticket->type" :min="true" />
+                                            <x-type-span :type="$ticket->type" :min="true"/>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <x-priority-span :priority="$ticket->priority" />
+                                            <x-priority-span :priority="$ticket->priority"/>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <a href="{{ route('tickets.details', ['ticket' => $ticket, 'slug' => Str::slug($ticket->title)]) }}" class="text-gray-500 text-sm hover:underline hover:text-primary-500">
+                                            <a
+                                                href="{{
+                                                            route(
+                                                                'tickets.details',
+                                                                [
+                                                                    'ticket' => $ticket,
+                                                                    'slug' => Str::slug($ticket->title)
+                                                                    ]
+                                                                )
+                                                     }}"
+                                                class="text-gray-500 text-sm hover:underline hover:text-primary-500">
                                                 {{ $ticket->title }}
                                             </a>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <x-status-span :status="$ticket->status" />
+                                            <x-status-span :status="$ticket->status"/>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                                    hover:bg-gray-50 dark:hover:bg-gray-600"
+                                >
                                     <td colspan="4" class="py-4 px-6 text-center dark:text-white">
                                         @lang('All tickets are assigned!')
                                     </td>
