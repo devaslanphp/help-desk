@@ -21,7 +21,13 @@ class TicketDetailsCommentsContent extends Component implements HasForms
     public bool $updating = false;
     public bool $deleteConfirmationOpened = false;
 
-    protected $listeners = ['doDeleteComment', 'cancelDeleteComment', 'commentCreated', 'commentDeleted', 'commentSaved'];
+    protected $listeners = [
+        'doDeleteComment',
+        'cancelDeleteComment',
+        'commentCreated',
+        'commentDeleted',
+        'commentSaved'
+    ];
 
     public function mount(): void
     {

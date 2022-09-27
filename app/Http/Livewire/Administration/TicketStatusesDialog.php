@@ -23,7 +23,8 @@ class TicketStatusesDialog extends Component implements HasForms
 
     protected $listeners = ['doDeleteStatus', 'cancelDeleteStatus'];
 
-    public function mount(): void {
+    public function mount(): void
+    {
         $this->form->fill([
             'title' => $this->status->title,
             'text_color' => $this->status->text_color,
@@ -49,9 +50,14 @@ class TicketStatusesDialog extends Component implements HasForms
             TextInput::make('title')
                 ->label(__('Title'))
                 ->maxLength(255)
-                ->unique(table: TicketStatus::class, column: 'title', ignorable: fn () => $this->status, callback: function (Unique $rule) {
-                    return $rule->withoutTrashed();
-                })
+                ->unique(
+                    table: TicketStatus::class,
+                    column: 'title',
+                    ignorable: fn() => $this->status,
+                    callback: function (Unique $rule) {
+                        return $rule->withoutTrashed();
+                    }
+                )
                 ->required(),
 
             ColorPicker::make('text_color')
@@ -73,7 +79,8 @@ class TicketStatusesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function save(): void {
+    public function save(): void
+    {
         $data = $this->form->getState();
         if (!$this->status?->id) {
             $status = TicketStatus::create([
@@ -89,7 +96,7 @@ class TicketStatusesDialog extends Component implements HasForms
                 ->body(__('The status has been created'))
                 ->send();
             if ($status->default) {
-                TicketStatus::where('id', '<>',$status->id)->update(['default' => false]);
+                TicketStatus::where('id', '<>', $status->id)->update(['default' => false]);
             }
         } else {
             $this->status->title = $data['title'];
@@ -103,7 +110,7 @@ class TicketStatusesDialog extends Component implements HasForms
                 ->title(__('Status updated'))
                 ->body(__('The status\'s details has been updated'))
                 ->send();
-            TicketStatus::where('id', '<>',$this->status->id)->update(['default' => false]);
+            TicketStatus::where('id', '<>', $this->status->id)->update(['default' => false]);
         }
         if (TicketStatus::where('default', true)->count() === 0) {
             $first = TicketStatus::first();
@@ -118,7 +125,8 @@ class TicketStatusesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteStatus(): void {
+    public function doDeleteStatus(): void
+    {
         $this->status->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('statusDeleted');
@@ -134,7 +142,8 @@ class TicketStatusesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function cancelDeleteStatus(): void {
+    public function cancelDeleteStatus(): void
+    {
         $this->deleteConfirmationOpened = false;
     }
 
@@ -144,7 +153,8 @@ class TicketStatusesDialog extends Component implements HasForms
      * @return void
      * @throws \Exception
      */
-    public function deleteStatus(): void {
+    public function deleteStatus(): void
+    {
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()

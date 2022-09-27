@@ -61,7 +61,16 @@ class TicketUpdatedNotification extends Notification implements ShouldQueue
             ->line(__('- Field: :field', ['field' => $this->field]))
             ->line(__('- Old value: :oldValue', ['oldValue' => $this->before]))
             ->line(__('- New value: :newValue', ['newValue' => $this->after]))
-            ->action(__('Ticket details'), route('tickets.details', ['ticket' => $this->ticket, 'slug' => Str::slug($this->ticket->title)]))
+            ->action(
+                __('Ticket details'),
+                route(
+                    'tickets.details',
+                    [
+                        'ticket' => $this->ticket,
+                        'slug' => Str::slug($this->ticket->title)
+                    ]
+                )
+            )
             ->line(__('Thank you for using our application!'));
     }
 

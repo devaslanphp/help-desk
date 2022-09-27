@@ -41,7 +41,13 @@ class CommentCreatedJob implements ShouldQueue
             if (
                 (auth()->user()->can('View all tickets') && $this->comment->owner_id !== $user->id)
                 ||
-                (auth()->user()->can('View own tickets') && ($this->comment->ticket->owner_id === $user->id || $this->comment->ticket->responsible_id === $user->id) && $this->comment->owner_id !== $user->id)
+                (
+                    auth()->user()->can('View own tickets')
+                    && (
+                        $this->comment->ticket->owner_id === $user->id
+                        || $this->comment->ticket->responsible_id === $user->id
+                    )
+                    && $this->comment->owner_id !== $user->id)
             ) {
                 $user->notify(new CommentCreateNotification($this->comment, $user));
             }

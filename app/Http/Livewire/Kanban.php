@@ -53,13 +53,25 @@ class Kanban extends FilamentKanbanBoard
                     'title' => new HtmlString('
                         <div class="w-full flex flex-col space-y-3">
                             <div class="w-full flex items-center gap-2">
-                                <div title="' . $type['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center" style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';">
+                                <div title="' . $type['title'] . '"
+                                    class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
+                                    style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';"
+                                    >
                                     <i class="fa ' . $type['icon'] . '"></i>
                                 </div>
-                                <div title="' . $priority['title'] . '" class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center" style="color: ' . $priority->text_color . '; background-color: ' . $priority->bg_color . ';">
+                                <div title="' . $priority['title'] . '"
+                                    class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
+                                    style="
+                                        color: ' . $priority->text_color . ';
+                                        background-color: ' . $priority->bg_color . ';
+                                    "
+                                    >
                                     <i class="fa ' . $priority['icon'] . '"></i>
                                 </div>
-                                <span class="text-sm font-normal" title="' . $ticket->title . '">' . Str::limit($ticket->title, 15) . '</span>
+                                <span class="text-sm font-normal"
+                                    title="' . $ticket->title . '">
+                                    ' . Str::limit($ticket->title, 15) . '
+                                </span>
                             </div>
                             <div class="w-full text-xs font-light">
                                 ' . Str::limit(htmlspecialchars(strip_tags($ticket->content))) . '
@@ -68,9 +80,15 @@ class Kanban extends FilamentKanbanBoard
                                 <div class="flex items-center gap-1">
                                     ' .
                         ($ticket->responsible ? '
-                                            <img src="' . $ticket->responsible->avatar_url . '" alt="' . $ticket->responsible->name . '" class="rounded-full shadow" style="width: 20px; height: 20px;" />
+                                            <img src="' . $ticket->responsible->avatar_url . '"
+                                                alt="' . $ticket->responsible->name . '"
+                                                class="rounded-full shadow"
+                                                style="width: 20px; height: 20px;"
+                                            />
                                             <span class="font-light text-xs">' . $ticket->responsible->name . '</span>
-                                        ' : '<span class="text-xs font-normal text-gray-400">' . __('Not assigned yet!') . '</span>')
+                                        ' : '<span class="text-xs font-normal text-gray-400">
+                                                ' . __('Not assigned yet!') .
+                                            '</span>')
                         . '
                                 </div>
                                 <div class="flex items-center gap-1 text-xs text-gray-500">
@@ -99,7 +117,8 @@ class Kanban extends FilamentKanbanBoard
             'kanbanHeader' => 'px-3 py-3 font-bold text-xs w-full border-b border-gray-150',
             'kanbanFooter' => '',
             'kanbanRecords' => 'space-y-4 p-3 flex-1 overflow-y-auto w-64',
-            'record' => 'bg-white dark:bg-gray-800 p-4 border border-gray-150 rounded cursor-pointer w-62 hover:bg-gray-50 hover:shadow-lg',
+            'record' => 'bg-white dark:bg-gray-800 p-4 border border-gray-150 rounded
+                        cursor-pointer w-62 hover:bg-gray-50 hover:shadow-lg',
             'recordContent' => 'w-full',
         ];
     }
@@ -116,7 +135,18 @@ class Kanban extends FilamentKanbanBoard
     public function onStatusChanged($recordId, $statusId, $fromOrderedIds, $toOrderedIds): void
     {
         $ticket = Ticket::find($recordId);
-        if ((auth()->user()->can('Update all tickets') || (auth()->user()->can('Update own tickets') && ($ticket->owner_id === auth()->user() || $ticket->responsible_id === auth()->user()->id))) && auth()->user()->can('Change status tickets')) {
+        if (
+            (
+                auth()->user()->can('Update all tickets')
+                || (
+                    auth()->user()->can('Update own tickets')
+                    && (
+                        $ticket->owner_id === auth()->user()
+                        || $ticket->responsible_id === auth()->user()->id)
+                )
+            )
+            && auth()->user()->can('Change status tickets')
+        ) {
             $before = __(config('system.statuses.' . $ticket->status . '.title')) ?? '-';
             $ticket->status = $statusId;
             $ticket->save();
@@ -125,7 +155,13 @@ class Kanban extends FilamentKanbanBoard
                 ->title(__('Status updated'))
                 ->body(__('The ticket status has been successfully updated'))
                 ->send();
-            TicketUpdatedJob::dispatch($ticket, __('Status'), $before, __(config('system.statuses.' . $ticket->status . '.title') ?? '-'), auth()->user());
+            TicketUpdatedJob::dispatch(
+                $ticket,
+                __('Status'),
+                $before,
+                __(config('system.statuses.' . $ticket->status . '.title') ?? '-'),
+                auth()->user()
+            );
         } else {
             Notification::make()
                 ->success()

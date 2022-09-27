@@ -2,18 +2,14 @@
 
 namespace App\Http\Livewire\Administration;
 
-use App\Models\Company;
 use App\Models\CompanyUser;
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
-use Filament\Forms\Components\Checkbox;
+use Closure;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\MultiSelect;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -23,7 +19,6 @@ use Illuminate\Support\HtmlString;
 use Livewire\Component;
 use Ramsey\Uuid\Uuid;
 use Spatie\Permission\Models\Permission;
-use Closure;
 
 class UsersDialog extends Component implements HasForms
 {
@@ -70,7 +65,11 @@ class UsersDialog extends Component implements HasForms
                     TextInput::make('email')
                         ->label(__('Email address'))
                         ->email()
-                        ->unique(table: User::class, column: 'email', ignorable: fn() => $this->user->id ? $this->user : null)
+                        ->unique(
+                            table: User::class,
+                            column: 'email',
+                            ignorable: fn() => $this->user->id ? $this->user : null
+                        )
                         ->required(),
                 ]),
 
@@ -85,7 +84,13 @@ class UsersDialog extends Component implements HasForms
                     Select::make('company')
                         ->label(__('Company'))
                         ->columnSpan(1)
-                        ->visible(fn() => !$this->user?->id && (auth()->user()->can('View own companies') && !auth()->user()->can('View all companies')))
+                        ->visible(
+                            fn() => !$this->user?->id
+                                && (
+                                    auth()->user()->can('View own companies')
+                                    && !auth()->user()->can('View all companies')
+                                )
+                        )
                         ->options(fn() => auth()->user()->ownCompanies->pluck('name', 'id')->toArray()),
                 ]),
 
@@ -100,10 +105,16 @@ class UsersDialog extends Component implements HasForms
                         ->searchable()
                         ->options(function () {
                             $query = User::query();
-                            if (auth()->user()->can('View own companies') && !auth()->user()->can('View all companies')) {
-                                $query->whereHas('companies', fn($query) => $query->whereIn('companies.id',
-                                    auth()->user()->ownCompanies->pluck('id')->toArray()
-                                )
+                            if (
+                                auth()->user()->can('View own companies')
+                                && !auth()->user()->can('View all companies')
+                            ) {
+                                $query->whereHas(
+                                    'companies',
+                                    fn($query) => $query->whereIn(
+                                        'companies.id',
+                                        auth()->user()->ownCompanies->pluck('id')->toArray()
+                                    )
                                 );
                             }
                             return $query->get()->pluck('name', 'id')->toArray();
@@ -121,9 +132,17 @@ class UsersDialog extends Component implements HasForms
                 ->label(__('Permissions'))
                 ->hint(new HtmlString('
                     <div class="w-full flex items-center gap-2">
-                        <button type="button" class="text-xs text-primary-500 hover:text-primary-600 hover:underline" wire:click="assignAllPermissions">' . __('Assign all permissions') . '</button>
+                        <button type="button"
+                            class="text-xs text-primary-500 hover:text-primary-600 hover:underline"
+                            wire:click="assignAllPermissions">
+                            ' . __('Assign all permissions') . '
+                        </button>
                         <span class="text-xs text-gray-300">|</span>
-                        <button type="button" class="text-xs text-primary-500 hover:text-primary-600 hover:underline" wire:click="removeAllPermissions">' . __('Remove all permissions') . '</button>
+                        <button type="button"
+                            class="text-xs text-primary-500 hover:text-primary-600 hover:underline"
+                            wire:click="removeAllPermissions">
+                            ' . __('Remove all permissions') . '
+                        </button>
                     </div>
                 '))
                 ->visible(fn() => auth()->user()->can('Assign permissions'))
@@ -211,7 +230,8 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteUser(): void {
+    public function doDeleteUser(): void
+    {
         $this->user->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('userDeleted');

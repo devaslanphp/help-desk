@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Administration;
 
 use App\Models\Icon;
 use App\Models\TicketType;
+use Closure;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -11,12 +12,10 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component;
-use Closure;
 
 class TicketTypesDialog extends Component implements HasForms
 {
@@ -27,7 +26,8 @@ class TicketTypesDialog extends Component implements HasForms
 
     protected $listeners = ['doDeleteType', 'cancelDeleteType'];
 
-    public function mount(): void {
+    public function mount(): void
+    {
         $this->form->fill([
             'title' => $this->type->title,
             'text_color' => $this->type->text_color,
@@ -53,9 +53,14 @@ class TicketTypesDialog extends Component implements HasForms
             TextInput::make('title')
                 ->label(__('Title'))
                 ->maxLength(255)
-                ->unique(table: TicketType::class, column: 'title', ignorable: fn () => $this->type, callback: function (Unique $rule) {
-                    return $rule->withoutTrashed();
-                })
+                ->unique(
+                    table: TicketType::class,
+                    column: 'title',
+                    ignorable: fn() => $this->type,
+                    callback: function (Unique $rule) {
+                        return $rule->withoutTrashed();
+                    }
+                )
                 ->required(),
 
             ColorPicker::make('text_color')
@@ -71,10 +76,26 @@ class TicketTypesDialog extends Component implements HasForms
                 ->reactive()
                 ->searchable()
                 ->required()
-                ->getSearchResultsUsing(fn (string $search) => Icon::where('icon', 'like', "%{$search}%")->limit(50)->pluck('icon', 'icon'))
-                ->getOptionLabelUsing(fn ($value): ?string => Icon::where('icon', $value)->first()?->icon)
-                ->hint(fn (Closure $get) => $get('icon') ? new HtmlString(__('Selected icon:') . ' <i class="fa fa-2x ' . $get('icon') . '"></i>') : '')
-                ->helperText(new HtmlString(__("Check the <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>fontawesome icons here</a> to choose your right icon"))),
+                ->getSearchResultsUsing(
+                    fn(string $search) => Icon::where('icon', 'like', "%{$search}%")
+                        ->limit(50)
+                        ->pluck('icon', 'icon')
+                )
+                ->getOptionLabelUsing(fn($value): ?string => Icon::where('icon', $value)->first()?->icon)
+                ->hint(
+                    fn(Closure $get) => $get('icon') ?
+                        new HtmlString(
+                            __('Selected icon:') . ' <i class="fa fa-2x ' . $get('icon') . '"></i>')
+                        :
+                        ''
+                )
+                ->helperText(
+                    new HtmlString(
+                        __(
+                            "Check the <a href='https://fontawesome.com/icons'
+                                    target='_blank' class='text-blue-500 underline'>
+                                    fontawesome icons here
+                                 </a> to choose your right icon"))),
         ];
     }
 
@@ -83,10 +104,11 @@ class TicketTypesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function save(): void {
+    public function save(): void
+    {
         $data = $this->form->getState();
         if (!$this->type?->id) {
-            $type = TicketType::create([
+            TicketType::create([
                 'title' => $data['title'],
                 'text_color' => $data['text_color'],
                 'bg_color' => $data['bg_color'],
@@ -119,7 +141,8 @@ class TicketTypesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteType(): void {
+    public function doDeleteType(): void
+    {
         $this->type->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('typeDeleted');
@@ -135,7 +158,8 @@ class TicketTypesDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function cancelDeleteType(): void {
+    public function cancelDeleteType(): void
+    {
         $this->deleteConfirmationOpened = false;
     }
 
@@ -145,7 +169,8 @@ class TicketTypesDialog extends Component implements HasForms
      * @return void
      * @throws \Exception
      */
-    public function deleteType(): void {
+    public function deleteType(): void
+    {
         $this->deleteConfirmationOpened = true;
         Notification::make()
             ->warning()

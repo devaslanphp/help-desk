@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Core\HasLogsActivity;
 use App\Core\LogsActivity;
 use Devaslanphp\FilamentAvatar\Core\HasAvatarUrl;

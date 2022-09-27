@@ -1,16 +1,19 @@
 <div class="w-full flex flex-col justify-start items-start gap-5">
     <div class="w-full flex md:flex-row flex-col justify-between items-start gap-2">
         <div class="w-full flex flex-col justify-center items-start gap-3">
-            <a href="{{ route('tickets') }}" class="text-xs text-blue-500 hover:text-blue-600 font-light flex items-center gap-2">
-                <i class="fa fa-long-arrow-left"></i>
+            <a href="{{ route('tickets') }}"
+               class="text-xs text-blue-500 hover:text-blue-600 font-light flex items-center gap-2">
+                <em  class="fa fa-long-arrow-left"></em>
                 @lang('Go back to tickets list')
             </a>
             <div class="w-full flex flex-col justify-center items-start gap-0">
                 <span class="w-full text-sm font-medium text-gray-500 flex flex-row justify-start items-center gap-2">
-                    <i class="fa fa-tag"></i>
+                    <em  class="fa fa-tag"></em>
                     {{ $ticket->project->name }}
                     <span class="text-xs text-gray-300">/</span>
-                    <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl('{{ $ticket->id }}')" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
+                    <button type="button" class="font-normal hover:cursor-pointer hover:underline"
+                            wire:click="copyTicketUrl('{{ $ticket->id }}')"
+                            title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
                 </span>
                 <div class="w-full">
                     @livewire('ticket-details.title', ['ticket' => $ticket])
@@ -25,8 +28,19 @@
             <div class="w-full flex flex-col gap-2 mt-10" id="ticket-details-tabs">
                 <div class="w-full flex flex-row justify-start items-center gap-3 overflow-x-auto menu">
                     @foreach($menu as $item)
-                        <button wire:click="selectMenu('{{ $item }}')" type="button" class="item {{ $activeMenu === $item ? 'active' : '' }}">
-                            @lang($item) {{ ($item === 'Comments' && $ticket->comments->count()) ? ('(' . $ticket->comments->count() . ')') : '' }}
+                        <button wire:click="selectMenu('{{ $item }}')" type="button"
+                                class="item {{ $activeMenu === $item ? 'active' : '' }}">
+                            @lang($item)
+                            {{
+                                (
+                                    $item === 'Comments'
+                                    && $ticket->comments->count()
+                                )
+                                ?
+                                ('(' . $ticket->comments->count() . ')')
+                                :
+                                ''
+                            }}
                         </button>
                     @endforeach
                 </div>
@@ -58,7 +72,8 @@
             <div class="w-full flex flex-col justify-start items-start gap-2">
                 <span class="text-gray-500 font-normal text-xs">@lang('Owner')</span>
                 <div class="w-full flex flex-row justify-start items-center gap-2">
-                    <x-user-avatar :user="$ticket->owner" /> <span class="text-gray-700 text-sm font-medium">{{ $ticket->owner->name }}</span>
+                    <x-user-avatar :user="$ticket->owner"/>
+                    <span class="text-gray-700 text-sm font-medium">{{ $ticket->owner->name }}</span>
                 </div>
             </div>
             <div class="w-full flex flex-col justify-start items-start gap-2">

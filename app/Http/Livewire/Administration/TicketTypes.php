@@ -2,14 +2,8 @@
 
 namespace App\Http\Livewire\Administration;
 
-use App\Models\TicketStatus;
 use App\Models\TicketType;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -53,8 +47,11 @@ class TicketTypes extends Component implements HasTable
                 ->label(__('Title'))
                 ->searchable()
                 ->sortable()
-                ->formatStateUsing(fn (TicketType $record) => new HtmlString('
-                    <span class="px-2 py-1 rounded-full text-sm flex items-center gap-2" style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">
+                ->formatStateUsing(fn(TicketType $record) => new HtmlString('
+                    <span
+                        class="px-2 py-1 rounded-full text-sm flex items-center gap-2"
+                        style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '"
+                    >
                     <i class="fa ' . $record->icon . '"></i>' . $record->title . '
                     </span>
                 ')),
@@ -142,7 +139,8 @@ class TicketTypes extends Component implements HasTable
      *
      * @return void
      */
-    public function typeSaved() {
+    public function typeSaved()
+    {
         $this->cancelType();
     }
 
@@ -151,7 +149,8 @@ class TicketTypes extends Component implements HasTable
      *
      * @return void
      */
-    public function typeDeleted() {
+    public function typeDeleted()
+    {
         $this->typeSaved();
     }
 }
