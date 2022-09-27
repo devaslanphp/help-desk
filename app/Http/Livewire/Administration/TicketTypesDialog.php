@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Core\CrudDialogHelper;
 use App\Models\Icon;
 use App\Models\TicketType;
 use Closure;
@@ -10,7 +11,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -20,9 +20,9 @@ use Livewire\Component;
 class TicketTypesDialog extends Component implements HasForms
 {
     use InteractsWithForms;
+    use CrudDialogHelper;
 
     public TicketType $type;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeleteType', 'cancelDeleteType'];
 
@@ -171,24 +171,11 @@ class TicketTypesDialog extends Component implements HasForms
      */
     public function deleteType(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('Type deletion'))
-            ->body(__('Are you sure you want to delete this type?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeleteType'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeleteType')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('Type deletion'),
+            __('Are you sure you want to delete this type?'),
+            'doDeleteType',
+            'cancelDeleteType'
+        );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Core\CrudDialogHelper;
 use App\Models\Project;
 use App\Models\User;
 use App\Notifications\ProjectCreatedNotification;
@@ -18,9 +19,9 @@ use Livewire\Component;
 class ProjectsDialog extends Component implements HasForms
 {
     use InteractsWithForms;
+    use CrudDialogHelper;
 
     public Project $project;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeleteProject', 'cancelDeleteProject'];
 
@@ -148,24 +149,11 @@ class ProjectsDialog extends Component implements HasForms
      */
     public function deleteProject(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('Project deletion'))
-            ->body(__('Are you sure you want to delete this project?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeleteProject'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeleteProject')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('Project deletion'),
+            __('Are you sure you want to delete this project?'),
+            'doDeleteProject',
+            'cancelDeleteProject'
+        );
     }
 }
