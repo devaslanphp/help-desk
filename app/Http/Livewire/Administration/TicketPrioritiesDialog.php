@@ -136,7 +136,6 @@ class TicketPrioritiesDialog extends Component implements HasForms
             $this->priority->text_color = $data['text_color'];
             $this->priority->bg_color = $data['bg_color'];
             $this->priority->icon = $data['icon'];
-            $this->priority->slug = Str::slug($data['title'], '_');
             $this->priority->save();
             Notification::make()
                 ->success()

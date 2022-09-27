@@ -53,21 +53,25 @@ class Kanban extends FilamentKanbanBoard
                     'title' => new HtmlString('
                         <div class="w-full flex flex-col space-y-3">
                             <div class="w-full flex items-center gap-2">
-                                <div title="' . $type['title'] . '"
-                                    class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
-                                    style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';"
-                                    >
-                                    <i class="fa ' . $type['icon'] . '"></i>
-                                </div>
-                                <div title="' . $priority['title'] . '"
-                                    class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
-                                    style="
-                                        color: ' . $priority->text_color . ';
-                                        background-color: ' . $priority->bg_color . ';
-                                    "
-                                    >
-                                    <i class="fa ' . $priority['icon'] . '"></i>
-                                </div>
+                                ' . ($type ? '
+                                    <div title="' . $type['title'] . '"
+                                        class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
+                                        style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';"
+                                        >
+                                        <i class="fa ' . $type['icon'] . '"></i>
+                                    </div>
+                                ' : '') . '
+                                ' . ($priority ? '
+                                    <div title="' . $priority['title'] . '"
+                                        class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
+                                        style="
+                                            color: ' . $priority->text_color . ';
+                                            background-color: ' . $priority->bg_color . ';
+                                        "
+                                        >
+                                        <i class="fa ' . $priority['icon'] . '"></i>
+                                    </div>
+                                ' : '') . '
                                 <span class="text-sm font-normal"
                                     title="' . $ticket->title . '">
                                     ' . Str::limit($ticket->title, 15) . '
@@ -79,7 +83,7 @@ class Kanban extends FilamentKanbanBoard
                             <div class="w-full flex items-center space-x-4">
                                 <div class="flex items-center gap-1">
                                     ' .
-                        ($ticket->responsible ? '
+                                        ($ticket->responsible ? '
                                             <img src="' . $ticket->responsible->avatar_url . '"
                                                 alt="' . $ticket->responsible->name . '"
                                                 class="rounded-full shadow"
