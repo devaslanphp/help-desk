@@ -41,7 +41,14 @@ class UserActivatedNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line(__('We inform you that your user account for the :platform platform is now activated.', ['platform' => config('app.name')]))
+                    ->line(
+                        __(
+                            'We inform you that your user account for the :platform platform is now activated.',
+                            [
+                                'platform' => config('app.name')
+                            ]
+                        )
+                    )
                     ->line(__('You can use the following button to access the platform.'))
                     ->action('Access my account', route('home'))
                     ->line(__('Thank you for using our application!'));

@@ -17,9 +17,15 @@ class LocaleMiddleware
     public function handle(Request $request, Closure $next)
     {
         $locale = config('app.locale');
-        if (session()->has('locale') && in_array(session()->get('locale'), array_keys(config('system.locales')))) {
+        if (
+            session()->has('locale')
+            && in_array(session()->get('locale'), array_keys(config('system.locales')))
+        ) {
             $locale = session()->get('locale');
-        } else if (auth()->user()?->locale && in_array(auth()->user()?->locale, array_keys(config('system.locales')))) {
+        } elseif (
+            auth()->user()?->locale
+            && in_array(auth()->user()?->locale, array_keys(config('system.locales')))
+        ) {
             $locale = auth()->user()?->locale;
         }
         app()->setLocale($locale);

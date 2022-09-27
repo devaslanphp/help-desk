@@ -48,7 +48,10 @@ class TicketPriorities extends Component implements HasTable
                 ->searchable()
                 ->sortable()
                 ->formatStateUsing(fn(TicketPriority $record) => new HtmlString('
-                    <span class="px-2 py-1 rounded-full text-sm flex items-center gap-2" style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '">
+                    <span
+                        class="px-2 py-1 rounded-full text-sm flex items-center gap-2"
+                        style="color: ' . $record->text_color . '; background-color: ' . $record->bg_color . '"
+                    >
                     <i class="fa ' . $record->icon . '"></i>' . $record->title . '
                     </span>
                 ')),

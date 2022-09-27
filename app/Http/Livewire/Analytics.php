@@ -65,7 +65,7 @@ class Analytics extends Component
             return ($a->first()->responsible_id ?? 0) > ($b->first()->responsibe_id ?? 0);
         });
         $this->ticketsAssignments = [];
-        foreach ($tickets as $key => $ticket) {
+        foreach ($tickets as $ticket) {
             $this->ticketsAssignments[$ticket->first()->responsible?->name ?? __('Unassigned')] = $ticket->count();
         }
     }
@@ -87,7 +87,7 @@ class Analytics extends Component
         $tickets = $query->get()->groupBy('status');
         $this->ticketsByStatuses = [];
         $statuses = TicketStatus::all();
-        foreach ($tickets as $key => $ticket) {
+        foreach ($tickets as $ticket) {
             $status = $statuses->where('slug', $ticket->first()->status)->first();
             if ($status) {
                 $this->ticketsByStatuses[$status->title] = $ticket->count();

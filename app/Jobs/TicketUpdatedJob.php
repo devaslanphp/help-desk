@@ -29,7 +29,13 @@ class TicketUpdatedJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Ticket $ticket, string $field, string $before, string $after, User|Authenticatable $user)
+    public function __construct(
+        Ticket $ticket,
+        string $field,
+        string $before,
+        string $after,
+        User|Authenticatable $user
+    )
     {
         $this->ticket = $ticket;
         $this->field = $field;
@@ -49,11 +55,29 @@ class TicketUpdatedJob implements ShouldQueue
             $users = User::whereNull('register_token')->where('id', '<>', $this->user->id)->get();
             foreach ($users as $u) {
                 if (
-                    (auth()->user()->can('View all tickets') && $this->ticket->owner_id !== $u->id)
+                    (
+                        auth()->user()->can('View all tickets')
+                        && $this->ticket->owner_id !== $u->id
+                    )
                     ||
-                    (auth()->user()->can('View own tickets') && ($this->ticket->owner_id === $u->id || $this->ticket->responsible_id === $u->id) && $this->ticket->owner_id !== $u->id)
+                    (
+                        auth()->user()->can('View own tickets')
+                        && (
+                            $this->ticket->owner_id === $u->id
+                            || $this->ticket->responsible_id === $u->id
+                        )
+                        && $this->ticket->owner_id !== $u->id
+                    )
                 ) {
-                    $u->notify(new TicketUpdatedNotification($this->ticket, $this->field, $this->before, $this->after, $this->user));
+                    $u->notify(
+                        new TicketUpdatedNotification(
+                            $this->ticket,
+                            $this->field,
+                            $this->before,
+                            $this->after,
+                            $this->user
+                        )
+                    );
                 }
             }
         }

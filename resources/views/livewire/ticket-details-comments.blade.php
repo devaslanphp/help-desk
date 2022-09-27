@@ -6,10 +6,12 @@
             </div>
             <div class="w-full flex flex-row gap-2 justify-between items-center px-5">
                 <button type="submit" wire:loading.attr="disabled"
-                        class="rounded-lg flex flex-row justify-center items-center text-center gap-2 text-white bg-primary-700 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg px-10 py-3 text-sm">
+                        class="rounded-lg flex flex-row justify-center items-center text-center gap-2
+                        text-white bg-primary-700 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg
+                        px-10 py-3 text-sm">
                     @lang('Add comment')
                     <div wire:loading>
-                        <i class="fa fa-spin fa-spinner"></i>
+                        <em class="fa fa-spin fa-spinner"></em>
                     </div>
                 </button>
             </div>

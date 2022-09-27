@@ -54,9 +54,15 @@ class TicketPrioritiesDialog extends Component implements HasForms
             TextInput::make('title')
                 ->label(__('Title'))
                 ->maxLength(255)
-                ->unique(table: TicketPriority::class, column: 'title', ignorable: fn () => $this->priority, callback: function (Unique $rule) {
-                    return $rule->withoutTrashed();
-                })
+                ->unique(
+                    table: TicketPriority::class,
+                    column: 'title',
+                    ignorable: fn () => $this->priority,
+                    callback: function (Unique $rule)
+                    {
+                        return $rule->withoutTrashed();
+                    }
+                )
                 ->required(),
 
             ColorPicker::make('text_color')
@@ -72,10 +78,34 @@ class TicketPrioritiesDialog extends Component implements HasForms
                 ->reactive()
                 ->searchable()
                 ->required()
-                ->getSearchResultsUsing(fn (string $search) => Icon::where('icon', 'like', "%{$search}%")->limit(50)->pluck('icon', 'icon'))
+                ->getSearchResultsUsing(
+                    fn (string $search) =>
+                        Icon::where('icon', 'like', "%{$search}%")
+                            ->limit(50)
+                            ->pluck('icon', 'icon')
+                )
                 ->getOptionLabelUsing(fn ($value): ?string => Icon::where('icon', $value)->first()?->icon)
-                ->hint(fn (Closure $get) => $get('icon') ? new HtmlString(__('Selected icon:') . ' <i class="fa fa-2x ' . $get('icon') . '"></i>') : '')
-                ->helperText(new HtmlString(__("Check the <a href='https://fontawesome.com/icons' target='_blank' class='text-blue-500 underline'>fontawesome icons here</a> to choose your right icon"))),
+                ->hint(
+                    fn (Closure $get) =>
+                        $get('icon') ?
+                            new HtmlString(
+                                __('Selected icon:')
+                                . ' <i class="fa fa-2x '
+                                . $get('icon')
+                                . '"></i>'
+                            )
+                            :
+                            ''
+                )
+                ->helperText(
+                    new HtmlString(
+                        __("Check the <a href='https://fontawesome.com/icons'
+                                    target='_blank' class='text-blue-500 underline'>
+                                    fontawesome icons here
+                                </a> to choose your right icon"
+                        )
+                    )
+                ),
         ];
     }
 
@@ -88,7 +118,7 @@ class TicketPrioritiesDialog extends Component implements HasForms
     {
         $data = $this->form->getState();
         if (!$this->priority?->id) {
-            $priority = TicketPriority::create([
+            TicketPriority::create([
                 'title' => $data['title'],
                 'text_color' => $data['text_color'],
                 'bg_color' => $data['bg_color'],

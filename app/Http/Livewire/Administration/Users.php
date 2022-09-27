@@ -41,10 +41,13 @@ class Users extends Component implements HasTable
     {
         $query = User::query();
         if (auth()->user()->can('View company users') && !auth()->user()->can('View all users')) {
-            $query->whereHas('companies', fn ($query) =>
-                $query->whereIn('companies.id',
-                    auth()->user()->ownCompanies->pluck('id')->toArray()
-                )
+            $query->whereHas(
+                'companies',
+                fn ($query) =>
+                    $query->whereIn(
+                        'companies.id',
+                        auth()->user()->ownCompanies->pluck('id')->toArray()
+                    )
             );
         } elseif (!auth()->user()->can('View all users')) {
             // Get empty list

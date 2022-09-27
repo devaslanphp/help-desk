@@ -80,9 +80,12 @@ class CompaniesDialog extends Component implements HasForms
                             TextInput::make('name')
                                 ->label(__('Company name'))
                                 ->maxLength(255)
-                                ->unique(table: Company::class, column: 'name', ignorable: fn() => $this->company, callback: function (Unique $rule) {
-                                    return $rule->withoutTrashed();
-                                })
+                                ->unique(
+                                    table: Company::class,
+                                    column: 'name',
+                                    ignorable: fn() => $this->company,
+                                    callback: fn (Unique $rule) => $rule->withoutTrashed()
+                                )
                                 ->required(),
 
                             Select::make('responsible_id')
