@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Core\CrudDialogHelper;
 use App\Models\TicketStatus;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\ColorPicker;
@@ -17,9 +18,9 @@ use Livewire\Component;
 class TicketStatusesDialog extends Component implements HasForms
 {
     use InteractsWithForms;
+    use CrudDialogHelper;
 
     public TicketStatus $status;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeleteStatus', 'cancelDeleteStatus'];
 
@@ -155,24 +156,11 @@ class TicketStatusesDialog extends Component implements HasForms
      */
     public function deleteStatus(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('Status deletion'))
-            ->body(__('Are you sure you want to delete this status?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeleteStatus'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeleteStatus')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('Status deletion'),
+            __('Are you sure you want to delete this status?'),
+            'doDeleteStatus',
+            'cancelDeleteStatus'
+        );
     }
 }

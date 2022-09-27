@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Core\CrudDialogHelper;
 use App\Models\Icon;
 use App\Models\TicketPriority;
 use Closure;
@@ -21,9 +22,9 @@ use Livewire\Component;
 class TicketPrioritiesDialog extends Component implements HasForms
 {
     use InteractsWithForms;
+    use CrudDialogHelper;
 
     public TicketPriority $priority;
-    public bool $deleteConfirmationOpened = false;
 
     protected $listeners = ['doDeletePriority', 'cancelDeletePriority'];
 
@@ -181,24 +182,11 @@ class TicketPrioritiesDialog extends Component implements HasForms
      */
     public function deletePriority(): void
     {
-        $this->deleteConfirmationOpened = true;
-        Notification::make()
-            ->warning()
-            ->title(__('Priority deletion'))
-            ->body(__('Are you sure you want to delete this priority?'))
-            ->actions([
-                Action::make('confirm')
-                    ->label(__('Confirm'))
-                    ->color('danger')
-                    ->button()
-                    ->close()
-                    ->emit('doDeletePriority'),
-                Action::make('cancel')
-                    ->label(__('Cancel'))
-                    ->close()
-                    ->emit('cancelDeletePriority')
-            ])
-            ->persistent()
-            ->send();
+        $this->deleteConfirmation(
+            __('Priority deletion'),
+            __('Are you sure you want to delete this priority?'),
+            'doDeletePriority',
+            'cancelDeletePriority'
+        );
     }
 }

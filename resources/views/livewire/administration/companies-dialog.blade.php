@@ -18,7 +18,7 @@
         @if($company->id && auth()->user()->can('Delete companies'))
             <button type="button"
                     wire:loading.attr="disabled" {!! $deleteConfirmationOpened ? 'disabled' : '' !!}
-                    wire:click="deletePriority"
+                    wire:click="deleteCompany"
                     class="rounded-lg flex flex-row justify-center items-center text-center text-white bg-red-700
                     disabled:bg-red-400 bg-opacity-90 hover:bg-opacity-100 shadow hover:shadow-lg
                     disabled:hover:shadow px-10 py-3 text-sm mt-5"
