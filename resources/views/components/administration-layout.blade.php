@@ -8,7 +8,7 @@
     </div>
     <div class="w-full flex flex-row flex-wrap border-t border-gray-200 mt-8 pt-3">
 
-        <div class="xl:w-1/5 lg:w-1/4 w-full flex flex-col space-y-5 py-5">
+        <div class="xl:w-1/5 lg:w-1/4 w-full flex flex-col space-y-5 py-5" wire:ignore>
             @foreach($menu as $item)
                 @if(auth()->user()->hasAnyPermission($item['permissions']))
                     <a href="{{ route($item['route']) }}" class="w-full px-5 text-lg hover:text-primary-500 border-l-2 border-transparent {{ (Route::is($item['route']) || Route::is($item['route'] . '.*')) ? 'text-primary-500 font-medium border-primary-500' : 'text-gray-500 font-base hover:border-primary-500' }}">
