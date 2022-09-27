@@ -32,7 +32,7 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 
 Below are the analyzes reported by SonarCloud. 
 
-> This project has just started so don't be afraid if there are big numbers.
+> This project has just started so don't be afraid if there are big numbers :satisfied:
 
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=bugs)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
