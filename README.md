@@ -21,9 +21,18 @@
     </a>
 </p>
 
+Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with
+a beautiful and simple to use platform.
+
+Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
+
+<hr/>
+
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 
-Below are the analyzes reported by SonarCloud. **This project has just started so don't be afraid if there are big numbers.**
+Below are the analyzes reported by SonarCloud. 
+
+> This project has just started so don't be afraid if there are big numbers.
 
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=bugs)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
@@ -37,12 +46,7 @@ Below are the analyzes reported by SonarCloud. **This project has just started s
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 
-Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with
-a beautiful and simple to use platform.
-
-Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
-
-![Help Desk](github-contents/banner.jpg)
+<hr/>
 
 ## Screenshots
 <kbd>
