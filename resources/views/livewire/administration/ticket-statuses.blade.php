@@ -1,10 +1,7 @@
+<x-administration-layout>
 <div class="w-full flex flex-col justify-start items-start gap-5">
     <div class="w-full flex md:flex-row flex-col justify-between items-start gap-2">
         <div class="flex flex-col justify-center items-start gap-1">
-            <a href="{{ route('administration') }}" class="text-xs text-blue-500 hover:text-blue-600 font-light flex items-center gap-2">
-                <i class="fa fa-long-arrow-left"></i>
-                @lang('Go back to administration')
-            </a>
             <span class="lg:text-4xl md:text-2xl text-xl font-medium text-gray-700">
                 @lang('Ticket statuses')
             </span>
@@ -57,3 +54,4 @@
         </script>
     @endpush
 </div>
+</x-administration-layout>
