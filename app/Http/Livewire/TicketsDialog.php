@@ -82,6 +82,7 @@ class TicketsDialog extends Component implements HasForms
 
             RichEditor::make('content')
                 ->label(__('Content'))
+                ->required()
                 ->fileAttachmentsDisk(config('filesystems.default'))
                 ->fileAttachmentsDirectory('tickets')
                 ->fileAttachmentsVisibility('private'),
