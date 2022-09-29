@@ -37,11 +37,9 @@ Below are the analyzes reported by SonarCloud.
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=bugs)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
-
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
-
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
