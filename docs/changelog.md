@@ -2,6 +2,9 @@
 
 See what's new added, changed, fixed, improved or updated in the latest versions.
 
+- **Version 1.4.8** *(30 September, 2022)*
+  - `pxlrbt/filament-excel` integration
+
 - **Version 1.4.7** *(30 September, 2022)*
   - Project - Company integration
 

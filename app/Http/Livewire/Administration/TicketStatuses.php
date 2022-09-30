@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\TicketStatus;
+use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -12,6 +13,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TicketStatuses extends Component implements HasTable
 {
@@ -81,6 +85,33 @@ class TicketStatuses extends Component implements HasTable
                 ->link()
                 ->label(__('Edit status'))
                 ->action(fn(TicketStatus $record) => $this->updateStatus($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('ticket-statuses-export')
+                        ->withColumns([
+                            Column::make('title')
+                                ->heading(__('Title')),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+                ])
         ];
     }
 

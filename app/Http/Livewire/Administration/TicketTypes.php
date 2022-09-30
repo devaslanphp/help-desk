@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\TicketType;
+use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -11,6 +12,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TicketTypes extends Component implements HasTable
 {
@@ -77,6 +81,33 @@ class TicketTypes extends Component implements HasTable
                 ->link()
                 ->label(__('Edit type'))
                 ->action(fn(TicketType $record) => $this->updateType($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('ticket-types-export')
+                        ->withColumns([
+                            Column::make('title')
+                                ->heading(__('Title')),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+                ])
         ];
     }
 
