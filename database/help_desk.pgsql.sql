@@ -95,12 +95,7 @@ TRUNCATE TABLE permissions CASCADE;
 TRUNCATE TABLE permissions CASCADE;
 TRUNCATE TABLE roles CASCADE;
 TRUNCATE TABLE role_has_permissions CASCADE;
-
-TRUNCATE TABLE model_has_roles;
-INSERT INTO model_has_roles (role_id, model_type, model_id)
-VALUES (1, 'App\\Models\\User', 4),
-       (2, 'App\\Models\\User', 5),
-       (3, 'App\\Models\\User', 6);
+TRUNCATE TABLE model_has_roles CASCADE;
 
 INSERT INTO permissions (id, name, guard_name, created_at, updated_at)
 VALUES (1, 'View all projects', 'web', '2022-09-25 14:51:10', '2022-09-25 14:51:10'),
@@ -147,6 +142,11 @@ INSERT INTO roles (id, name, guard_name, created_at, updated_at)
 VALUES (1, 'Super administrator', 'web', '2022-09-30 08:11:23', '2022-09-30 08:11:23'),
        (2, 'Employee', 'web', '2022-09-30 08:14:58', '2022-09-30 08:14:58'),
        (3, 'Customer', 'web', '2022-09-30 08:17:01', '2022-09-30 08:17:01');
+
+INSERT INTO model_has_roles (role_id, model_type, model_id)
+VALUES (1, 'App\Models\User', 4),
+       (2, 'App\Models\User', 5),
+       (3, 'App\Models\User', 6);
 
 INSERT INTO role_has_permissions (permission_id, role_id)
 VALUES (1, 1),

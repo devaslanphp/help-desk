@@ -1,4 +1,4 @@
-![Help Desk](logo.png)
+![Help Desk](_media/logo.png)
 
 - [Help Desk](/?id=help-desk)
   - [Features](/?id=features)
@@ -15,5 +15,12 @@
       - [Database configuration](/getting-started?id=database-configuration)
       - [Project structure](/getting-started?id=project-structure)
       - [Theme customization](/getting-started?id=theme-customization)
+
+- [Configuration](/configuration?id=configuration)
+    - [Locales](/configuration?id=locales)
+    - [Main menu](/configuration?id=main-menu)
+
+- [Permissions](/permissions?id=permissions)
+    - [Seeder](/permissions?id=seeder)
 
 - [Changelog](/changelog?id=changelog)
