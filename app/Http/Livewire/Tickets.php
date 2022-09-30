@@ -52,7 +52,12 @@ class Tickets extends Component implements HasForms
         if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id);
+                    ->orWhere('responsible_id', auth()->user()->id)
+                    ->orWhereHas('project', function ($query) {
+                        $query->whereHas('company', function ($query) {
+                            $query->whereIn('companies.id', auth()->user()->ownCompanies->pluck('id')->toArray());
+                        });
+                    });
             });
         }
         if ($this->activeMenu === 'Unassigned') {

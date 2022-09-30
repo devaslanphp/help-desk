@@ -20,7 +20,8 @@ class Project extends Model implements HasLogsActivity
         'name',
         'description',
         'owner_id',
-        'ticket_prefix'
+        'ticket_prefix',
+        'company_id'
     ];
 
     protected static function boot()
@@ -34,6 +35,11 @@ class Project extends Model implements HasLogsActivity
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id')->withTrashed();
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function tickets(): HasMany
