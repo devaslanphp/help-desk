@@ -16,7 +16,7 @@
         <img src="https://img.shields.io/github/issues/devaslanphp/help-desk?style=for-the-badge" alt="issues - help-desk">
     </a>
     <br/>
-    <a href="https://laravel-help-desk.herokuapp.com/docs" title="Go to project documentation">
+    <a href="https://devaslanphp.github.io/help-desk/" title="Go to project documentation">
         <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
     </a>
 </p>
@@ -37,11 +37,9 @@ Below are the analyzes reported by SonarCloud.
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=bugs)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
-
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
-
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=devaslanphp_help-desk&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
@@ -81,7 +79,7 @@ You can check our online demo here: [Online demo](http://helpdesk.devaslan.com/)
 
 ## Documentation
 
-You can find a full documentation here: [Documentation](https://laravel-help-desk.herokuapp.com/docs)
+You can find a full documentation here: [Documentation](https://devaslanphp.github.io/help-desk/)
 
 ## Work in progress
 

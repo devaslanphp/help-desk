@@ -69,6 +69,7 @@ Route::middleware(['auth', 'set_locale'])
             ->name('administration.ticket-types');
         Route::view('/administration/activity-logs', 'administration.activity-logs')
             ->name('administration.activity-logs');
+        Route::view('/administration/roles', 'administration.roles')->name('administration.roles');
 
         // Notifications
         Route::view('/notifications', 'notifications')->name('notifications');
