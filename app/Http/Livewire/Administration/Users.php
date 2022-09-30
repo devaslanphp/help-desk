@@ -72,8 +72,8 @@ class Users extends Component implements HasTable
             BooleanColumn::make('isAccountActivated')
                 ->label(__('Account activated')),
 
-            TagsColumn::make('permissions.name')
-                ->label(__('Permissions'))
+            TagsColumn::make('roles.name')
+                ->label(__('User roles'))
                 ->limit(1)
                 ->visible(fn () => auth()->user()->can('Assign permissions'))
                 ->searchable()

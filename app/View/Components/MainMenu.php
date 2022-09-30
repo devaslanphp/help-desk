@@ -65,6 +65,13 @@ class MainMenu extends Component
                 ],
                 'children' => [
                     [
+                        'title' => 'Manage companies',
+                        'route' => 'administration.companies',
+                        'icon' => 'fa-building',
+                        'always_shown' => false,
+                        'permissions' => ['View all companies', 'View own companies']
+                    ],
+                    [
                         'title' => 'Manage users',
                         'route' => 'administration.users',
                         'icon' => 'fa-users',
@@ -72,11 +79,11 @@ class MainMenu extends Component
                         'permissions' => ['View all users', 'View company users']
                     ],
                     [
-                        'title' => 'Manage companies',
-                        'route' => 'administration.companies',
-                        'icon' => 'fa-building',
+                        'title' => 'Manage user roles',
+                        'route' => 'administration.roles',
+                        'icon' => 'fa-user-lock',
                         'always_shown' => false,
-                        'permissions' => ['View all companies', 'View own companies']
+                        'permissions' => ['Manage user roles']
                     ],
                     [
                         'title' => 'Manage statuses',

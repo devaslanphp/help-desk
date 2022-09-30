@@ -43,6 +43,10 @@ class PermissionsSeeder extends Seeder
         'Manage ticket priorities',
         'Manage ticket types',
         'View activity log',
+        'Manage user roles',
+        'Create user roles',
+        'Update user roles',
+        'Delete user roles',
     ];
 
     /**
