@@ -73,14 +73,15 @@
                 xl:mt-0 xl:text-sm xl:font-medium xl:border-0 xl:bg-white dark:bg-gray-800 xl:dark:bg-gray-900
                 dark:border-gray-700"
             >
-                @foreach($menu as $key => $value)
+                @foreach($menu as $value)
                     @if($value['always_shown'] || auth()->user()->hasAnyPermission($value['permissions']))
                         @isset($value['children'])
                             <li>
-                                <button id="{{ $key }}" data-dropdown-toggle="{{ $key . '-navbar' }}"
+                                <button id="{{ $value['route'] }}"
+                                        data-dropdown-toggle="{{ $value['route'] . '-navbar' }}"
                                         class="relative xl:flex hidden items-center justify-start gap-2
                                         gap-2 py-2 px-3 text-base rounded-lg dark:text-white
-                                        {{ (Route::is($key) || Route::is($key . '.*'))
+                                        {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                 ?
                                                 'text-white bg-primary-500 font-medium'
                                                 :
@@ -95,7 +96,7 @@
                                             )
                                             <em
                                                 class="fa fa-circle fa-beat-fade
-                                                {{ (Route::is($key) || Route::is($key . '.*'))
+                                                {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                     ?
                                                     'text-white'
                                                     :
@@ -109,14 +110,14 @@
                                             </em>
                                         @endif
                                     </div>
-                                    @if((Route::is($key) || Route::is($key . '.*')))
+                                    @if((Route::is($value['route']) || Route::is($value['route'] . '.*')))
                                         <span>@lang($value['title'])</span>
                                     @endif
                                 </button>
-                                <button data-dropdown-toggle="{{ $key . '-navbar' }}"
+                                <button data-dropdown-toggle="{{ $value['route'] . '-navbar' }}"
                                         class="relative xl:hidden flex items-center justify-start gap-2 py-2 px-3
                                         text-base rounded-lg dark:text-white w-full
-                                        {{ (Route::is($key) || Route::is($key . '.*'))
+                                        {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                 ? 'text-white bg-primary-500 font-medium'
                                                 :
                                                 'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -130,7 +131,7 @@
                                             )
                                             <em
                                                 class="fa fa-circle fa-beat-fade
-                                                {{ (Route::is($key) || Route::is($key . '.*'))
+                                                {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                     ?
                                                     'text-white'
                                                     :
@@ -147,8 +148,8 @@
                                     <span>@lang($value['title'])</span>
                                 </button>
                                 <div
-                                    id="{{ $key . '-navbar' }}"
-                                    class="hidden z-10 w-44 font-normal bg-white rounded divide-y
+                                    id="{{ $value['route'] . '-navbar' }}"
+                                    class="hidden z-10 w-56 font-normal bg-white rounded divide-y
                                     divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                                 >
                                     <ul
@@ -160,9 +161,10 @@
                                                     $item['always_shown']
                                                     || auth()->user()->hasAnyPermission($item['permissions'])
                                                 )
-                                                <li>
+                                                <li class="w-full">
                                                     <a href="{{ route($item['route']) }}"
-                                                       class="flex items-center gap-2 block py-2 px-4 hover:bg-gray-100
+                                                       class="flex items-center justify-start w-full space-x-2
+                                                              block py-2 px-4 hover:bg-gray-100
                                                        {{
                                                             (
                                                                 Route::is($item['route'])
@@ -174,8 +176,8 @@
                                                             'text-gray-500'
                                                         }}"
                                                     >
-                                                        <em class="fa {{ $item['icon'] }}"></em>
-                                                        <span>{{ __($item['title']) }}</span>
+                                                        <em class="w-6 fa {{ $item['icon'] }}"></em>
+                                                        <span class="w-full">{{ __($item['title']) }}</span>
                                                     </a>
                                                 </li>
                                             @endif
@@ -186,11 +188,11 @@
                         @else
                             <li>
                                 <a
-                                    href="{{ route($key) }}"
-                                    id="{{ $key }}"
+                                    href="{{ route($value['route']) }}"
+                                    id="{{ $value['route'] }}"
                                     class="relative xl:flex hidden items-center justify-between
                                     gap-2 py-2 px-3 text-base xl:flex hidden rounded-lg dark:text-white
-                                    {{ (Route::is($key) || Route::is($key . '.*'))
+                                    {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                             ?
                                             'text-white bg-primary-500 font-medium'
                                             :
@@ -205,7 +207,7 @@
                                         )
                                             <em
                                                 class="fa fa-circle fa-beat-fade
-                                                {{ (Route::is($key) || Route::is($key . '.*'))
+                                                {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                     ?
                                                     'text-white'
                                                     :
@@ -218,15 +220,15 @@
                                             ></em>
                                         @endif
                                     </div>
-                                    @if((Route::is($key) || Route::is($key . '.*')))
+                                    @if((Route::is($value['route']) || Route::is($value['route'] . '.*')))
                                         <span>@lang($value['title'])</span>
                                     @endif
                                 </a>
                                 <a
-                                    href="{{ route($key) }}"
+                                    href="{{ route($value['route']) }}"
                                     class="relative xl:hidden flex items-center justify-start gap-2 py-2 px-3
                                     text-base rounded-lg dark:text-white
-                                    {{ (Route::is($key) || Route::is($key . '.*'))
+                                    {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                             ? 'text-white bg-primary-500 font-medium'
                                             :
                                             'text-gray-500 font-normal hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -240,7 +242,7 @@
                                         )
                                             <em
                                                 class="fa fa-circle fa-beat-fade
-                                                {{ (Route::is($key) || Route::is($key . '.*'))
+                                                {{ (Route::is($value['route']) || Route::is($value['route'] . '.*'))
                                                     ?
                                                     'text-white'
                                                     :
@@ -266,9 +268,9 @@
     @push('scripts')
         <script>
             window.addEventListener('load', () => {
-                @foreach($menu as $key => $value)
-                    @if(!(Route::is($key) || Route::is($key . '.*')))
-                        window.makeTippy('#{{ $key }}', '{{ $value['title'] }}');
+                @foreach($menu as $value['route'] => $value)
+                    @if(!(Route::is($value['route']) || Route::is($value['route'] . '.*')))
+                        window.makeTippy('#{{ $value['route'] }}', '{{ $value['title'] }}');
                     @endif
                 @endforeach
             })
