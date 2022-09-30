@@ -146,7 +146,7 @@ class UsersDialog extends Component implements HasForms
     {
         $data = $this->form->getState();
         if (!$this->user?->id) {
-            $user = User::create([
+            /*$user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'locale' => $data['locale'],
@@ -154,24 +154,24 @@ class UsersDialog extends Component implements HasForms
                 'register_token' => Uuid::uuid4()->toString()
             ]);
             $user->syncRoles($this->roles);
-            $user->notify(new UserCreatedNotification($user));
+            $user->notify(new UserCreatedNotification($user));*/
             Notification::make()
                 ->success()
                 ->title(__('User created'))
                 ->body(__('An email has been sent to the user'))
                 ->send();
-            if (isset($data['company'])) {
+            /*if (isset($data['company'])) {
                 CompanyUser::create([
                     'user_id' => $user->id,
                     'company_id' => $data['company']
                 ]);
-            }
+            }*/
         } else {
             $this->user->name = $data['name'];
             $this->user->email = $data['email'];
             $this->user->locale = $data['locale'];
-            $this->user->save();
-            $this->user->syncRoles($this->roles);
+            // $this->user->save();
+            // $this->user->syncRoles($this->roles);
             Notification::make()
                 ->success()
                 ->title(__('User updated'))
@@ -181,12 +181,12 @@ class UsersDialog extends Component implements HasForms
             if ($this->user->id == auth()->user()->id) {
                 session()->put('locale', $this->user->locale);
             }
-            if (isset($data['company'])) {
+            /*if (isset($data['company'])) {
                 CompanyUser::create([
                     'user_id' => $this->user->id,
                     'company_id' => $data['company']
                 ]);
-            }
+            }*/
         }
         $this->emit('userSaved');
     }
@@ -196,9 +196,8 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function doDeleteUser(): void
-    {
-        $this->user->delete();
+    public function doDeleteUser(): void {
+        //$this->user->delete();
         $this->deleteConfirmationOpened = false;
         $this->emit('userDeleted');
         Notification::make()
