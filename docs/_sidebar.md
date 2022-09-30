@@ -23,4 +23,6 @@
 - [Permissions](/permissions?id=permissions)
     - [Seeder](/permissions?id=seeder)
 
+- [Screenshots](/screenshots?id=screenshots)
+
 - [Changelog](/changelog?id=changelog)
