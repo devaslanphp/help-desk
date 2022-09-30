@@ -15,6 +15,10 @@
             margin: 0;
         }
 
+        img[alt="screenshot"] {
+            width: 20%;
+        }
+
         aside.sidebar .sidebar-nav > ul > li > p > a {
             font-weight: bold;
             font-size: 1.1rem;
@@ -27,11 +31,15 @@
     window.$docsify = {
         el: '#main',
         loadSidebar: true,
-        name: '',
-        repo: ''
+        repo: 'devaslanphp/help-desk',
+        themeColor: '#4889ef',
+        autoHeader: true,
     }
 </script>
 <!-- Docsify v4 -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
 </body>
 </html>

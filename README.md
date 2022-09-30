@@ -29,15 +29,31 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 ![Help Desk](github-contents/banner.jpg)
 
 ## Screenshots
-<kbd>
-    <img src="github-contents/Help-Desk-Home-page.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-Analytics.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-Tickets.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-Tickets-Cannot-access-the-platform.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-Kanban-Board.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-Administration.png" width="20%"></img> 
-    <img src="github-contents/Help-Desk-My-profile-Dark-Vador.png" width="20%"></img> 
-</kbd>
+<div>
+    <img src="github-contents/1.png" width="20%"></img> 
+    <img src="github-contents/2.png" width="20%"></img> 
+    <img src="github-contents/3.png" width="20%"></img> 
+    <img src="github-contents/4.png" width="20%"></img> 
+    <img src="github-contents/5.png" width="20%"></img> 
+    <img src="github-contents/6.png" width="20%"></img> 
+    <img src="github-contents/7.png" width="20%"></img> 
+    <img src="github-contents/8.png" width="20%"></img> 
+    <img src="github-contents/9.png" width="20%"></img> 
+    <img src="github-contents/10.png" width="20%"></img> 
+    <img src="github-contents/11.png" width="20%"></img> 
+    <img src="github-contents/12.png" width="20%"></img> 
+    <img src="github-contents/13.png" width="20%"></img> 
+    <img src="github-contents/14.png" width="20%"></img> 
+    <img src="github-contents/15.png" width="20%"></img> 
+    <img src="github-contents/16.png" width="20%"></img> 
+    <img src="github-contents/17.png" width="20%"></img> 
+    <img src="github-contents/18.png" width="20%"></img> 
+    <img src="github-contents/19.png" width="20%"></img> 
+    <img src="github-contents/20.png" width="20%"></img> 
+    <img src="github-contents/21.png" width="20%"></img> 
+    <img src="github-contents/22.png" width="20%"></img> 
+    <img src="github-contents/23.png" width="20%"></img> 
+</div>
 
 ## Online demo
 
