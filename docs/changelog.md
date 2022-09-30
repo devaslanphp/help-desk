@@ -2,6 +2,9 @@
 
 See what's new added, changed, fixed, improved or updated in the latest versions.
 
+- **Version 1.4.6** *(30 September, 2022)*
+  - Bug-fix: assign all roles
+
 - **Version 1.4.5** *(30 September, 2022)*
   - Using roles instead of permissions
 

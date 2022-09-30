@@ -124,7 +124,7 @@ class UsersDialog extends Component implements HasForms
      */
     public function assignAllRoles(): void
     {
-        $this->roles = Permission::all()->pluck('id')->toArray();
+        $this->roles = Role::all()->pluck('id')->toArray();
     }
 
     /**
