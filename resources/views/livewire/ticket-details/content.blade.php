@@ -24,7 +24,7 @@
                 {!! $ticket->content !!}
             </div>
             @if(
-                auth()->user()->can('update all tickets')
+                auth()->user()->can('Update all tickets')
                 || (
                     auth()->user()->can('Update own tickets')
                     && (

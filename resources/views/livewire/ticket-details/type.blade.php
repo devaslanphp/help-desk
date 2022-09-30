@@ -21,7 +21,7 @@
         <div class="w-full flex flex-row justify-start items-center gap-5 updating-section">
             <x-type-span :type="$ticket->type"/>
             @if(
-                auth()->user()->can('update all tickets')
+                auth()->user()->can('Update all tickets')
                 || (
                     auth()->user()->can('Update own tickets')
                     && (
