@@ -2,7 +2,7 @@
 
 > We are working to make the Help Desk application configurable as much as possible.
 
-You can check the below section to see the section you can configure easily by using the file `config/system.php`.
+You can check the below section to see what you can configure easily by using the file `config/system.php`.
 
 ## Locales
 
