@@ -4,8 +4,8 @@ Help Desk is a Laravel based project, that let you manage your support tickets a
 
 > Help Desk is based on the latest version of Laravel and any other Open Source packages and technologies.
 
-- **Current version:** *v1.4.4*
-- **Last update:** *27 September, 2022*
+- **Current version:** *v1.4.5*
+- **Last update:** *30 September, 2022*
 
 ## Features
 
