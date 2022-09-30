@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire\Administration;
 
-use App\Models\Company;
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
-use Filament\Forms\Components\TagsInput;
+use Carbon\Carbon;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -18,6 +16,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Livewire\Component;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class Users extends Component implements HasTable
 {
@@ -43,11 +44,10 @@ class Users extends Component implements HasTable
         if (auth()->user()->can('View company users') && !auth()->user()->can('View all users')) {
             $query->whereHas(
                 'companies',
-                fn ($query) =>
-                    $query->whereIn(
-                        'companies.id',
-                        auth()->user()->ownCompanies->pluck('id')->toArray()
-                    )
+                fn($query) => $query->whereIn(
+                    'companies.id',
+                    auth()->user()->ownCompanies->pluck('id')->toArray()
+                )
             );
         } elseif (!auth()->user()->can('View all users')) {
             // Get empty list
@@ -75,7 +75,7 @@ class Users extends Component implements HasTable
             TagsColumn::make('roles.name')
                 ->label(__('User roles'))
                 ->limit(1)
-                ->visible(fn () => auth()->user()->can('Assign permissions'))
+                ->visible(fn() => auth()->user()->can('Assign permissions'))
                 ->searchable()
                 ->sortable(),
 
@@ -113,8 +113,45 @@ class Users extends Component implements HasTable
                 ->icon('heroicon-o-pencil')
                 ->link()
                 ->label(__('Edit user'))
-                ->visible(fn () => auth()->user()->can('Update users'))
+                ->visible(fn() => auth()->user()->can('Update users'))
                 ->action(fn(User $record) => $this->updateUser($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('users-export')
+                        ->withColumns([
+                            Column::make('name')
+                                ->heading(__('Full name')),
+                            Column::make('companies')
+                                ->heading(__('Companies'))
+                                ->formatStateUsing(
+                                    fn(User $record) => $record->companies->pluck('name')->join(', ')
+                                ),
+                            Column::make('roles')
+                                ->heading(__('User roles'))
+                                ->formatStateUsing(
+                                    fn(User $record) => $record->roles->pluck('name')->join(', ')
+                                ),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+                ])
         ];
     }
 

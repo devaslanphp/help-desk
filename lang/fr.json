@@ -164,7 +164,7 @@
     "Title": "Titre",
     "Title updated": "Titre mis à jour",
     "Too many login attempts. Please try again in :seconds seconds.": "Trop de tentatives de connexion. Veuillez réessayer dans : secondes secondes.",
-    "Type": "Taper",
+    "Type": "Type",
     "Type a new comment...": "Tapez un nouveau commentaire...",
     "Type updated": "Type mis à jour",
     "Types": "Les types",
@@ -331,5 +331,7 @@
     "The role's details has been updated": "Les détails du rôle ont été mis à jour",
     "The role has been deleted": "Le rôle a été supprimé",
     "Are you sure you want to delete this role?": "Êtes-vous sûr de vouloir supprimer ce rôle ?",
-    "User roles": "Rôles de l'utilisateur"
+    "User roles": "Rôles de l'utilisateur",
+    "Export": "Exporter",
+    "Permissions": "Permissions"
 }

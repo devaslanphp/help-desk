@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\FavoriteProject;
 use App\Models\Project;
 use App\Tables\Columns\UserColumn;
+use Carbon\Carbon;
+use Exception;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -15,6 +17,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Maatwebsite\Excel\Excel;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class Projects extends Component implements HasTable
 {
@@ -113,6 +119,7 @@ class Projects extends Component implements HasTable
      * Table actions definition
      *
      * @return array
+     * @throws Exception
      */
     protected function getTableActions(): array
     {
@@ -122,6 +129,37 @@ class Projects extends Component implements HasTable
                 ->link()
                 ->label(__('Edit project'))
                 ->action(fn(Project $record) => $this->updateProject($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('projects-export')
+                        ->withColumns([
+                            Column::make('name')
+                                ->heading(__('Project name')),
+                            Column::make('owner.name')
+                                ->heading(__('Owner')),
+                            Column::make('company.name')
+                                ->heading(__('Company')),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn (Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+            ])
         ];
     }
 
