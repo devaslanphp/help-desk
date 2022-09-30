@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Administration;
 
+use App\Models\Company;
+use Carbon\Carbon;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -11,6 +13,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Livewire\Component;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\Permission\Models\Role;
 
 class Roles extends Component implements HasTable
@@ -73,6 +78,38 @@ class Roles extends Component implements HasTable
                 ->label(__('Edit role'))
                 ->visible(fn () => auth()->user()->can('Update user roles'))
                 ->action(fn(Role $record) => $this->updateRole($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('user-roles-export')
+                        ->withColumns([
+                            Column::make('name')
+                                ->heading(__('Role name')),
+                            Column::make('permissions')
+                                ->heading(__('Permissions'))
+                                ->formatStateUsing(
+                                    fn (Role $record) => $record->permissions->pluck('name')->join(', ')
+                                ),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn (Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+                ])
         ];
     }
 

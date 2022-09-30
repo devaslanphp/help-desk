@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Administration;
 
 use App\Models\Company;
 use App\Tables\Columns\UserColumn;
+use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -15,6 +16,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
+use Maatwebsite\Excel\Excel;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class Companies extends Component implements HasTable
 {
@@ -105,6 +110,41 @@ class Companies extends Component implements HasTable
                 ->label(__('Edit company'))
                 ->visible(fn () => auth()->user()->can('Update companies'))
                 ->action(fn(Company $record) => $this->updateCompany($record->id))
+        ];
+    }
+
+    /**
+     * Table header actions definition
+     *
+     * @return array
+     */
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+                ->label(__('Export'))
+                ->color('success')
+                ->icon('heroicon-o-document-download')
+                ->exports([
+                    ExcelExport::make()
+                        ->askForWriterType()
+                        ->withFilename('companies-export')
+                        ->withColumns([
+                            Column::make('name')
+                                ->heading(__('Company name')),
+                            Column::make('responsible.name')
+                                ->heading(__('Responsible')),
+                            Column::make('is_disabled')
+                                ->heading(__('Company activated'))
+                                ->formatStateUsing(fn (bool $state) => $state ? __('No') : __('Yes')),
+                            Column::make('users')
+                                ->heading(__('Company users'))
+                                ->formatStateUsing(fn (Company $record) => $record->users->pluck('name')->join(', ')),
+                            Column::make('created_at')
+                                ->heading(__('Created at'))
+                                ->formatStateUsing(fn (Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+                        ])
+                ])
         ];
     }
 
