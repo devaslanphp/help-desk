@@ -20,6 +20,7 @@ use Illuminate\Support\HtmlString;
 use Livewire\Component;
 use Ramsey\Uuid\Uuid;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UsersDialog extends Component implements HasForms
 {
@@ -30,7 +31,7 @@ class UsersDialog extends Component implements HasForms
 
     protected $listeners = ['doDeleteUser', 'cancelDeleteUser'];
 
-    public array $permissions;
+    public array $roles;
 
     public function mount(): void
     {
@@ -38,7 +39,7 @@ class UsersDialog extends Component implements HasForms
             'name' => $this->user->name,
             'email' => $this->user->email,
             'locale' => $this->user->locale ?? config('app.locale'),
-            'permissions' => $this->user->permissions->pluck('id')->toArray(),
+            'roles' => $this->user->roles->pluck('id')->toArray(),
         ]);
     }
 
@@ -95,60 +96,24 @@ class UsersDialog extends Component implements HasForms
                         ->options(fn() => auth()->user()->ownCompanies->pluck('name', 'id')->toArray()),
                 ]),
 
-            Grid::make()
-                ->extraAttributes([
-                    'class' => 'border-t border-gray-200 pt-5 mt-5'
-                ])
-                ->schema([
-                    Select::make('same_permissions_as')
-                        ->label(__('Use same permissions of'))
-                        ->helperText(__("Update the permissions of this user based on another user's permissions"))
-                        ->searchable()
-                        ->options(function () {
-                            $query = User::query();
-                            if (
-                                auth()->user()->can('View own companies')
-                                && !auth()->user()->can('View all companies')
-                            ) {
-                                $query->whereHas(
-                                    'companies',
-                                    fn($query) => $query->whereIn(
-                                        'companies.id',
-                                        auth()->user()->ownCompanies->pluck('id')->toArray()
-                                    )
-                                );
-                            }
-                            return $query->get()->pluck('name', 'id')->toArray();
-                        })
-                        ->reactive()
-                        ->afterStateUpdated(function (Closure $set, Closure $get) {
-                            if ($get('same_permissions_as')) {
-                                $user = User::find($get('same_permissions_as'));
-                                $set('permissions', $user->permissions->pluck('id')->toArray());
-                            }
-                        })
-                ]),
-
-            CheckboxList::make('permissions')
-                ->label(__('Permissions'))
+            CheckboxList::make('roles')
+                ->label(__('User roles'))
                 ->hint(new HtmlString('
                     <div class="w-full flex items-center gap-2">
                         <button type="button"
                             class="text-xs text-primary-500 hover:text-primary-600 hover:underline"
-                            wire:click="assignAllPermissions">
-                            ' . __('Assign all permissions') . '
+                            wire:click="assignAllRoles">
+                            ' . __('Assign all roles') . '
                         </button>
                         <span class="text-xs text-gray-300">|</span>
                         <button type="button"
                             class="text-xs text-primary-500 hover:text-primary-600 hover:underline"
-                            wire:click="removeAllPermissions">
-                            ' . __('Remove all permissions') . '
+                            wire:click="removeAllRoles">
+                            ' . __('Remove all roles') . '
                         </button>
                     </div>
                 '))
-                ->visible(fn() => auth()->user()->can('Assign permissions'))
-                ->columns(3)
-                ->options(Permission::orderBy('name')->get()->pluck('name', 'id')->toArray())
+                ->options(Role::orderBy('name')->get()->pluck('name', 'id')->toArray())
         ];
     }
 
@@ -157,9 +122,9 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function assignAllPermissions(): void
+    public function assignAllRoles(): void
     {
-        $this->permissions = Permission::all()->pluck('id')->toArray();
+        $this->roles = Permission::all()->pluck('id')->toArray();
     }
 
     /**
@@ -167,9 +132,9 @@ class UsersDialog extends Component implements HasForms
      *
      * @return void
      */
-    public function removeAllPermissions(): void
+    public function removeAllRoles(): void
     {
-        $this->permissions = [];
+        $this->roles = [];
     }
 
     /**
@@ -188,7 +153,7 @@ class UsersDialog extends Component implements HasForms
                 'password' => bcrypt(uniqid()),
                 'register_token' => Uuid::uuid4()->toString()
             ]);
-            $user->syncPermissions($this->permissions);
+            $user->syncRoles($this->roles);
             $user->notify(new UserCreatedNotification($user));
             Notification::make()
                 ->success()
@@ -206,7 +171,7 @@ class UsersDialog extends Component implements HasForms
             $this->user->email = $data['email'];
             $this->user->locale = $data['locale'];
             $this->user->save();
-            $this->user->syncPermissions($this->permissions);
+            $this->user->syncRoles($this->roles);
             Notification::make()
                 ->success()
                 ->title(__('User updated'))
