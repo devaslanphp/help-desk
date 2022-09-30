@@ -3,16 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Core\CrudDialogHelper;
+use App\Models\Company;
 use App\Models\Project;
 use App\Models\User;
 use App\Notifications\ProjectCreatedNotification;
+use Closure;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Livewire\Component;
 
@@ -32,6 +33,7 @@ class ProjectsDialog extends Component implements HasForms
             'ticket_prefix' => $this->project->ticket_prefix,
             'description' => $this->project->description,
             'owner_id' => $this->project->owner_id ?? auth()->user()->id,
+            'company_id' => $this->project->company_id
         ]);
     }
 
@@ -48,11 +50,40 @@ class ProjectsDialog extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Select::make('owner_id')
-                ->label(__('Owner'))
-                ->required()
-                ->searchable()
-                ->options(User::all()->pluck('name', 'id')),
+            Grid::make()
+                ->schema([
+                    Select::make('owner_id')
+                        ->label(__('Owner'))
+                        ->required()
+                        ->searchable()
+                        ->reactive()
+                        ->options(function () {
+                            $query = User::query();
+                            if (auth()->user()->can('View company users') && !auth()->user()->can('View all users')) {
+                                $query->whereHas(
+                                    'companies',
+                                    fn($query) => $query->whereIn(
+                                        'companies.id',
+                                        auth()->user()->ownCompanies->pluck('id')->toArray()
+                                    )
+                                )->orWhere('id', auth()->user()->id);
+                            }
+                            return $query->get()->pluck('name', 'id')->toArray();
+                        }),
+
+                    Select::make('company_id')
+                        ->label(__('Company'))
+                        ->searchable()
+                        ->options(function (Closure $get) {
+                            $query = Company::query();
+                            if ($get('owner_id')) {
+                                $query->where('responsible_id', $get('owner_id'));
+                            } elseif (auth()->user()->can('View own companies')) {
+                                $query->where('responsible_id', auth()->user()->id);
+                            }
+                            return $query->get()->pluck('name', 'id')->toArray();
+                        }),
+                ]),
 
             Grid::make(3)
                 ->schema([
@@ -92,7 +123,8 @@ class ProjectsDialog extends Component implements HasForms
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'owner_id' => $data['owner_id'],
-                'ticket_prefix' => $data['ticket_prefix']
+                'ticket_prefix' => $data['ticket_prefix'],
+                'company_id' => $data['company_id'],
             ]);
             Notification::make()
                 ->success()
@@ -103,6 +135,7 @@ class ProjectsDialog extends Component implements HasForms
             $this->project->name = $data['name'];
             $this->project->description = $data['description'];
             $this->project->owner_id = $data['owner_id'];
+            $this->project->company_id = $data['company_id'];
             $this->project->ticket_prefix = $data['ticket_prefix'];
             $this->project->save();
             Notification::make()

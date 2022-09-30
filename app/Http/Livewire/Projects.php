@@ -92,6 +92,11 @@ class Projects extends Component implements HasTable
             UserColumn::make('owner')
                 ->label(__('Owner')),
 
+            TextColumn::make('company.name')
+                ->label(__('Company'))
+                ->sortable()
+                ->searchable(),
+
             TextColumn::make('tickets_count')
                 ->label(__('Tickets'))
                 ->sortable(),

@@ -41,7 +41,12 @@ class Kanban extends FilamentKanbanBoard
         if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
             $query->where(function ($query) {
                 $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id);
+                    ->orWhere('responsible_id', auth()->user()->id)
+                    ->orWhereHas('project', function ($query) {
+                        $query->whereHas('company', function ($query) {
+                            $query->whereIn('companies.id', auth()->user()->ownCompanies->pluck('id')->toArray());
+                        });
+                    });
             });
         }
         return $query->get()
@@ -55,15 +60,18 @@ class Kanban extends FilamentKanbanBoard
                             <div class="w-full flex items-center gap-2">
                                 ' . ($type ? '
                                     <div title="' . $type['title'] . '"
-                                        class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
-                                        style="color: ' . $type->text_color . '; background-color: ' . $type->bg_color . ';"
+                                        class="text-xs rounded-full w-6 h-6 flex items-center
+                                            justify-center text-center"
+                                        style="color: ' . $type->text_color . ';
+                                            background-color: ' . $type->bg_color . ';"
                                         >
                                         <i class="fa ' . $type['icon'] . '"></i>
                                     </div>
                                 ' : '') . '
                                 ' . ($priority ? '
                                     <div title="' . $priority['title'] . '"
-                                        class="text-xs rounded-full w-6 h-6 flex items-center justify-center text-center"
+                                        class="text-xs rounded-full w-6 h-6 flex items-center
+                                            justify-center text-center"
                                         style="
                                             color: ' . $priority->text_color . ';
                                             background-color: ' . $priority->bg_color . ';

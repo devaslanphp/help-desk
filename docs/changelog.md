@@ -2,6 +2,9 @@
 
 See what's new added, changed, fixed, improved or updated in the latest versions.
 
+- **Version 1.4.7** *(30 September, 2022)*
+  - Project - Company integration
+
 - **Version 1.4.6** *(30 September, 2022)*
   - Bug-fix: assign all roles
 
