@@ -19,6 +19,10 @@
     <a href="https://devaslanphp.github.io/help-desk/" title="Go to project documentation">
         <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
     </a>
+    <br/>
+    <a href="https://deepscan.io/dashboard#view=project&tid=19327&pid=22721&bid=673739">
+        <img src="https://deepscan.io/api/teams/19327/projects/22721/branches/673739/badge/grade.svg?style=for-the-badge" alt="DeepScan grade">
+    </a>
 </p>
 
 Help Desk is a Laravel based project, that let you manage your support tickets and communicate with your customers, with
