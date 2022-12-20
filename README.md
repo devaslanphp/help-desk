@@ -32,6 +32,14 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 
 <hr/>
 
+# Version 2
+
+Take a look to the a newer version containing the same option and more:
+
+[https://github.com/devaslanphp/project-management](https://github.com/devaslanphp/project-management)
+
+<hr/>
+
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=devaslanphp_help-desk)
 
 Below are the analyzes reported by SonarCloud. 
