@@ -34,7 +34,7 @@ Help Desk is based on the latest version of Laravel and any other Open Source pa
 
 # Version 2
 
-Take a look to the a newer version containing the same option and more:
+Take a look to the a newer version containing the same options and more:
 
 [https://github.com/devaslanphp/project-management](https://github.com/devaslanphp/project-management)
 
