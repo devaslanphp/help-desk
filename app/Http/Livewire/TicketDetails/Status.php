@@ -17,8 +17,18 @@ class Status extends Component implements HasForms
     public Ticket $ticket;
     public bool $updating = false;
 
+    protected $listeners = ['refreshStatusForm' => 'refreshForm'];
+
     public function mount(): void
     {
+        $this->form->fill([
+            'status' => $this->ticket->status
+        ]);
+    }
+
+    public function refreshForm(): void
+    {
+        $this->ticket = $this->ticket->refresh();
         $this->form->fill([
             'status' => $this->ticket->status
         ]);
@@ -43,7 +53,18 @@ class Status extends Component implements HasForms
                 ->placeholder(__('Status'))
                 ->required()
                 ->searchable()
-                ->options(statuses_list()),
+                ->options(function($state) {
+                    $statuses = statuses_list();
+            
+                    if (auth()->user()->hasRole('technician')) {
+                        $statuses = array_intersect_key($statuses, array_flip(['inprogress', 'resolved']));
+                    } elseif (auth()->user()->hasRole('user') ) {
+                        $statuses = array_intersect_key($statuses, array_flip(['closed']));
+                    }
+            
+                    unset($statuses[$state]);
+                    return $statuses;
+                }),
         ];
     }
 
@@ -65,7 +86,7 @@ class Status extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        $before = __(config('system.statuses.' . $this->ticket->status . '.title')) ?? '-';
+        $before = $this->ticket->status ?? '-';
         $this->ticket->status = $data['status'];
         $this->ticket->save();
         Notification::make()
@@ -82,7 +103,7 @@ class Status extends Component implements HasForms
             $this->ticket,
             __('Status'),
             $before,
-            __(config('system.statuses.' . $this->ticket->status . '.title') ?? '-'),
+            ($this->ticket->status ?? '-'),
             auth()->user()
         );
     }

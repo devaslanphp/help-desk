@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Notifications\TicketCreatedNotification;
@@ -37,7 +38,7 @@ class TicketCreatedJob implements ShouldQueue
     {
         $users = User::whereNull('register_token')->get();
         foreach ($users as $user) {
-            if (auth()->user()->can('View all tickets') && $this->ticket->owner_id !== $user->id) {
+            if ($user->can('View all tickets') && auth()->user()->hasRole('administrator') == 'administrator')  {
                 $user->notify(new TicketCreatedNotification($this->ticket, $user));
             }
         }

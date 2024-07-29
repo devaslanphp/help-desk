@@ -19,6 +19,9 @@ class TypeSpan extends Component
     {
         $this->type = TicketType::where('slug', $type)->first();
         $this->min = $min;
+        if($type == "Select new type"){
+            $this->type = "Select new type";
+        }
     }
 
     /**

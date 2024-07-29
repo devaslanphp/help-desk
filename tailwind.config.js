@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 const colors = require('tailwindcss/colors')
 
 module.exports = {
@@ -21,6 +22,16 @@ module.exports = {
                 success: colors.green,
                 warning: colors.yellow,
             },
+            keyframes: {
+                slide_left: {
+                    '0%': {transform: 'translateX(100%)' },
+            
+                    '100%': {transform: 'translateX(-100%)' },
+                },
+            },
+            animation: {
+                'banner-slide-left' : 'slide_left 20s linear infinite',
+            }
         },
     },
     plugins: [

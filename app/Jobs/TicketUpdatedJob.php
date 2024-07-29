@@ -51,24 +51,31 @@ class TicketUpdatedJob implements ShouldQueue
      */
     public function handle()
     {
+        
         if ($this->before !== $this->after) {
             $users = User::whereNull('register_token')->where('id', '<>', $this->user->id)->get();
             foreach ($users as $u) {
-                if (
-                    (
-                        auth()->user()->can('View all tickets')
-                        && $this->ticket->owner_id !== $u->id
+                if((
+                    auth()->user()->id !== $u->id               //exclude notification to current user
+                )
+                &&(
+                (
+                    auth()->user()->can('View all tickets')
+                    && ($this->ticket->owner_id === $u->id
+                    || $this->ticket->responsible_id === $u->id)
+                )
+                ||
+                (
+                    auth()->user()->can('View own tickets')
+                    && (
+                        $this->ticket->owner_id === $u->id
+                        || $this->ticket->responsible_id === $u->id
                     )
-                    ||
-                    (
-                        auth()->user()->can('View own tickets')
-                        && (
-                            $this->ticket->owner_id === $u->id
-                            || $this->ticket->responsible_id === $u->id
-                        )
-                        && $this->ticket->owner_id !== $u->id
-                    )
-                ) {
+                    && $this->ticket->owner_id !== $u->id
+                )
+                )
+            )
+                 {
                     $u->notify(
                         new TicketUpdatedNotification(
                             $this->ticket,

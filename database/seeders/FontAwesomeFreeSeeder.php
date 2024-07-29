@@ -1466,6 +1466,7 @@ class FontAwesomeFreeSeeder extends Seeder
         1455 => 'fa-youtube',
         1456 => 'fa-youtube-square',
         1457 => 'fa-zhihu',
+        1458 => 'fa-solid fa-g',
     );
 
     /**

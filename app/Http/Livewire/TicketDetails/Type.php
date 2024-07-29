@@ -4,6 +4,8 @@ namespace App\Http\Livewire\TicketDetails;
 
 use App\Jobs\TicketUpdatedJob;
 use App\Models\Ticket;
+use App\Models\TicketCategory;
+use App\Models\TicketType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -17,11 +19,32 @@ class Type extends Component implements HasForms
     public Ticket $ticket;
     public bool $updating = false;
 
+    protected $listeners = ['refreshForm'];
+
     public function mount(): void
     {
         $this->form->fill([
             'type' => $this->ticket->type
         ]);
+    }
+
+    public function refreshForm(): void
+    {
+        $issue = $this->ticket->issue;
+        $this->ticket = $this->ticket->refresh();
+        $this->form->fill([
+            'type' => $this->ticket->type
+        ]);
+        if($issue != "Select new issue"){
+            $type = TicketCategory::where('slug',$issue)->pluck('type')->first();
+            $this->ticket->type = $type;
+            $this->ticket->save();
+            $this->ticket = $this->ticket->refresh();
+            $this->form->fill([
+                'type' => $type
+            ]);
+        }
+        $this->updating = false;
     }
 
     public function render()
@@ -43,7 +66,10 @@ class Type extends Component implements HasForms
                 ->placeholder(__('Type'))
                 ->required()
                 ->searchable()
-                ->options(types_list()),
+                ->options(function($state){
+                    $types = types_list();
+                    return $types;
+                }),
         ];
     }
 
@@ -65,8 +91,8 @@ class Type extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        $before = __(config('system.types.' . $this->ticket->type . '.title')) ?? '-';
-        $this->ticket->type = $data['type'];
+        $before = $this->ticket->type ?? '-';
+        $this->ticket->type = $data['type'];        //remove title / name
         $this->ticket->save();
         Notification::make()
             ->success()
@@ -82,7 +108,7 @@ class Type extends Component implements HasForms
             $this->ticket,
             __('Type'),
             $before,
-            __(config('system.types.' . $this->ticket->type . '.title') ?? '-'),
+            ($this->ticket->type ?? '-'),
             auth()->user()
         );
     }

@@ -24,7 +24,7 @@ class Users extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public $selectedUser;
+    public $selectedUser;           
 
     protected $listeners = ['userSaved', 'userDeleted'];
 
@@ -79,12 +79,6 @@ class Users extends Component implements HasTable
                 ->searchable()
                 ->sortable(),
 
-            TagsColumn::make('companies.name')
-                ->label(__('Companies'))
-                ->limit(1)
-                ->searchable()
-                ->sortable(),
-
             TextColumn::make('created_at')
                 ->label(__('Created at'))
                 ->sortable()
@@ -123,37 +117,37 @@ class Users extends Component implements HasTable
      *
      * @return array
      */
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            ExportAction::make()
-                ->label(__('Export'))
-                ->color('success')
-                ->icon('heroicon-o-document-download')
-                ->exports([
-                    ExcelExport::make()
-                        ->askForWriterType()
-                        ->withFilename('users-export')
-                        ->withColumns([
-                            Column::make('name')
-                                ->heading(__('Full name')),
-                            Column::make('companies')
-                                ->heading(__('Companies'))
-                                ->formatStateUsing(
-                                    fn(User $record) => $record->companies->pluck('name')->join(', ')
-                                ),
-                            Column::make('roles')
-                                ->heading(__('User roles'))
-                                ->formatStateUsing(
-                                    fn(User $record) => $record->roles->pluck('name')->join(', ')
-                                ),
-                            Column::make('created_at')
-                                ->heading(__('Created at'))
-                                ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
-                        ])
-                ])
-        ];
-    }
+    // protected function getTableHeaderActions(): array
+    // {
+    //     return [
+    //         ExportAction::make()
+    //             ->label(__('Export'))
+    //             ->color('success')
+    //             ->icon('heroicon-o-document-download')
+    //             ->exports([
+    //                 ExcelExport::make()
+    //                     ->askForWriterType()
+    //                     ->withFilename('users-export')
+    //                     ->withColumns([
+    //                         Column::make('name')
+    //                             ->heading(__('Full name')),
+    //                         Column::make('companies')
+    //                             ->heading(__('Companies'))
+    //                             ->formatStateUsing(
+    //                                 fn(User $record) => $record->companies->pluck('name')->join(', ')
+    //                             ),
+    //                         Column::make('roles')
+    //                             ->heading(__('User roles'))
+    //                             ->formatStateUsing(
+    //                                 fn(User $record) => $record->roles->pluck('name')->join(', ')
+    //                             ),
+    //                         Column::make('created_at')
+    //                             ->heading(__('Created at'))
+    //                             ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+    //                     ])
+    //             ])
+    //     ];
+    // }
 
     /**
      * Table default sort column definition

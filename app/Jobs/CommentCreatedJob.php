@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\User;
 use App\Notifications\CommentCreateNotification;
@@ -37,20 +38,31 @@ class CommentCreatedJob implements ShouldQueue
     public function handle()
     {
         $users = User::whereNull('register_token')->get();
-        foreach ($users as $user) {
-            if (
-                (auth()->user()->can('View all tickets') && $this->comment->owner_id !== $user->id)
-                ||
-                (
-                    auth()->user()->can('View own tickets')
-                    && (
-                        $this->comment->ticket->owner_id === $user->id
-                        || $this->comment->ticket->responsible_id === $user->id
-                    )
-                    && $this->comment->owner_id !== $user->id)
-            ) {
-                $user->notify(new CommentCreateNotification($this->comment, $user));
-            }
+        foreach ($users as $u) {
+            if ((
+                auth()->user()->id !== $u->id               //exclude notification to current user
+            )
+            &&(
+            (
+                auth()->user()->can('View all tickets')
+                && ($this->comment->ticket->owner_id === $u->id
+                || $this->comment->ticket->responsible_id === $u->id)
+            )
+            ||
+            (
+                auth()->user()->can('View own tickets')
+                && (
+                    $this->comment->ticket->owner_id === $u->id
+                    || $this->comment->ticket->responsible_id === $u->id
+                )
+                && $this->comment->ticket->owner_id !== $u->id
+            )
+            )
+        ) {
+            $u->notify(new CommentCreateNotification($this->comment, $u));
         }
+        }
+
+        
     }
 }

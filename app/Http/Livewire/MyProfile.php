@@ -63,60 +63,60 @@ class MyProfile extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('name')
-                ->label(__('Full name'))
-                ->maxLength(255)
-                ->required(),
+            // TextInput::make('name')
+            //     ->label(__('Full name'))
+            //     ->maxLength(255)
+            //     ->required(),
 
-            TextInput::make('email')
-                ->label(__('Email address'))
-                ->email()
-                ->unique(table: User::class, column: 'email', ignorable: fn() => $this->user->id ? $this->user : null)
-                ->required(),
+            // TextInput::make('email')
+            //     ->label(__('Email address'))
+            //     ->email()
+            //     ->unique(table: User::class, column: 'email', ignorable: fn() => $this->user->id ? $this->user : null)
+            //     ->required(),
 
-            Password::make('current_password')
-                ->label(__('Current password'))
-                ->required(),
+            // Password::make('current_password')
+            //     ->label(__('Current password'))
+            //     ->required(),
 
-            Grid::make()
-                ->schema([
-                    Password::make('new_password')
-                        ->label(__('New password'))
-                        ->rule('confirmed'),
+            // Grid::make()
+            //     ->schema([
+            //         Password::make('new_password')
+            //             ->label(__('New password'))
+            //             ->rule('confirmed'),
 
-                    Password::make('new_password_confirmation')
-                        ->label(__('Password confirmation'))
-                        ->dehydrated(false),
-                ]),
+            //         Password::make('new_password_confirmation')
+            //             ->label(__('Password confirmation'))
+            //             ->dehydrated(false),
+            //     ]),
 
-            Grid::make(1)
-                ->schema([
-                    Radio::make('locale')
-                        ->label(__('Default language'))
-                        ->options(locales())
-                        ->required()
-                ]),
+            // Grid::make(1)
+            //     ->schema([
+            //         Radio::make('locale')
+            //             ->label(__('Default language'))
+            //             ->options(locales())
+            //             ->required()
+            //     ]),
         ];
     }
 
     public function save(): void
     {
-        $data = $this->form->getState();
-        if (Hash::check($data['current_password'], $this->user->password)) {
-            $this->user->name = $data['name'];
-            $this->user->email = $data['email'];
-            $this->user->locale = $data['locale'];
-            if ($data['new_password']) {
-                $this->user->password = bcrypt($data['new_password']);
-            }
-            $this->user->save();
-            session()->put('locale', $this->user->locale);
-            session()->flash('profile_updated', true);
-            redirect()->to(route('my-profile'));
-        } else {
-            throw ValidationException::withMessages([
-                'current_password' => __('The password entered is incorrect.')
-            ]);
-        }
+        // $data = $this->form->getState();
+        // if (Hash::check($data['current_password'], $this->user->password)) {
+        //     $this->user->name = $data['name'];
+        //     $this->user->email = $data['email'];
+        //     $this->user->locale = $data['locale'];
+        //     if ($data['new_password']) {
+        //         $this->user->password = bcrypt($data['new_password']);
+        //     }
+        //     $this->user->save();
+        //     session()->put('locale', $this->user->locale);
+        //     session()->flash('profile_updated', true);
+        //     redirect()->to(route('my-profile'));
+        // } else {
+        //     throw ValidationException::withMessages([
+        //         'current_password' => __('The password entered is incorrect.')
+        //     ]);
+        // }
     }
 }

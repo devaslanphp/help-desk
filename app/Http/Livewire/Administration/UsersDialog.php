@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Core\CrudDialogHelper;
-use App\Models\CompanyUser;
 use App\Models\User;
 use App\Notifications\UserCreatedNotification;
 use Closure;

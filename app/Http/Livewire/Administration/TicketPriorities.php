@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Administration;
 
 use App\Models\TicketPriority;
-use App\Models\User;
 use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -90,27 +89,27 @@ class TicketPriorities extends Component implements HasTable
      *
      * @return array
      */
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            ExportAction::make()
-                ->label(__('Export'))
-                ->color('success')
-                ->icon('heroicon-o-document-download')
-                ->exports([
-                    ExcelExport::make()
-                        ->askForWriterType()
-                        ->withFilename('ticket-priorities-export')
-                        ->withColumns([
-                            Column::make('title')
-                                ->heading(__('Title')),
-                            Column::make('created_at')
-                                ->heading(__('Created at'))
-                                ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
-                        ])
-                ])
-        ];
-    }
+    // protected function getTableHeaderActions(): array
+    // {
+    //     return [
+    //         ExportAction::make()
+    //             ->label(__('Export'))
+    //             ->color('success')
+    //             ->icon('heroicon-o-document-download')
+    //             ->exports([
+    //                 ExcelExport::make()
+    //                     ->askForWriterType()
+    //                     ->withFilename('ticket-priorities-export')
+    //                     ->withColumns([
+    //                         Column::make('title')
+    //                             ->heading(__('Title')),
+    //                         Column::make('created_at')
+    //                             ->heading(__('Created at'))
+    //                             ->formatStateUsing(fn(Carbon $state) => $state->format(__('Y-m-d g:i A'))),
+    //                     ])
+    //             ])
+    //     ];
+    // }
 
     /**
      * Table default sort column definition

@@ -38,17 +38,7 @@ class Kanban extends FilamentKanbanBoard
     {
         $query = Ticket::query();
         $query->withCount('comments');
-        if (auth()->user()->can('View own tickets') && !auth()->user()->can('View all tickets')) {
-            $query->where(function ($query) {
-                $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id)
-                    ->orWhereHas('project', function ($query) {
-                        $query->whereHas('company', function ($query) {
-                            $query->whereIn('companies.id', auth()->user()->ownCompanies->pluck('id')->toArray());
-                        });
-                    });
-            });
-        }
+        
         return $query->get()
             ->map(function (Ticket $ticket) {
                 $priority = TicketPriority::where('slug', $ticket->priority)->withTrashed()->first();

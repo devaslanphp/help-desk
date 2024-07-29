@@ -1,0 +1,69 @@
+<div class="w-full flex flex-col justify-start items-start gap-5">
+    <div class="w-full flex md:flex-row flex-col justify-between items-start gap-2">
+        <div class="flex flex-col justify-center items-start gap-1">
+            <span class="lg:text-4xl md:text-2xl text-xl font-medium text-gray-700">
+                @lang('Ticket issues')
+            </span>
+            <span class="lg:text-lg md:text-sm text-xs font-light text-gray-500">
+                @lang('Below is the list of configured tickets issues in :app', [
+                    'app' => config('app.name')
+                ])
+            </span>
+        </div>
+        <button type="button" wire:click="createIssue()"
+                class="bg-primary-700 text-white hover:bg-primary-800 px-4 py-2 rounded-lg shadow
+                hover:shadow-lg text-base">
+            @lang('Create a new issue')
+        </button>
+    </div>
+    <div class="w-full mt-5">
+        <div class="w-full flex flex-col justify-start items-start gap-5">
+            <div class="w-full overflow-x-auto relative sm:rounded-lg">
+                <div class="w-full overflow-x-auto relative sm:rounded-lg">
+                    {{ $this->table }}
+                </div>
+            </div>
+        </div>
+
+        <div id="issueModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static" wire:ignore.self
+             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex items-center
+             justify-center w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-4xl h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            @lang($selectedIssue?->id ? 'Update issue' : 'Create a new issue')
+                        </h3>
+                        <button wire:click="cancelIssue()" type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg
+                                text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600
+                                dark:hover:text-white">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    @if($selectedIssue)
+                        @livewire('administration.ticket-issues-dialog', ['issue' => $selectedIssue])
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="hidden" data-modal-toggle="issueModal" id="toggleIssueModal"></button>
+
+    @push('scripts')
+        <script>
+            window.addEventListener('toggleIssueModal', () => {
+                const toggleIssueModalBtn = document.querySelector('#toggleIssueModal');
+                toggleIssueModalBtn.click();
+            });
+        </script>
+    @endpush
+</div>

@@ -60,20 +60,28 @@ return [
     */
     'main_menu' => [
         [
-            'title' => 'Overview',
-            'route' => 'home',
-            'icon' => 'fa-table-columns',
-            'always_shown' => true,
-            'show_notification_indicator' => false,
-            'permissions' => ['']
-        ],
-        [
-            'title' => 'Analytics',
+            'title' => 'Dashboard',
             'route' => 'analytics',
-            'icon' => 'fa-chart-bar',
+            'icon' => 'fa-table-columns',
             'always_shown' => false,
             'show_notification_indicator' => false,
             'permissions' => ['Can view Analytics page']
+        ],
+        [
+            'title' => 'Manage notice banners',
+            'route' => 'notice-banners',
+            'icon' => 'fa-bullhorn',
+            'always_shown' => false,
+            'show_notification_indicator' => false,
+            'permissions' => ['Manage notice banners']
+        ],
+        [
+            'title' => 'View Announcements',
+            'route' => 'announcements',
+            'icon' => 'fa-bullhorn',
+            'always_shown' => false,
+            'show_notification_indicator' => false,
+            'permissions' => ['Can view Announcement page']
         ],
         [
             'title' => 'Tickets',
@@ -98,27 +106,19 @@ return [
             'always_shown' => false,
             'show_notification_indicator' => false,
             'permissions' => [
-                'View all users', 'View company users',
-                'View all companies', 'View own companies',
+                'View all users',
                 'Manage ticket statuses',
                 'Manage ticket types',
                 'Manage ticket priorities',
-                'View activity log'
+                'View activity log',
             ],
             'children' => [
-                [
-                    'title' => 'Manage companies',
-                    'route' => 'administration.companies',
-                    'icon' => 'fa-building',
-                    'always_shown' => false,
-                    'permissions' => ['View all companies', 'View own companies']
-                ],
                 [
                     'title' => 'Manage users',
                     'route' => 'administration.users',
                     'icon' => 'fa-users',
                     'always_shown' => false,
-                    'permissions' => ['View all users', 'View company users']
+                    'permissions' => ['View all users']
                 ],
                 [
                     'title' => 'Manage user roles',
@@ -140,6 +140,27 @@ return [
                     'icon' => 'fa-copy',
                     'always_shown' => false,
                     'permissions' => ['Manage ticket types']
+                ],
+                [
+                    'title' => 'Manage categories',
+                    'route' => 'administration.ticket-categories',
+                    'icon' => 'fa-copy',
+                    'always_shown' => false,
+                    'permissions' => ['Manage ticket categories']
+                ],
+                [
+                    'title' => 'Manage subcategories',
+                    'route' => 'administration.ticket-subcategories',
+                    'icon' => 'fa-copy',
+                    'always_shown' => false,
+                    'permissions' => ['Manage ticket categories']
+                ],
+                [
+                    'title' => 'Manage issues',
+                    'route' => 'administration.ticket-issues',
+                    'icon' => 'fa-copy',
+                    'always_shown' => false,
+                    'permissions' => ['Manage ticket categories']
                 ],
                 [
                     'title' => 'Manage priorities',

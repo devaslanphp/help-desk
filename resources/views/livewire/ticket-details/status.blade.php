@@ -26,11 +26,11 @@
                     || (
                         auth()->user()->can('Update own tickets')
                         && (
-                            $ticket->owner_id === auth()->user()
+                            $ticket->owner_id === auth()->user()->id
                             || $ticket->responsible_id === auth()->user()->id)
                         )
                     )
-                    && auth()->user()->can('change-status-tickets')
+                    && auth()->user()->can('Change status tickets')
                 )
                 <button type="button" wire:click="update"
                         class="bg-gray-100 shadow hover:bg-gray-200 hover:shadow-lg w-6 h-6 text-xs flex-row

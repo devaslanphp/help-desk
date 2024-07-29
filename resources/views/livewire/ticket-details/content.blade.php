@@ -25,13 +25,7 @@
             </div>
             @if(
                 auth()->user()->can('Update all tickets')
-                || (
-                    auth()->user()->can('Update own tickets')
-                    && (
-                        $ticket->owner_id === auth()->user()
-                        || $ticket->responsible_id === auth()->user()->id
-                        )
-                    )
+                
                 )
                 <button type="button"
                         wire:click="update"

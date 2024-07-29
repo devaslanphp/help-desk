@@ -3,8 +3,65 @@
 use App\Models\TicketPriority;
 use App\Models\TicketStatus;
 use App\Models\TicketType;
+use App\Models\TicketCategory;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
+use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
+
+if (!function_exists('categories_list')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * @return array
+     */
+    function categories_list(string $key = 'slug'): array
+    {
+        $validKeys = ['id', 'slug'];
+
+        if (!in_array($key, $validKeys)) {
+            throw new InvalidArgumentException("Invalid key. Allowed keys are 'id' or 'slug'.");
+        }
+
+        return TicketCategory::whereNull('parent_id')->pluck('title',$key)->toArray();
+    }
+}
+
+if (!function_exists('subcategories_list')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * @return array
+     */
+    function subcategories_list(): array
+    {
+        return TicketCategory::whereNotNull('parent_id')->where('level','subcategory')->pluck('title','slug')->toArray();
+    }
+}
+
+if (!function_exists('issues_list')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * @return array
+     */
+    function issues_list(): array
+    {
+        return TicketCategory::whereNotNull('parent_id')->where('level','issue')->pluck('title','slug')->toArray();
+    }
+}
+
+if (!function_exists('search_all_categories')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * 
+     */
+    function search_all_categories($category = null)
+    {
+        return TicketCategory::where('slug', $category)->pluck('title', 'slug')->toArray();
+    }
+}
 
 if (!function_exists('statuses_list')) {
     /**
@@ -88,4 +145,24 @@ if (!function_exists('locales')) {
         }
         return $locales;
     }
+}
+
+if (!function_exists('can')) {
+    /**
+     * Return statuses list as an array of KEY (status id) => VALUE (status title)
+     *
+     * @return array
+     */
+    function can($permission)
+    {
+        
+    }
+}
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }

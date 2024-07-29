@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Comment extends Model implements HasLogsActivity
 {
@@ -45,6 +46,7 @@ class Comment extends Model implements HasLogsActivity
 
     public function activityLogLink(): string
     {
-        return route('tickets.number', $this->ticket->ticket_number);
+        $ticket = Ticket::find($this->ticket_id);
+        return route('tickets.details', [$ticket->id,'slug' => Str::slug($ticket->title)]);
     }
 }

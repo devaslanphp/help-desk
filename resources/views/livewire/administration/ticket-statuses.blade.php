@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div id="statusModal" tabindex="-1" aria-hidden="true"
+        <div id="statusModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static" wire:ignore.self
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex items-center
              justify-center w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-4xl h-full md:h-auto">

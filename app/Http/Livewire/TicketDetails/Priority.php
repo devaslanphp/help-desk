@@ -44,7 +44,11 @@ class Priority extends Component implements HasForms
                 ->searchable()
                 ->disableLabel()
                 ->placeholder(__('Priority'))
-                ->options(priorities_list()),
+                ->options(function($state){
+                    $priorities = priorities_list();
+                    unset($priorities[$state]);
+                    return $priorities;
+                })
         ];
     }
 
@@ -66,7 +70,7 @@ class Priority extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-        $before = __(config('system.priorities.' . $this->ticket->priority . '.title')) ?? '-';
+        $before = $this->ticket->priority ?? '-';
         $this->ticket->priority = $data['priority'];
         $this->ticket->save();
         Notification::make()
@@ -83,7 +87,7 @@ class Priority extends Component implements HasForms
             $this->ticket,
             __('Priority'),
             $before,
-            __(config('system.priorities.' . $this->ticket->priority . '.title') ?? '-'),
+            ($this->ticket->priority ?? '-'),
             auth()->user()
         );
     }

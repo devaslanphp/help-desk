@@ -39,7 +39,7 @@
                                 border border-gray-200 rounded-t-lg focus:ring-4 focus:ring-gray-200
                                 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100
                                 dark:hover:bg-gray-800"
-                                data-accordion-target="#filter-accordion-body" aria-expanded="false"
+                                data-accordion-target="#filter-accordion-body" aria-expanded="true"
                                 aria-controls="filter-accordion-body">
                             <span>@lang('Filters')</span>
                             <svg data-accordion-icon class="w-6 h-6 rotate-360 shrink-0" fill="currentColor"
@@ -50,7 +50,7 @@
                             </svg>
                         </button>
                     </h2>
-                    <div id="filter-accordion-body" class="hidden" aria-labelledby="filter-accordion-heading">
+                    <div id="filter-accordion-body" class="" aria-labelledby="filter-accordion-heading">
                         <div class="w-full flex flex-row justify-start items-center p-5 border border-gray-200">
                             <form wire:submit.prevent="search"
                                   class="relative flex lg:flex-row flex-col justify-start items-center gap-5 w-full">
@@ -81,74 +81,73 @@
     </div>
     <div class="w-full flex flex-col gap-5">
         @if($tickets->count())
-            <div class="w-full flex flex-col justify-start items-start gap-5">
-                @foreach($tickets as $ticket)
-                    <div
-                        class="w-full bg-white border border-gray-200 shadow hover:shadow-lg rounded-lg p-5 flex
+        <div class="w-full flex flex-col justify-start items-start gap-5">
+            @foreach($tickets as $ticket)
+            @if($ticket->owner_id == auth()->user()->id || auth()->user()->can('View all tickets'))
+            <div class="w-full bg-white border border-gray-200 shadow hover:shadow-lg rounded-lg p-5 flex
                         flex-col justify-start items-start gap-1">
-                        <span class="text-xs font-medium text-gray-500 flex flex-row justify-start items-center gap-2">
-                            <em  class="fa fa-tag"></em>
-                            {{ $ticket->project->name }}
-                            <span class="text-xs text-gray-300">/</span>
-                            <button type="button" class="font-normal hover:cursor-pointer hover:underline"
-                                    wire:click="copyTicketUrl('{{ $ticket->id }}')"
-                                    title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
-                        </span>
-                        <div class="w-full flex flex-row justify-between items-start gap-5">
-                            <a
-                                href="{{ route(
+                <span class="text-xs font-medium text-gray-500 flex flex-row justify-start items-center gap-2">
+                    <em class="fa fa-tag"></em>
+                    <span class="text-xs text-gray-300">/</span>
+                    <button type="button" class="font-normal hover:cursor-pointer hover:underline" wire:click="copyTicketUrl('{{ $ticket->id }}')" title="@lang('Click to copy url to ticket')">{{ $ticket->ticket_number }}</button>
+                </span>
+                <div class="w-full flex flex-row justify-between items-start gap-5">
+                    <a href="{{ route(
                                         'tickets.details',
                                         [
                                             'ticket' => $ticket,
                                             'slug' => Str::slug($ticket->title)
                                         ]
-                                    ) }}"
-                               class="text-lg font-medium text-gray-700 hover:underline">
-                                {{ $ticket->title }}
-                            </a>
-                            <span
-                                class="text-sm font-medium text-gray-700">
-                                {{ $ticket->created_at->diffForHumans() }}
-                            </span>
-                        </div>
-                        <span class="text-sm font-light text-gray-500">
-                            {{ Str::limit(htmlspecialchars(strip_tags($ticket->content)), 400) }}
-                        </span>
-                        <div class="w-full flex flex-row justify-start items-center gap-3 mt-2 overflow-x-auto">
-                            <x-type-span :type="$ticket->type"/>
-                            <x-priority-span :priority="$ticket->priority"/>
-                            <x-status-span :status="$ticket->status"/>
-                            <span
-                                class="flex flex-row justify-center items-center gap-2 text-sm
+                                    ) }}" class="text-lg font-medium text-gray-700 hover:underline">
+                        {{ $ticket->title }}
+                    </a>
+                    <span class="text-sm font-medium text-gray-700">
+                        {{ $ticket->created_at->diffForHumans() }}
+                    </span>
+                </div>
+                <span class="text-sm font-light text-gray-500">
+                    {{ Str::limit(htmlspecialchars(strip_tags($ticket->content)), 400) }}
+                </span>
+                <div class="w-full flex flex-row justify-start items-center gap-3 mt-2 overflow-x-auto">
+                    <x-priority-span :priority="$ticket->priority" />
+                    <x-status-span :status="$ticket->status" />
+                    <x-category-span :category="$ticket->category" />
+                    <x-subcategory-span :subcategory="$ticket->subcategory" />
+                    <x-issue-span :issue="$ticket->issue" />
+                    <x-type-span :type="$ticket->type" />
+                    <span class="flex flex-row justify-center items-center gap-2 text-sm
                                 text-gray-700 font-medium">
-                                {{ $ticket->comments_count }}
-                                <em  class="fa fa-comment-o"></em>
-                            </span>
-                        </div>
-                        <div class="w-full flex flex-row justify-start items-center gap-10 mt-5">
-                            <div class="flex flex-row justify-start items-center gap-2 text-xs">
-                                <x-user-avatar :user="$ticket->owner" :size="30"/>
-                                <div class="flex flex-col gap-0">
-                                    <span class="font-medium text-gray-500 text-xs">@lang('Owner')</span>
-                                    <span class="font-light text-gray-500 text-base">{{ $ticket->owner->name }}</span>
-                                </div>
-                            </div>
-                            @if($ticket->responsible)
-                                <div class="flex flex-row justify-start items-center gap-2">
-                                    <x-user-avatar :user="$ticket->responsible" :size="30"/>
-                                    <div class="flex flex-col gap-0">
-                                        <span class="font-medium text-gray-500 text-xs">@lang('Responsible')</span>
-                                        <span
-                                            class="font-light text-gray-500 text-base">
-                                            {{ $ticket->responsible->name }}
-                                        </span>
-                                    </div>
-                                </div>
-                            @endif
+                        {{ $ticket->comments_count }}
+                        <em class="fa fa-comment-o"></em>
+                    </span>
+                </div>
+                <div class="w-full flex flex-row justify-start items-center gap-10 mt-5">
+                    <div class="flex flex-row justify-start items-center gap-2 text-xs">
+                        <x-user-avatar :user="$ticket->owner" :size="30" />
+                        <div class="flex flex-col gap-0">
+                            <span class="font-medium text-gray-500 text-xs">@lang('Owner')</span>
+                            <span class="font-light text-gray-500 text-base">{{ $ticket->owner->name }}</span>
                         </div>
                     </div>
-                @endforeach
+                    @if($ticket->responsible)
+                    <div class="flex flex-row justify-start items-center gap-2">
+                        <x-user-avatar :user="$ticket->responsible" :size="30" />
+                        <div class="flex flex-col gap-0">
+                            <span class="font-medium text-gray-500 text-xs">@lang('Responsible')</span>
+                            <span class="font-light text-gray-500 text-base">
+                                {{ $ticket->responsible->name }}
+                            </span>
+                        </div>
+                    </div>
+                    @endif
+                </div>
             </div>
+
+            @endif
+
+            @endforeach
+        </div>
+
             <div class="w-full flex flex-row justify-start items-center">
                 {{ $tickets->links('pagination::tailwind') }}
             </div>

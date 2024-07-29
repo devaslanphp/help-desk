@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\TicketNumberController;
 use App\Models\Ticket;
 use App\Models\User;
+//use App\Http\Livewire\ScrollingBanner;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,7 +42,6 @@ Route::middleware(['auth', 'set_locale'])
     ->group(function () {
         // Logout
         Route::get('/auth/logout', LogoutController::class)->name('auth.logout');
-
         // Home
         Route::view('/', 'welcome')->name('home');
 
@@ -60,7 +60,6 @@ Route::middleware(['auth', 'set_locale'])
 
         // Administration
         Route::view('/administration/users', 'administration.users')->name('administration.users');
-        Route::view('/administration/companies', 'administration.companies')->name('administration.companies');
         Route::view('/administration/ticket-statuses', 'administration.ticket-statuses')
             ->name('administration.ticket-statuses');
         Route::view('/administration/ticket-priorities', 'administration.ticket-priorities')
@@ -70,10 +69,20 @@ Route::middleware(['auth', 'set_locale'])
         Route::view('/administration/activity-logs', 'administration.activity-logs')
             ->name('administration.activity-logs');
         Route::view('/administration/roles', 'administration.roles')->name('administration.roles');
+        
+        Route::view('/administration/ticket-categories', 'administration.ticket-categories')->name('administration.ticket-categories');
+        Route::view('/administration/ticket-subcategories', 'administration.ticket-subcategories')->name('administration.ticket-subcategories');
+        Route::view('/administration/ticket-issues', 'administration.ticket-issues')->name('administration.ticket-issues');
 
         // Notifications
         Route::view('/notifications', 'notifications')->name('notifications');
 
         // Kanban board
         Route::view('/kanban', 'kanban')->name('kanban');
+
+        // Notice banner
+        //Route::get('/scrolling-banner', ScrollingBanner::class)->name('scrolling-banner');
+        Route::view('/announcements','announcements')->name('announcements');
+        Route::view('/notice-banners', 'notice-banners')
+            ->name('notice-banners');
     });

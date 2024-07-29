@@ -1,7 +1,5 @@
 <x-layout>
 
     <x-slot:title>Home page</x-slot:title>
-
-    @livewire('projects')
-
+    @livewire('scrolling-banner')
 </x-layout>

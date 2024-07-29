@@ -20,7 +20,6 @@ class TicketNumberController extends Controller
         $ticketPrefix = substr($number, 0, 4);
         $ticketNumber = str_replace($ticketPrefix, "", $number);
         $ticket = Ticket::where('number', $ticketNumber)
-            ->whereHas('project', fn($query) => $query->where('ticket_prefix', $ticketPrefix))
             ->first();
         if ($ticket) {
             return redirect()->route('tickets.details', [

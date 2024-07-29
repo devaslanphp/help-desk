@@ -61,11 +61,6 @@ class User extends Authenticatable implements HasLogsActivity
         });
     }
 
-    public function projects(): HasMany
-    {
-        return $this->hasMany(Project::class, 'owner_id');
-    }
-
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'owner_id');
@@ -76,14 +71,6 @@ class User extends Authenticatable implements HasLogsActivity
         return $this->hasMany(Ticket::class, 'responsible_id');
     }
 
-    public function favoriteProjects(): BelongsToMany
-    {
-        $query = $this->belongsToMany(Project::class, 'favorite_projects', 'user_id', 'project_id');
-        if (auth()->user()->can('View own projects') && !auth()->user()->can('View all projects')) {
-            $query->where('user_id', auth()->user()->id);
-        }
-        return $query;
-    }
 
     public function comments(): HasMany
     {
@@ -107,13 +94,4 @@ class User extends Authenticatable implements HasLogsActivity
         );
     }
 
-    public function ownCompanies(): HasMany
-    {
-        return $this->hasMany(Company::class, 'responsible_id');
-    }
-
-    public function companies(): BelongsToMany
-    {
-        return $this->belongsToMany(Company::class, 'company_users', 'user_id', 'company_id');
-    }
 }

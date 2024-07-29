@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ticket_types', function (Blueprint $table) {
-            $table->string('slug', 500);
+            $table->string('slug', 500)->unique();
         });
     }
 

@@ -96,7 +96,25 @@ class Login extends Component implements HasForms
         }
 
         session()->put('locale', auth()->user()->locale);
-        redirect()->to(route('home'));
-
+        $role = Auth::user()->getRoleNames()->first();
+                    switch ($role) {
+                        case 'administrator':
+                            redirect()->to(route('analytics'));
+                            break;
+                        case 'Head of Department':
+                            redirect()->to(route('tickets'));
+                            break;
+                        case 'technician':
+                            redirect()->to(route('tickets'));
+                            break;
+                        case 'Human Resources':
+                            redirect()->to(route('tickets'));
+                            break;    
+                        case 'user':
+                            redirect()->to(route('tickets'));
+                            break;
+                        case null:
+                            redirect()->to(route('home'));
+                    }
     }
 }

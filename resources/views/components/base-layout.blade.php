@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }} {{ isset($title) ? (' - ' . $title) : '' }}</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
     @livewireStyles
@@ -18,8 +18,13 @@
 <body>
 
 {{$slot}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
 
-<script src="{{ asset('js/chart.min.js') }}"></script>
+<!-- <script src="{{ asset('js/chart.min.js') }}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 @stack('scripts')
 
 @livewire('notifications')
